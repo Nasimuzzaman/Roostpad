@@ -1,5 +1,7 @@
 package com.example.nasimuzzaman.roostpad.authentication;
 
+import com.example.nasimuzzaman.roostpad.Client;
+
 /**
  * Created by nasimuzzaman on 10/12/17.
  */

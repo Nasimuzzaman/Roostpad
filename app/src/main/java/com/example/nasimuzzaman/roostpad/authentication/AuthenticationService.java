@@ -9,6 +9,6 @@ import retrofit2.http.POST;
  */
 
 public interface AuthenticationService {
-    @POST("login.php")
+    @POST("RoostpadLMS/controller/login.php")
     Call<LoginResponse> login(@Body LoginCredential loginCredential);
 }

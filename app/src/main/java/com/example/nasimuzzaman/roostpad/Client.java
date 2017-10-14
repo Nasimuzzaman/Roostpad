@@ -1,4 +1,4 @@
-package com.example.nasimuzzaman.roostpad.authentication;
+package com.example.nasimuzzaman.roostpad;
 
 /**
  * Created by nasimuzzaman on 10/12/17.
@@ -18,7 +18,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public abstract class Client<Service> {
-    private static final String BASE_URL = "http://kothay.uphero.com/";
+    private static final String BASE_URL = "http://10.100.100.213";
 
     public abstract Service createService();
 

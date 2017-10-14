@@ -1,13 +1,16 @@
 package com.example.nasimuzzaman.roostpad.authentication;
 
-import android.preference.Preference;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
+import com.example.nasimuzzaman.roostpad.home.HomeActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,18 +43,30 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         LoginResponse body = response.body();
-                        if(body.getStatusCode() == 200) {
-                            // Show home page and save user info
-                            com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_INFO, body);
+                        if(body != null) {
+                            if (body.getStatusCode() == 200) {
+                                //ave user info
+                                com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_INFO, body);
+                                // show login success message
+                                Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT).show();
+                                // goto next page
+                                openHomePage();
+                            } else Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<LoginResponse> call, Throwable t) {
-                        // Show error message
+                        Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
+    }
+
+    private void openHomePage() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
