@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@+id/action_home"
+        android:title="Home"
+        app:showAsAction="collapseActionView"
+        />
+
+    <item
+        android:id="@+id/action_setup"
+        android:title="Setup"
+        app:showAsAction="collapseActionView"
+        />
+
+    <item
+        android:id="@+id/action_edit_profile"
+        android:title="Edit Profile"
+        app:showAsAction="collapseActionView"
+        />
+
+    <item
+        android:id="@+id/action_change_password"
+        android:title="Change Password"
+        app:showAsAction="collapseActionView"
+        />
+    <item
+        android:id="@+id/action_logout"
+        android:title="Logout"
+        app:showAsAction="collapseActionView"
+        />
+
+</menu>

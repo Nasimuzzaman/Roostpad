@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".home.HomeActivity"></activity>
+        <activity android:name=".home.CalendarActivity"></activity>
     </application>
 
 </manifest>
