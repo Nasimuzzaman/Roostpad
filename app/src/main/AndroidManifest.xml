@@ -19,8 +19,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".home.HomeActivity"></activity>
-        <activity android:name=".home.CalendarActivity"></activity>
+        <activity android:name=".home.HomeActivity" />
+        <activity android:name=".home.CalendarActivity" />
+        <activity android:name=".home.RequestHolidayActivity" />
+        <activity android:name=".home.DateCalendarActivity" />
+        <activity android:name=".home.SetupActivity" />
+        <activity android:name=".home.AddNewUserActivity"></activity>
     </application>
 
 </manifest>

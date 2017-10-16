@@ -1,39 +1,36 @@
 package com.example.nasimuzzaman.roostpad.home;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.CalendarView;
 
 import com.example.nasimuzzaman.roostpad.R;
 
-/**
- * Created by nasimuzzaman on 10/14/17.
- */
+public class DateCalendarActivity extends AppCompatActivity {
 
-public class CalendarActivity extends AppCompatActivity{
-
-    private static final String TAG = "CalendarActivity";
-    private CalendarView calendarView;
+    private static final String TAG = "FromDateCalendarActivit";
+    private CalendarView fromDateCalendarView;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.calendar_layout);
-        calendarView = (CalendarView) findViewById(R.id.calendarView);
+        setContentView(R.layout.activity_from_date_calendar);
 
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        fromDateCalendarView = (CalendarView) findViewById(R.id.fromDateCalendarView);
+
+        fromDateCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
                 String date = (i1+1) + "/" + i2 + "/" + i;
                 Log.d(TAG, "onSelectedDayChange: mm/dd/yyyy: " + date);
 
-                Intent intent = new Intent(CalendarActivity.this, HomeActivity.class);
+                Intent intent = new Intent();
                 intent.putExtra("date", date);
-                startActivity(intent);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }

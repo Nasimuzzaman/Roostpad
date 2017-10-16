@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.nasimuzzaman.roostpad.home.RequestHolidayActivity">
+
+
+    <Button
+        android:hint="Date"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_from_date_go_calendar"
+        android:text="From"
+        />
+
+    <Button
+        android:hint="Date"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/btn_from_date_go_calendar"
+        android:id="@+id/btn_to_date_go_calendar"
+        android:text="To"
+        />
+
+
+
+    <TextView
+        android:textSize="25sp"
+        android:layout_below="@+id/btn_from_date_go_calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Date"
+        android:id="@+id/fromDate"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/btn_to_date_go_calendar"
+        android:layout_toStartOf="@+id/btn_to_date_go_calendar"
+        />
+
+    <TextView
+        android:textSize="25sp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:hint="Date"
+        android:id="@+id/toDate"
+        android:layout_below="@+id/btn_to_date_go_calendar"
+        android:layout_toRightOf="@+id/btn_from_date_go_calendar"
+        android:layout_alignRight="@+id/btn_to_date_go_calendar"
+        android:layout_alignEnd="@+id/btn_to_date_go_calendar" />
+
+
+</RelativeLayout>

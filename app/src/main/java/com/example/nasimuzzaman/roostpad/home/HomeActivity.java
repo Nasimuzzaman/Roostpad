@@ -19,6 +19,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private TextView theDate;
     private Button btnGoCalendar;
+    private Button requestAHoliday;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +27,24 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         theDate = (TextView) findViewById(R.id.date);
         btnGoCalendar = (Button) findViewById(R.id.btn_go_calender);
+        requestAHoliday = (Button) findViewById(R.id.request_a_holiday);
+
+        Intent incomingIntent = getIntent();
+        String date = incomingIntent.getStringExtra("date");
+        theDate.setText(date);
 
         btnGoCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this,CalendarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        requestAHoliday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, RequestHolidayActivity.class);
                 startActivity(intent);
             }
         });

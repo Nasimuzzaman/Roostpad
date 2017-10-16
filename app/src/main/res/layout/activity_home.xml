@@ -27,6 +27,15 @@
         android:id="@+id/date"
         />
 
+    <Button
+        android:hint="Request a Holiday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/request_a_holiday"
+        android:text="Request a Holiday"
+        android:layout_below="@+id/date"
+        />
+
 
 
 </RelativeLayout>
