@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.home.HomeActivity;
@@ -25,6 +26,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        if(Preference.getObject(PrefKeys.USER_INFO, LoginResponse.class) != null) {
+            openHomePage();
+        }
         emailInput = (EditText) findViewById(R.id.email);
         passwordInput = (EditText) findViewById(R.id.password);
         loginBtn = (Button) findViewById(R.id.login);

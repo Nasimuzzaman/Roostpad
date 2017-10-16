@@ -11,17 +11,17 @@ import com.example.nasimuzzaman.roostpad.R;
 
 public class DateCalendarActivity extends AppCompatActivity {
 
-    private static final String TAG = "FromDateCalendarActivit";
-    private CalendarView fromDateCalendarView;
+    private static final String TAG = "DateCalendarActivity";
+    private CalendarView dateCalendarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_from_date_calendar);
+        setContentView(R.layout.activity_date_calendar);
 
-        fromDateCalendarView = (CalendarView) findViewById(R.id.fromDateCalendarView);
+        dateCalendarView = (CalendarView) findViewById(R.id.dateCalendarView);
 
-        fromDateCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        dateCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
                 String date = (i1+1) + "/" + i2 + "/" + i;

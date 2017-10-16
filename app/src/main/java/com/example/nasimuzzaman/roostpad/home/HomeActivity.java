@@ -11,7 +11,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.binjar.prefsdroid.Preference;
+import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
+import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -68,14 +71,27 @@ public class HomeActivity extends AppCompatActivity {
         } else if(res_id == R.id.action_change_password) {
             Toast.makeText(getApplicationContext(), "You select Change Password option", Toast.LENGTH_SHORT).show();
         } else if(res_id == R.id.action_logout) {
-            Toast.makeText(getApplicationContext(), "You select Logout option", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Logged out Successfully", Toast.LENGTH_SHORT).show();
+            showLoginPage();
+            Preference.remove(PrefKeys.USER_INFO);
         } else if(res_id == R.id.action_home) {
             openHomePage();
         } else if(res_id == R.id.action_setup) {
-            Toast.makeText(getApplicationContext(), "You select Setup option", Toast.LENGTH_SHORT).show();
+            showSetupPage();
         }
 
         return true;
+    }
+
+    private void showSetupPage() {
+        Intent intent = new Intent(this, SetupActivity.class);
+        startActivity(intent);
+    }
+
+    private void showLoginPage() {
+        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+        finishAffinity();
+        startActivity(intent);
     }
 
     private void openHomePage() {
