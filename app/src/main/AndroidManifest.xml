@@ -24,7 +24,8 @@
         <activity android:name=".home.RequestHolidayActivity" />
         <activity android:name=".home.DateCalendarActivity" />
         <activity android:name=".home.SetupActivity" />
-        <activity android:name=".home.AddNewUserActivity"></activity>
+        <activity android:name=".home.AddNewUserActivity" />
+        <activity android:name=".home.UsersActivity"></activity>
     </application>
 
 </manifest>
