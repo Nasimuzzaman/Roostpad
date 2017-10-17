@@ -25,7 +25,11 @@
         <activity android:name=".home.DateCalendarActivity" />
         <activity android:name=".home.SetupActivity" />
         <activity android:name=".home.AddNewUserActivity" />
-        <activity android:name=".home.UsersActivity"></activity>
+        <activity android:name=".home.UsersActivity" />
+        <activity android:name=".home.ContactsActivity" />
+        <activity android:name=".home.CalendarEventsActivity" />
+        <activity android:name=".home.NewsActivity" />
+        <activity android:name=".home.SettingsActivity"></activity>
     </application>
 
 </manifest>
