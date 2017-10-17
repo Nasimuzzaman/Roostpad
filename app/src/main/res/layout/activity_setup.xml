@@ -1,9 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.nasimuzzaman.roostpad.home.SetupActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/users"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/users_icon"
+        tools:layout_editor_absoluteX="45dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/users"
+        android:layout_toRightOf="@+id/users"
+        android:background="@drawable/contact_icon"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+
+    <Button
+        android:id="@+id/contacts"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/calendar_events_icon"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/button"
+        android:layout_toEndOf="@+id/button" />
+
+    <Button
+        android:id="@+id/news"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/news_icon3"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/contacts"
+        android:layout_toEndOf="@+id/contacts" />
+
+    <Button
+        android:id="@+id/settings"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/settings1"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/news"
+        android:layout_toEndOf="@+id/news" />
+
+
+</RelativeLayout>
