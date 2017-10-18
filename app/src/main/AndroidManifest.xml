@@ -27,9 +27,7 @@
         <activity android:name=".home.AddNewUserActivity" />
         <activity android:name=".home.UsersActivity" />
         <activity android:name=".home.ContactsActivity" />
-        <activity android:name=".home.CalendarEventsActivity" />
-        <activity android:name=".home.NewsActivity" />
-        <activity android:name=".home.SettingsActivity"></activity>
+        <activity android:name=".home.ChangePasswordActivity"></activity>
     </application>
 
 </manifest>

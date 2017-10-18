@@ -70,6 +70,7 @@ public class HomeActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
         } else if(res_id == R.id.action_change_password) {
             Toast.makeText(getApplicationContext(), "You select Change Password option", Toast.LENGTH_SHORT).show();
+            showChangePasswordDialogBox();
         } else if(res_id == R.id.action_logout) {
             Toast.makeText(getApplicationContext(), "Logged out Successfully", Toast.LENGTH_SHORT).show();
             showLoginPage();
@@ -81,6 +82,11 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    private void showChangePasswordDialogBox() {
+        Intent intent = new Intent(this, ChangePasswordActivity.class);
+        startActivity(intent);
     }
 
     private void showSetupPage() {

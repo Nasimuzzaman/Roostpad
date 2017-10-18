@@ -14,9 +14,6 @@ public class SetupActivity extends AppCompatActivity {
 
     private Button users;
     private Button contacts;
-    private Button calendarEvents;
-    private Button news;
-    private Button settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +22,6 @@ public class SetupActivity extends AppCompatActivity {
 
         users = (Button) findViewById(R.id.users);
         contacts = (Button) findViewById(R.id.contacts);
-        calendarEvents = (Button) findViewById(R.id.calendar_events);
-        news = (Button) findViewById(R.id.news);
-        settings = (Button) findViewById(R.id.settings);
 
         users.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,37 +31,13 @@ public class SetupActivity extends AppCompatActivity {
             }
         });
 
-        /*contacts.setOnClickListener(new View.OnClickListener() {
+        contacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SetupActivity.this, ContactsActivity.class);
                 startActivity(intent);
             }
         });
-
-        calendarEvents.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SetupActivity.this, CalendarEventsActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        news.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SetupActivity.this, NewsActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SetupActivity.this, SettingsActivity.class);
-                startActivity(intent);
-            }
-        });*/
 
     }
 
