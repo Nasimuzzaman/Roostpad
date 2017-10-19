@@ -11,6 +11,7 @@
         android:layout_width="60dp"
         android:layout_height="45dp"
         android:background="@drawable/users_icon"
+        android:layout_marginLeft="10dp"
         tools:layout_editor_absoluteX="45dp"
         tools:layout_editor_absoluteY="0dp" />
 
@@ -37,8 +38,9 @@
         
         android:text="Contacts"
         android:includeFontPadding="true"
+        android:layout_marginLeft="90dp"
         android:textSize="20sp"
-        android:textColor="@color/steelblue"
+        android:textColor="@color/teal"
         android:textStyle="bold"
         android:layout_below="@+id/users" />
 

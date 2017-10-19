@@ -6,36 +6,20 @@
     android:layout_height="match_parent"
     tools:context="com.example.nasimuzzaman.roostpad.home.HomeActivity">
 
-
-
-    <Button
-        android:hint="Date"
+    <CalendarView
+        android:id="@+id/calendarView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_go_calender"
-        android:text="Calender"
-        />
-
-    <TextView
-        android:layout_centerHorizontal="true"
-        android:textSize="25sp"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/btn_go_calender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Date"
-        android:id="@+id/date"
-        />
+        android:layout_height="wrap_content" />
 
     <Button
-        android:hint="Request a Holiday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/request_a_holiday"
         android:text="Request a Holiday"
-        android:layout_below="@+id/date"
-        />
-
-
+        android:textColor="@color/teal"
+        android:textStyle="bold"
+        android:layout_below="@+id/calendarView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

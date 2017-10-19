@@ -8,45 +8,68 @@
 
 
     <Button
-        android:hint="Date"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/btn_from_date_go_calendar"
-        android:text="From"
-        />
+        android:text="Date"
+        android:textColor="@color/teal"
+        android:textStyle="bold"
+        android:layout_below="@+id/toDate"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
-        android:hint="Date"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/btn_from_date_go_calendar"
         android:id="@+id/btn_to_date_go_calendar"
-        android:text="To"
-        />
+        android:text="Date"
+        android:textColor="@color/teal"
+        android:textStyle="bold"
+        android:layout_below="@+id/toDate"
+        android:layout_toRightOf="@+id/btn_from_date_go_calendar"
+        android:layout_toEndOf="@+id/btn_from_date_go_calendar" />
 
 
-
-    <TextView
-        android:textSize="25sp"
-        android:layout_below="@+id/btn_from_date_go_calendar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Date"
-        android:id="@+id/fromDate"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/btn_to_date_go_calendar"
-        android:layout_toStartOf="@+id/btn_to_date_go_calendar"
-        />
 
     <TextView
         android:textSize="25sp"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:hint="Date"
+        android:text="From"
+        android:layout_marginRight="10dp"
+        android:id="@+id/fromDate"
+        android:layout_toLeftOf="@+id/btn_to_date_go_calendar" />
+
+    <TextView
+        android:textSize="25sp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="To"
+        android:gravity="center"
         android:id="@+id/toDate"
-        android:layout_below="@+id/btn_to_date_go_calendar"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/btn_to_date_go_calendar"
+        android:layout_alignStart="@+id/btn_to_date_go_calendar" />
+
+    <EditText
+        android:id="@+id/parseFromDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date"
+        android:layout_below="@+id/btn_from_date_go_calendar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/parseToDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/parseFromDate"
         android:layout_toRightOf="@+id/btn_from_date_go_calendar"
+        android:ems="10"
+        android:inputType="date"
         android:layout_alignRight="@+id/btn_to_date_go_calendar"
         android:layout_alignEnd="@+id/btn_to_date_go_calendar" />
 
