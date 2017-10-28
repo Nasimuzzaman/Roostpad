@@ -1,13 +1,14 @@
-package com.example.nasimuzzaman.roostpad.authentication;
+package com.example.nasimuzzaman.roostpad.changePassword;
 
 import com.example.nasimuzzaman.roostpad.BaseResponse;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by nasimuzzaman on 10/12/17.
+ * Created by nasimuzzaman on 10/26/17.
  */
 
-public class LoginResponse extends BaseResponse {
+public class ChangePasswordResponse extends BaseResponse{
+
     @SerializedName("id") private long id;
     @SerializedName("email") private String email;
     @SerializedName("role") private String role;
@@ -16,6 +17,7 @@ public class LoginResponse extends BaseResponse {
     @SerializedName("gender") private String gender;
     @SerializedName("token") private String token;
     @SerializedName("name") private String name;
+
 
     public long getId() {
         return id;
@@ -37,7 +39,7 @@ public class LoginResponse extends BaseResponse {
         return holiday;
     }
 
-    public String isGender() {
+    public String getGender() {
         return gender;
     }
 

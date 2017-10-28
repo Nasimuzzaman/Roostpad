@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                         LoginResponse body = response.body();
                         if(body != null) {
                             if (body.getStatusCode() == 200) {
-                                //ave user info
+                                // save user info
                                 com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_INFO, body);
                                 // show login success message
                                 Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT).show();

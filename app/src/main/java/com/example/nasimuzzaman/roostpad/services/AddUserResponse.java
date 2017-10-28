@@ -1,4 +1,4 @@
-package com.example.nasimuzzaman.roostpad.authentication;
+package com.example.nasimuzzaman.roostpad.services;
 
 import com.example.nasimuzzaman.roostpad.BaseResponse;
 import com.google.gson.annotations.SerializedName;
@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by nasimuzzaman on 10/12/17.
  */
 
-public class LoginResponse extends BaseResponse {
+public class AddUserResponse extends BaseResponse {
     @SerializedName("id") private long id;
     @SerializedName("email") private String email;
     @SerializedName("role") private String role;
@@ -37,7 +37,7 @@ public class LoginResponse extends BaseResponse {
         return holiday;
     }
 
-    public String isGender() {
+    public String getGender() {
         return gender;
     }
 

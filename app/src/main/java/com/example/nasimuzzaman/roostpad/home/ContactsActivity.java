@@ -9,17 +9,24 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TableLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
+import com.example.nasimuzzaman.roostpad.contacts.Contacts;
+import com.example.nasimuzzaman.roostpad.contacts.ContactsResponse;
+
+import java.util.List;
 
 public class ContactsActivity extends AppCompatActivity {
 
-    private Button users;
-    private Button contacts;
+    private Button users, contacts;
+    private TextView contactList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +35,7 @@ public class ContactsActivity extends AppCompatActivity {
 
         users = (Button) findViewById(R.id.users);
         contacts = (Button) findViewById(R.id.contacts);
+        contactList = (TextView) findViewById(R.id.contact_list);
 
         users.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +48,17 @@ public class ContactsActivity extends AppCompatActivity {
         contacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*ContactsResponse contactsResponse = new ContactsResponse();
+                List<Contacts> contacts = contactsResponse.getContacts();
+
+                for (int i=0; i<contacts.size(); i++) {
+                    Contacts contact = contacts.get(i);
+                    contactList.setText("");
+                    contactList.append("Name: " + contact.getName());
+                    contactList.append("Email: " + contact.getEmail());
+                    contactList.append("Phone: " + contact.getContact());
+                }*/
+
                 Intent intent = new Intent(ContactsActivity.this, ContactsActivity.class);
                 startActivity(intent);
             }

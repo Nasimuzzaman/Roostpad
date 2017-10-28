@@ -8,17 +8,28 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
+import com.example.nasimuzzaman.roostpad.services.AddUserClient;
+import com.example.nasimuzzaman.roostpad.services.AddUserResponse;
+import com.example.nasimuzzaman.roostpad.services.AddUserService;
+import com.example.nasimuzzaman.roostpad.services.UserCredential;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddNewUserActivity extends AppCompatActivity {
 
-    private Button users;
-    private Button contacts;
+    private Button users, contacts, add_new_user;
+    EditText nameInput, emailInput, phoneInput, designationInput;
+    Spinner genderInput, roleInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +38,16 @@ public class AddNewUserActivity extends AppCompatActivity {
 
         users = (Button) findViewById(R.id.users);
         contacts = (Button) findViewById(R.id.contacts);
+        add_new_user = (Button) findViewById(R.id.btn_add_new_user);
+
+        nameInput = (EditText) findViewById(R.id.name);
+        emailInput = (EditText) findViewById(R.id.email);
+        phoneInput = (EditText) findViewById(R.id.phone);
+        designationInput = (EditText) findViewById(R.id.designation);
+        roleInput = (Spinner) findViewById(R.id.role);
+        genderInput = (Spinner) findViewById(R.id.gender);
+
+
 
         users.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +62,54 @@ public class AddNewUserActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(AddNewUserActivity.this, ContactsActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        add_new_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = nameInput.getText().toString();
+                String email = emailInput.getText().toString();
+                String phone = phoneInput.getText().toString();
+                String designation = designationInput.getText().toString();
+                String role = roleInput.getSelectedItem().toString();
+                String gender = genderInput.getSelectedItem().toString();
+
+                UserCredential userCredential = new UserCredential();
+                userCredential.setName(name);
+                userCredential.setEmail(email);
+                userCredential.setContact(phone);
+                userCredential.setPassword("123456");
+                userCredential.setDesignation(designation);
+                userCredential.setRole(role);
+                userCredential.setHoliday(25);
+                userCredential.setGender(gender);
+
+                AddUserService userService = new AddUserClient().createService();
+                Call<AddUserResponse> call = userService.addUser(userCredential);
+                call.enqueue(new Callback<AddUserResponse>() {
+                    @Override
+                    public void onResponse(Call<AddUserResponse> call, Response<AddUserResponse> response) {
+                        AddUserResponse body = response.body();
+                        if(body != null) {
+                            if(body.getStatusCode() == 200) {
+                                // save user info
+                                com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_INFO, body);
+                                // show success message
+                                Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
+                                // go to setup page
+                                showSetupPage();
+                            } else Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AddUserResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
             }
         });
     }
