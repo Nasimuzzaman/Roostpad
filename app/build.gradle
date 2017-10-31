@@ -34,5 +34,8 @@ dependencies {
     compile 'com.binjar.prefsdroid:prefs-droid:1.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:26.+'
+    compile files('libs/activation.jar')
+    compile files('libs/additional.jar')
+    compile files('libs/mail.jar')
     testCompile 'junit:junit:4.12'
 }

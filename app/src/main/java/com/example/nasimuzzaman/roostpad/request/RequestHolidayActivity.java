@@ -1,5 +1,6 @@
 package com.example.nasimuzzaman.roostpad.request;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -22,8 +23,10 @@ import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
+import com.example.nasimuzzaman.roostpad.authentication.LoginCredential;
 import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
 import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
+import com.example.nasimuzzaman.roostpad.gmail.GMailSender;
 import com.example.nasimuzzaman.roostpad.home.DateCalendarActivity;
 import com.example.nasimuzzaman.roostpad.home.HomeActivity;
 import com.example.nasimuzzaman.roostpad.home.SetupActivity;
@@ -48,6 +51,7 @@ public class RequestHolidayActivity extends AppCompatActivity {
     private final int FROM_DATE_REQ = 1;
     private final int TO_DATE_REQ = 2;
     Date from, to;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +96,14 @@ public class RequestHolidayActivity extends AppCompatActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
+//                System.out.println("HIM");
+//                System.out.println("000000 "+new LoginResponse().getName());
+
+
+
                 if (fromDateInput.getText().toString().trim().length() != 0 && toDateInput.getText().toString().trim().length() != 0) {
                     dates.removeAllViews();
                     showDatesInfo(btnFromDateGoCalender.getText().toString(), btnToDateGoCalender.getText().toString());
@@ -118,8 +130,8 @@ public class RequestHolidayActivity extends AppCompatActivity {
                 credential.setDays(numberOfDays);
                 credential.setMessage(leaveMessage);
 
-                sendEmail(credential);
-
+                //sendEmail(credential);
+                sendMessage(credential);
 
                 RequestHolidayService requestHolidayService = new RequestHolidayClient().createService();
                 Call<RequestHolidayResponse> call = requestHolidayService.requestHoliday(credential);
@@ -151,6 +163,35 @@ public class RequestHolidayActivity extends AppCompatActivity {
 
     }
 
+
+    //using javax.mail
+    private void sendMessage(final RequestHolidayCredential credential) {
+        final ProgressDialog dialog = new ProgressDialog(RequestHolidayActivity.this);
+        dialog.setTitle("Sending Email");
+        dialog.setMessage("Please wait");
+        dialog.show();
+        final String subject = credential.getEmail() + " apply for holiday from " + credential.getFromDate() +
+                " to " + credential.getToDate();
+
+        Thread sender = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    GMailSender sender = new GMailSender("roostpaddb@gmail.com", "Kaz123Mig");
+                    sender.sendMail(subject,
+                            credential.getMessage(),
+                            "roostpaddb@gmail.com",
+                            credential.getEmail());
+                    dialog.dismiss();
+                } catch (Exception e) {
+                    Log.e("mylog", "Error: " + e.getMessage());
+                }
+            }
+        });
+        sender.start();
+    }
+
+    //using inten
     private void sendEmail(RequestHolidayCredential credential) {
         Intent email = new Intent(Intent.ACTION_SEND);
 
@@ -163,6 +204,7 @@ public class RequestHolidayActivity extends AppCompatActivity {
         email.putExtra(Intent.EXTRA_CC, "nasimuzzaman.iit.du@gmail.com");
         email.putExtra(Intent.EXTRA_SUBJECT, subject);
         email.putExtra(Intent.EXTRA_TEXT, credential.getMessage());
+        //email.putExtra(Intent.EXTRA_);
         email.setType("message/rfc822");
 
         Intent chooser = Intent.createChooser(email, "Send Email");
