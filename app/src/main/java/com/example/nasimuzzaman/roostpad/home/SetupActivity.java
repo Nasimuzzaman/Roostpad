@@ -14,6 +14,7 @@ import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
+import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
 
 public class SetupActivity extends AppCompatActivity {
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_margin="5dp"
     android:orientation="vertical"
-    tools:context="com.example.nasimuzzaman.roostpad.home.AddNewUserActivity">
+    tools:context="com.example.nasimuzzaman.roostpad.services.AddNewUserActivity">
 
     <Button
         android:id="@+id/users"

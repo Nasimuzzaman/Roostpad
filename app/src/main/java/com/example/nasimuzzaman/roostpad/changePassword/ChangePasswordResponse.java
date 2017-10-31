@@ -8,7 +8,6 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class ChangePasswordResponse extends BaseResponse{
-
     @SerializedName("id") private long id;
     @SerializedName("email") private String email;
     @SerializedName("role") private String role;
@@ -17,7 +16,6 @@ public class ChangePasswordResponse extends BaseResponse{
     @SerializedName("gender") private String gender;
     @SerializedName("token") private String token;
     @SerializedName("name") private String name;
-
 
     public long getId() {
         return id;

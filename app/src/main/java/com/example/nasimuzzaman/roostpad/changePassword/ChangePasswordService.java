@@ -1,7 +1,5 @@
 package com.example.nasimuzzaman.roostpad.changePassword;
 
-import com.example.nasimuzzaman.roostpad.authentication.LoginCredential;
-
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;

@@ -1,4 +1,4 @@
-package com.example.nasimuzzaman.roostpad.home;
+package com.example.nasimuzzaman.roostpad.services;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -16,10 +16,11 @@ import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
-import com.example.nasimuzzaman.roostpad.services.AddUserClient;
-import com.example.nasimuzzaman.roostpad.services.AddUserResponse;
-import com.example.nasimuzzaman.roostpad.services.AddUserService;
-import com.example.nasimuzzaman.roostpad.services.UserCredential;
+import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
+import com.example.nasimuzzaman.roostpad.home.ContactsActivity;
+import com.example.nasimuzzaman.roostpad.home.HomeActivity;
+import com.example.nasimuzzaman.roostpad.home.SetupActivity;
+import com.example.nasimuzzaman.roostpad.home.UsersActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;

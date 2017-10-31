@@ -1,7 +1,6 @@
 package com.example.nasimuzzaman.roostpad.home;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,8 +8,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,10 +15,7 @@ import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
-import com.example.nasimuzzaman.roostpad.contacts.Contacts;
-import com.example.nasimuzzaman.roostpad.contacts.ContactsResponse;
-
-import java.util.List;
+import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
 
 public class ContactsActivity extends AppCompatActivity {
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.nasimuzzaman.roostpad.home.RequestHolidayActivity">
+    tools:context="com.example.nasimuzzaman.roostpad.request.RequestHolidayActivity">
 
 
     <Button
@@ -52,26 +52,89 @@
         android:layout_alignLeft="@+id/btn_to_date_go_calendar"
         android:layout_alignStart="@+id/btn_to_date_go_calendar" />
 
-    <EditText
+    <TextView
         android:id="@+id/parseFromDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
         android:ems="10"
         android:inputType="date"
+        android:textSize="20dp"
         android:layout_below="@+id/btn_from_date_go_calendar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <EditText
+    <TextView
         android:id="@+id/parseToDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:textSize="20dp"
         android:layout_alignBottom="@+id/parseFromDate"
         android:layout_toRightOf="@+id/btn_from_date_go_calendar"
         android:ems="10"
         android:inputType="date"
         android:layout_alignRight="@+id/btn_to_date_go_calendar"
         android:layout_alignEnd="@+id/btn_to_date_go_calendar" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/parseFromDate"
+        android:background="@color/AntiqueWhite"
+        android:id="@+id/scrollView">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/dates">
+
+        </TableLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:id="@+id/total_day_count"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/scrollView"/>
+
+    <EditText
+        android:id="@+id/messageBox"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/total_day_count"
+        android:layout_marginTop="12dp"
+        android:background="@color/thistle"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Write message"
+        android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/btn_request"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/messageBox"
+        android:text="Request"
+        android:textColor="@color/teal"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/parseToDate"
+        android:layout_toEndOf="@+id/btn_to_date_go_calendar"
+        android:layout_toRightOf="@+id/btn_to_date_go_calendar"
+        android:text="Info" />
 
 
 </RelativeLayout>

@@ -23,13 +23,13 @@
         </activity>
         <activity android:name=".home.HomeActivity" />
         <activity android:name=".home.CalendarActivity" />
-        <activity android:name=".home.RequestHolidayActivity" />
+        <activity android:name=".request.RequestHolidayActivity" />
         <activity android:name=".home.DateCalendarActivity" />
         <activity android:name=".home.SetupActivity" />
-        <activity android:name=".home.AddNewUserActivity" />
+        <activity android:name=".services.AddNewUserActivity" />
         <activity android:name=".home.UsersActivity" />
         <activity android:name=".home.ContactsActivity" />
-        <activity android:name=".home.ChangePasswordActivity"></activity>
+        <activity android:name=".changePassword.ChangePasswordActivity"></activity>
     </application>
 
 </manifest>
