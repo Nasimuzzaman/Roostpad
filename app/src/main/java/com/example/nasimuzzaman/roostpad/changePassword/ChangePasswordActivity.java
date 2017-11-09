@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
@@ -22,11 +23,14 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     Button submitChangePassword, cancelChangePassword;
     EditText currentPasswordInput, newPasswordInput;
+    LoginResponse userInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
+
+        userInfo = Preference.getObject(PrefKeys.USER_INFO, LoginResponse.class);
 
         submitChangePassword = (Button) findViewById(R.id.btn_change_password);
         cancelChangePassword = (Button) findViewById(R.id.btn_cancel_change_password);
@@ -41,11 +45,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 String newPassword = newPasswordInput.getText().toString();
 
                 ChangePasswordCredential credential = new ChangePasswordCredential();
-                LoginResponse loginResponse = new LoginResponse();
-
-
-                credential.setEmail("nasim@gmail.com");
-                //credential.setEmail(loginResponse.getEmail());
+                credential.setEmail(userInfo.getEmail());
                 credential.setPassword(currentPassword);
                 credential.setNewPassword(newPassword);
 

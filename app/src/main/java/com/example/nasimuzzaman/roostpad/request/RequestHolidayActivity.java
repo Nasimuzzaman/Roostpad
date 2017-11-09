@@ -97,8 +97,6 @@ public class RequestHolidayActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-
 //                System.out.println("HIM");
 //                System.out.println("000000 "+new LoginResponse().getName());
 
