@@ -7,7 +7,7 @@ import retrofit2.http.GET;
  * Created by nasimuzzaman on 10/26/17.
  */
 
-public interface ShowContactsService {
+public interface ContactsService {
 
     @GET("RoostpadLMS/controller/ShowContacts.php")
     Call<ContactsResponse> showContacts();

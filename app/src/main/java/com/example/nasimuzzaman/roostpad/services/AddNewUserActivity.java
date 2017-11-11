@@ -17,7 +17,7 @@ import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
 import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
-import com.example.nasimuzzaman.roostpad.home.ContactsActivity;
+import com.example.nasimuzzaman.roostpad.contacts.ContactsActivity;
 import com.example.nasimuzzaman.roostpad.home.HomeActivity;
 import com.example.nasimuzzaman.roostpad.home.SetupActivity;
 import com.example.nasimuzzaman.roostpad.home.UsersActivity;
@@ -127,7 +127,7 @@ public class AddNewUserActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int res_id = item.getItemId();
-        if(res_id == R.id.action_edit_profile) {
+        if(res_id == R.id.action_show_pending_requests) {
             Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
         } else if(res_id == R.id.action_change_password) {
             Toast.makeText(getApplicationContext(), "You select Change Password option", Toast.LENGTH_SHORT).show();

@@ -1,4 +1,4 @@
-package com.example.nasimuzzaman.roostpad.home;
+package com.example.nasimuzzaman.roostpad.contacts;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.binjar.prefsdroid.Preference;
@@ -15,28 +16,49 @@ import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
 import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
-import com.example.nasimuzzaman.roostpad.contacts.ContactsActivity;
-import com.example.nasimuzzaman.roostpad.services.AddNewUserActivity;
+import com.example.nasimuzzaman.roostpad.home.HomeActivity;
+import com.example.nasimuzzaman.roostpad.home.SetupActivity;
+import com.example.nasimuzzaman.roostpad.home.UsersActivity;
 
-public class UsersActivity extends AppCompatActivity {
+import java.util.List;
 
-    private Button users;
-    private Button contacts;
-    private Button addNewUser;
+public class ContactsActivity extends AppCompatActivity {
+
+    private Button users, contacts;
+    private TextView contactView;
+    ContactsResponse contactsResponse;
+    List<Contacts> contactsLists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_users);
+        setContentView(R.layout.activity_contacts);
+
+        contactsResponse = Preference.getObject(PrefKeys.USER_INFO, ContactsResponse.class);
+        contactsLists = contactsResponse.getContacts();
 
         users = (Button) findViewById(R.id.users);
         contacts = (Button) findViewById(R.id.contacts);
-        addNewUser = (Button) findViewById(R.id.add_new_user);
+        contactView = (TextView) findViewById(R.id.contact_list);
+
+        if(contactsLists.isEmpty())
+            contactView.append("No Contacts Available. Please Try Again Later !!");
+
+        for(int i=0; i<contactsLists.size(); i++) {
+            Contacts contacts = contactsLists.get(i);
+
+            contactView.append("\n");
+            contactView.append("\t\t\t" + contacts.getName());
+            contactView.append("\t\t\t" + contacts.getEmail());
+            contactView.append("\t\t\t" + contacts.getContact());
+            contactView.append("\n");
+        }
+
 
         users.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UsersActivity.this, UsersActivity.class);
+                Intent intent = new Intent(ContactsActivity.this, UsersActivity.class);
                 startActivity(intent);
             }
         });
@@ -44,15 +66,7 @@ public class UsersActivity extends AppCompatActivity {
         contacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UsersActivity.this, ContactsActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        addNewUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(UsersActivity.this, AddNewUserActivity.class);
+                Intent intent = new Intent(ContactsActivity.this, ContactsActivity.class);
                 startActivity(intent);
             }
         });
@@ -70,18 +84,18 @@ public class UsersActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int res_id = item.getItemId();
-        if(res_id == R.id.action_show_pending_requests) {
+        if (res_id == R.id.action_show_pending_requests) {
             Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
-        } else if(res_id == R.id.action_change_password) {
+        } else if (res_id == R.id.action_change_password) {
             Toast.makeText(getApplicationContext(), "You select Change Password option", Toast.LENGTH_SHORT).show();
             showChangePasswordDialogBox();
-        } else if(res_id == R.id.action_logout) {
+        } else if (res_id == R.id.action_logout) {
             Toast.makeText(getApplicationContext(), "Logged out Successfully", Toast.LENGTH_SHORT).show();
             showLoginPage();
             Preference.remove(PrefKeys.USER_INFO);
-        } else if(res_id == R.id.action_home) {
+        } else if (res_id == R.id.action_home) {
             openHomePage();
-        } else if(res_id == R.id.action_setup) {
+        } else if (res_id == R.id.action_setup) {
             showSetupPage();
         }
 

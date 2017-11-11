@@ -7,11 +7,11 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Contacts {
-    @SerializedName("name") private long name;
+    @SerializedName("name") private String name;
     @SerializedName("email") private String email;
     @SerializedName("contact") private String contact;
 
-    public long getName() {
+    public String getName() {
         return name;
     }
 

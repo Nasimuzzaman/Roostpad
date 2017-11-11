@@ -15,6 +15,14 @@ import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
 import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
+import com.example.nasimuzzaman.roostpad.contacts.ContactsActivity;
+import com.example.nasimuzzaman.roostpad.contacts.ContactsClient;
+import com.example.nasimuzzaman.roostpad.contacts.ContactsResponse;
+import com.example.nasimuzzaman.roostpad.contacts.ContactsService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SetupActivity extends AppCompatActivity {
 
@@ -40,12 +48,39 @@ public class SetupActivity extends AppCompatActivity {
         contacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SetupActivity.this, ContactsActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(SetupActivity.this, ContactsActivity.class);
+//                startActivity(intent);
+                ContactsService contactsService = new ContactsClient().createService();
+                Call<ContactsResponse> call = contactsService.showContacts();
+
+                call.enqueue(new Callback<ContactsResponse>() {
+                    @Override
+                    public void onResponse(Call<ContactsResponse> call, Response<ContactsResponse> response) {
+                        ContactsResponse body = response.body();
+
+                        if(body != null) {
+                            if(body.getStatusCode() == 200) {
+                                // save user info
+                                com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_INFO, body);
+                                // show success message
+                                Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
+                                // go to setup page
+                                showContactsPage();
+                            } else Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ContactsResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -59,18 +94,18 @@ public class SetupActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int res_id = item.getItemId();
-        if(res_id == R.id.action_edit_profile) {
+        if (res_id == R.id.action_show_pending_requests) {
             Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
-        } else if(res_id == R.id.action_change_password) {
+        } else if (res_id == R.id.action_change_password) {
             Toast.makeText(getApplicationContext(), "You select Change Password option", Toast.LENGTH_SHORT).show();
             showChangePasswordDialogBox();
-        } else if(res_id == R.id.action_logout) {
+        } else if (res_id == R.id.action_logout) {
             Toast.makeText(getApplicationContext(), "Logged out Successfully", Toast.LENGTH_SHORT).show();
             showLoginPage();
             Preference.remove(PrefKeys.USER_INFO);
-        } else if(res_id == R.id.action_home) {
+        } else if (res_id == R.id.action_home) {
             openHomePage();
-        } else if(res_id == R.id.action_setup) {
+        } else if (res_id == R.id.action_setup) {
             showSetupPage();
         }
 
@@ -79,6 +114,12 @@ public class SetupActivity extends AppCompatActivity {
 
     private void showChangePasswordDialogBox() {
         Intent intent = new Intent(this, ChangePasswordActivity.class);
+        startActivity(intent);
+    }
+
+
+    private void showContactsPage() {
+        Intent intent = new Intent(this, ContactsActivity.class);
         startActivity(intent);
     }
 

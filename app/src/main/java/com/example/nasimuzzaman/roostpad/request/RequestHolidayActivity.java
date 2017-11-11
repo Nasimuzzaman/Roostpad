@@ -2,7 +2,6 @@ package com.example.nasimuzzaman.roostpad.request;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -23,18 +21,15 @@ import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
-import com.example.nasimuzzaman.roostpad.authentication.LoginCredential;
 import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
 import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
 import com.example.nasimuzzaman.roostpad.gmail.GMailSender;
 import com.example.nasimuzzaman.roostpad.home.DateCalendarActivity;
 import com.example.nasimuzzaman.roostpad.home.HomeActivity;
 import com.example.nasimuzzaman.roostpad.home.SetupActivity;
-import com.example.nasimuzzaman.roostpad.services.AddUserResponse;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -51,12 +46,15 @@ public class RequestHolidayActivity extends AppCompatActivity {
     private final int FROM_DATE_REQ = 1;
     private final int TO_DATE_REQ = 2;
     Date from, to;
+    LoginResponse userInfo;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_holiday);
+
+        userInfo = Preference.getObject(PrefKeys.USER_INFO, LoginResponse.class);
 
         fromDateInput = (TextView) findViewById(R.id.parseFromDate);
         toDateInput = (TextView) findViewById(R.id.parseToDate);
@@ -122,7 +120,7 @@ public class RequestHolidayActivity extends AppCompatActivity {
 
 
                 final RequestHolidayCredential credential = new RequestHolidayCredential();
-                credential.setEmail("nasimuzzaman.iit.du@gmail.com");
+                credential.setEmail(userInfo.getEmail());
                 credential.setFromDate(startDate);
                 credential.setToDate(endDate);
                 credential.setDays(numberOfDays);
@@ -350,7 +348,7 @@ public class RequestHolidayActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int res_id = item.getItemId();
-        if (res_id == R.id.action_edit_profile) {
+        if (res_id == R.id.action_show_pending_requests) {
             Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
         } else if (res_id == R.id.action_change_password) {
             Toast.makeText(getApplicationContext(), "You select Change Password option", Toast.LENGTH_SHORT).show();

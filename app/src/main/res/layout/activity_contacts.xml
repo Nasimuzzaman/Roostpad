@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.nasimuzzaman.roostpad.home.ContactsActivity">
+    tools:context="com.example.nasimuzzaman.roostpad.contacts.ContactsActivity">
 
     <Button
         android:id="@+id/users"
@@ -50,8 +50,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp"
-        android:text="View Contacts Here" />c
+        android:layout_marginTop="90dp" />
 
 
 

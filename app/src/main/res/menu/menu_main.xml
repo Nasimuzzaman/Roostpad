@@ -16,8 +16,8 @@
         />
 
     <item
-        android:id="@+id/action_edit_profile"
-        android:title="Edit Profile"
+        android:id="@+id/action_show_pending_requests"
+        android:title="Notifications"
         app:showAsAction="collapseActionView"
         />
 
