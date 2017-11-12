@@ -62,12 +62,14 @@
         android:background="@color/colorPrimaryDark">
 
         <Button
+            android:id="@+id/btn_Accept_Request"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Accept"
             android:textStyle="bold"/>
 
         <Button
+            android:id="@+id/btn_Reject_Request"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reject"

@@ -1,5 +1,6 @@
 package com.example.nasimuzzaman.roostpad.pendingRequests;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -106,6 +107,11 @@ public class PendingRequestsActivity extends AppCompatActivity {
 
     private void showPendingRequests() {
         Intent intent = new Intent(this, PendingRequestsActivity.class);
+        startActivity(intent);
+    }
+
+    public void showPendingRequests(Context context) {
+        Intent intent = new Intent(context, PendingRequestsActivity.class);
         startActivity(intent);
     }
 
