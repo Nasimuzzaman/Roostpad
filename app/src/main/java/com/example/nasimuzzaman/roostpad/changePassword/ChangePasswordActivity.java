@@ -60,7 +60,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                         if(body != null) {
                             if(body.getStatusCode() == 200) {
                                 // save user info
-                                com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_INFO, body);
+                                // com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_INFO, body);
                                 // show success message
                                 Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
                                 // go to setup page

@@ -16,6 +16,15 @@ public class LoginResponse extends BaseResponse {
     @SerializedName("gender") private String gender;
     @SerializedName("token") private String token;
     @SerializedName("name") private String name;
+    @SerializedName("emailOfCTO") private String emailOfCTO;
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getCtoEmail() {
+        return emailOfCTO;
+    }
 
     public long getId() {
         return id;

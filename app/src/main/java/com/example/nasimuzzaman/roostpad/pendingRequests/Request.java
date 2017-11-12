@@ -11,14 +11,20 @@ public class Request {
     @SerializedName("name") private String name;
     @SerializedName("id") private int id;
     @SerializedName("email") private String email;
-    @SerializedName("fromDate") private String fromDate;
-    @SerializedName("toDate") private String toDate;
-    @SerializedName("days") private String days;
+    @SerializedName("from_date") private String fromDate;
+    @SerializedName("to_date") private String toDate;
+    @SerializedName("days") private int days;
     @SerializedName("message") private String message;
     @SerializedName("seen") private boolean seen;
     @SerializedName("status") private String status;
 
 
+    public Request(String name, String fromDate, String toDate, int days) {
+        this.name = name;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+        this.days = days;
+    }
 
     public String getName() {
         return name;
@@ -40,7 +46,7 @@ public class Request {
         return toDate;
     }
 
-    public String getDays() {
+    public int getDays() {
         return days;
     }
 

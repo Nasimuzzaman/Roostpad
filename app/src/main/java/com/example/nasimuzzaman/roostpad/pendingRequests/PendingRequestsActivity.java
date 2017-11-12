@@ -1,9 +1,13 @@
 package com.example.nasimuzzaman.roostpad.pendingRequests;
 
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.telecom.Call;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,12 +18,21 @@ import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
 import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
+import com.example.nasimuzzaman.roostpad.contacts.ContactsResponse;
 import com.example.nasimuzzaman.roostpad.home.HomeActivity;
 import com.example.nasimuzzaman.roostpad.home.SetupActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PendingRequestsActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
+    RecyclerView.Adapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +40,35 @@ public class PendingRequestsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pending_requests);
 
         recyclerView = (RecyclerView) findViewById(R.id.rview);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        PendingRequestsService requestsService = new PendingRequestsClient().createService();
+        retrofit2.Call<PendingRequestsResponse> call = requestsService.showPendingRequests();
+        call.enqueue(new Callback<PendingRequestsResponse>() {
+            @Override
+            public void onResponse(retrofit2.Call<PendingRequestsResponse> call, Response<PendingRequestsResponse> response) {
+                PendingRequestsResponse body = response.body();
+                if(body != null) {
+                    if(body.getStatusCode() == 200) {
+                        // show success message
+                        Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
+
+                        //Toast.makeText(getApplicationContext(), ""+body.getRequests().size(), Toast.LENGTH_SHORT).show();
+
+                        adapter = new RequestAdapter(body.getRequests());
+                        recyclerView.setAdapter(adapter);
 
 
+                    } else Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<PendingRequestsResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

@@ -16,6 +16,7 @@ import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
 import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
 import com.example.nasimuzzaman.roostpad.contacts.ContactsActivity;
+import com.example.nasimuzzaman.roostpad.pendingRequests.PendingRequestsActivity;
 import com.example.nasimuzzaman.roostpad.services.AddNewUserActivity;
 
 public class UsersActivity extends AppCompatActivity {
@@ -71,9 +72,10 @@ public class UsersActivity extends AppCompatActivity {
 
         int res_id = item.getItemId();
         if(res_id == R.id.action_show_pending_requests) {
-            Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
+            showPendingRequests();
         } else if(res_id == R.id.action_change_password) {
-            Toast.makeText(getApplicationContext(), "You select Change Password option", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "You select Change Password option", Toast.LENGTH_SHORT).show();
             showChangePasswordDialogBox();
         } else if(res_id == R.id.action_logout) {
             Toast.makeText(getApplicationContext(), "Logged out Successfully", Toast.LENGTH_SHORT).show();
@@ -86,6 +88,11 @@ public class UsersActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    private void showPendingRequests() {
+        Intent intent = new Intent(this, PendingRequestsActivity.class);
+        startActivity(intent);
     }
 
     private void showChangePasswordDialogBox() {

@@ -30,7 +30,7 @@
         <activity android:name=".home.UsersActivity" />
         <activity android:name=".contacts.ContactsActivity" />
         <activity android:name=".changePassword.ChangePasswordActivity" />
-        <activity android:name=".pendingRequests.PendingRequestsActivity"></activity>
+        <activity android:name=".pendingRequests.PendingRequestsActivity" />
     </application>
 
 </manifest>

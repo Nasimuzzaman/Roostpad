@@ -19,6 +19,7 @@ import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
 import com.example.nasimuzzaman.roostpad.home.HomeActivity;
 import com.example.nasimuzzaman.roostpad.home.SetupActivity;
 import com.example.nasimuzzaman.roostpad.home.UsersActivity;
+import com.example.nasimuzzaman.roostpad.pendingRequests.PendingRequestsActivity;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class ContactsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
 
-        contactsResponse = Preference.getObject(PrefKeys.USER_INFO, ContactsResponse.class);
+        contactsResponse = Preference.getObject(PrefKeys.USER_CONTACTS, ContactsResponse.class);
         contactsLists = contactsResponse.getContacts();
 
         users = (Button) findViewById(R.id.users);
@@ -84,22 +85,28 @@ public class ContactsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int res_id = item.getItemId();
-        if (res_id == R.id.action_show_pending_requests) {
-            Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
-        } else if (res_id == R.id.action_change_password) {
-            Toast.makeText(getApplicationContext(), "You select Change Password option", Toast.LENGTH_SHORT).show();
+        if(res_id == R.id.action_show_pending_requests) {
+            //Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
+            showPendingRequests();
+        } else if(res_id == R.id.action_change_password) {
+            //Toast.makeText(getApplicationContext(), "You select Change Password option", Toast.LENGTH_SHORT).show();
             showChangePasswordDialogBox();
-        } else if (res_id == R.id.action_logout) {
+        } else if(res_id == R.id.action_logout) {
             Toast.makeText(getApplicationContext(), "Logged out Successfully", Toast.LENGTH_SHORT).show();
             showLoginPage();
             Preference.remove(PrefKeys.USER_INFO);
-        } else if (res_id == R.id.action_home) {
+        } else if(res_id == R.id.action_home) {
             openHomePage();
-        } else if (res_id == R.id.action_setup) {
+        } else if(res_id == R.id.action_setup) {
             showSetupPage();
         }
 
         return true;
+    }
+
+    private void showPendingRequests() {
+        Intent intent = new Intent(this, PendingRequestsActivity.class);
+        startActivity(intent);
     }
 
     private void showChangePasswordDialogBox() {

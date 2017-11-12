@@ -27,6 +27,7 @@ import com.example.nasimuzzaman.roostpad.gmail.GMailSender;
 import com.example.nasimuzzaman.roostpad.home.DateCalendarActivity;
 import com.example.nasimuzzaman.roostpad.home.HomeActivity;
 import com.example.nasimuzzaman.roostpad.home.SetupActivity;
+import com.example.nasimuzzaman.roostpad.pendingRequests.PendingRequestsActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -121,6 +122,7 @@ public class RequestHolidayActivity extends AppCompatActivity {
 
                 final RequestHolidayCredential credential = new RequestHolidayCredential();
                 credential.setEmail(userInfo.getEmail());
+                //System.out.println("12345 "+userInfo.getCtoEmail().toString());
                 credential.setFromDate(startDate);
                 credential.setToDate(endDate);
                 credential.setDays(numberOfDays);
@@ -139,7 +141,7 @@ public class RequestHolidayActivity extends AppCompatActivity {
                         if(body != null) {
                             if(body.getStatusCode() == 200) {
                                 // save user info
-                                com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_INFO, body);
+                                // com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_INFO, body);
                                 // show success message
                                 Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
                                 // go to home page
@@ -166,8 +168,8 @@ public class RequestHolidayActivity extends AppCompatActivity {
         dialog.setTitle("Sending Email");
         dialog.setMessage("Please wait");
         dialog.show();
-        final String subject = credential.getEmail() + " apply for holiday from " + credential.getFromDate() +
-                " to " + credential.getToDate();
+        final String subject = userInfo.getName() + " apply for holiday from " + credential.getFromDate() +
+                " to " + credential.getToDate() + " for total " + credential.getDays() + " days.";
 
         Thread sender = new Thread(new Runnable() {
             @Override
@@ -177,7 +179,7 @@ public class RequestHolidayActivity extends AppCompatActivity {
                     sender.sendMail(subject,
                             credential.getMessage(),
                             "roostpaddb@gmail.com",
-                            credential.getEmail());
+                            userInfo.getCtoEmail());
                     dialog.dismiss();
                 } catch (Exception e) {
                     Log.e("mylog", "Error: " + e.getMessage());
@@ -205,13 +207,6 @@ public class RequestHolidayActivity extends AppCompatActivity {
 
         Intent chooser = Intent.createChooser(email, "Send Email");
         startActivity(chooser);
-
-//        startActivity(Intent.createChooser(email, "Send mail..."));
-
-
-//        email.setType("message/rfc822");
-//
-//        startActivity(Intent.createChooser(email, "Choose an Email client :"));
     }
 
     private void showDatesInfo(String start, String end) {
@@ -348,22 +343,28 @@ public class RequestHolidayActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int res_id = item.getItemId();
-        if (res_id == R.id.action_show_pending_requests) {
-            Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
-        } else if (res_id == R.id.action_change_password) {
-            Toast.makeText(getApplicationContext(), "You select Change Password option", Toast.LENGTH_SHORT).show();
+        if(res_id == R.id.action_show_pending_requests) {
+            //Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
+            showPendingRequests();
+        } else if(res_id == R.id.action_change_password) {
+            //Toast.makeText(getApplicationContext(), "You select Change Password option", Toast.LENGTH_SHORT).show();
             showChangePasswordDialogBox();
-        } else if (res_id == R.id.action_logout) {
+        } else if(res_id == R.id.action_logout) {
             Toast.makeText(getApplicationContext(), "Logged out Successfully", Toast.LENGTH_SHORT).show();
             showLoginPage();
             Preference.remove(PrefKeys.USER_INFO);
-        } else if (res_id == R.id.action_home) {
+        } else if(res_id == R.id.action_home) {
             openHomePage();
-        } else if (res_id == R.id.action_setup) {
+        } else if(res_id == R.id.action_setup) {
             showSetupPage();
         }
 
         return true;
+    }
+
+    private void showPendingRequests() {
+        Intent intent = new Intent(this, PendingRequestsActivity.class);
+        startActivity(intent);
     }
 
     private void showChangePasswordDialogBox() {

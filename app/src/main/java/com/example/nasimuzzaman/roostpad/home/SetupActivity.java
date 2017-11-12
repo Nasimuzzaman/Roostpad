@@ -19,6 +19,7 @@ import com.example.nasimuzzaman.roostpad.contacts.ContactsActivity;
 import com.example.nasimuzzaman.roostpad.contacts.ContactsClient;
 import com.example.nasimuzzaman.roostpad.contacts.ContactsResponse;
 import com.example.nasimuzzaman.roostpad.contacts.ContactsService;
+import com.example.nasimuzzaman.roostpad.pendingRequests.PendingRequestsActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,7 +62,7 @@ public class SetupActivity extends AppCompatActivity {
                         if(body != null) {
                             if(body.getStatusCode() == 200) {
                                 // save user info
-                                com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_INFO, body);
+                                com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_CONTACTS, body);
                                 // show success message
                                 Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
                                 // go to setup page
@@ -94,22 +95,28 @@ public class SetupActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int res_id = item.getItemId();
-        if (res_id == R.id.action_show_pending_requests) {
-            Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
-        } else if (res_id == R.id.action_change_password) {
-            Toast.makeText(getApplicationContext(), "You select Change Password option", Toast.LENGTH_SHORT).show();
+        if(res_id == R.id.action_show_pending_requests) {
+            //Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
+            showPendingRequests();
+        } else if(res_id == R.id.action_change_password) {
+            //Toast.makeText(getApplicationContext(), "You select Change Password option", Toast.LENGTH_SHORT).show();
             showChangePasswordDialogBox();
-        } else if (res_id == R.id.action_logout) {
+        } else if(res_id == R.id.action_logout) {
             Toast.makeText(getApplicationContext(), "Logged out Successfully", Toast.LENGTH_SHORT).show();
             showLoginPage();
             Preference.remove(PrefKeys.USER_INFO);
-        } else if (res_id == R.id.action_home) {
+        } else if(res_id == R.id.action_home) {
             openHomePage();
-        } else if (res_id == R.id.action_setup) {
+        } else if(res_id == R.id.action_setup) {
             showSetupPage();
         }
 
         return true;
+    }
+
+    private void showPendingRequests() {
+        Intent intent = new Intent(this, PendingRequestsActivity.class);
+        startActivity(intent);
     }
 
     private void showChangePasswordDialogBox() {
