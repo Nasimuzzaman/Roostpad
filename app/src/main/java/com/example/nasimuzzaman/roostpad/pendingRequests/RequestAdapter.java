@@ -19,13 +19,9 @@ import com.example.nasimuzzaman.roostpad.replyToLeaveRequest.ReplyToLeaveRequest
 import com.example.nasimuzzaman.roostpad.replyToLeaveRequest.ReplyToLeaveRequestCredential;
 import com.example.nasimuzzaman.roostpad.replyToLeaveRequest.ReplyToLeaveRequestResponse;
 import com.example.nasimuzzaman.roostpad.replyToLeaveRequest.ReplyToLeaveRequestService;
-import com.example.nasimuzzaman.roostpad.request.RequestHolidayActivity;
-import com.example.nasimuzzaman.roostpad.request.RequestHolidayCredential;
-import com.example.nasimuzzaman.roostpad.request.RequestHolidayResponse;
 
 import java.util.List;
 
-import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
