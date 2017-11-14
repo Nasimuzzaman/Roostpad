@@ -1,12 +1,13 @@
 package com.example.nasimuzzaman.roostpad.deleteUser;
 
+import com.example.nasimuzzaman.roostpad.BaseResponse;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by nasimuzzaman on 11/14/17.
  */
 
-public class DeleteUserResponse {
+public class DeleteUserResponse extends BaseResponse{
 
     @SerializedName("id") private int id;
     @SerializedName("email") private String email;

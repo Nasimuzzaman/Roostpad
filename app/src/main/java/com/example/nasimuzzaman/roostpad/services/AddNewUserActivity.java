@@ -18,6 +18,9 @@ import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
 import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
 import com.example.nasimuzzaman.roostpad.contacts.ContactsActivity;
+import com.example.nasimuzzaman.roostpad.contacts.ContactsClient;
+import com.example.nasimuzzaman.roostpad.contacts.ContactsResponse;
+import com.example.nasimuzzaman.roostpad.contacts.ContactsService;
 import com.example.nasimuzzaman.roostpad.home.HomeActivity;
 import com.example.nasimuzzaman.roostpad.home.SetupActivity;
 import com.example.nasimuzzaman.roostpad.home.UsersActivity;
@@ -62,8 +65,31 @@ public class AddNewUserActivity extends AppCompatActivity {
         contacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AddNewUserActivity.this, ContactsActivity.class);
-                startActivity(intent);
+                ContactsService contactsService = new ContactsClient().createService();
+                Call<ContactsResponse> call = contactsService.showContacts();
+
+                call.enqueue(new Callback<ContactsResponse>() {
+                    @Override
+                    public void onResponse(Call<ContactsResponse> call, Response<ContactsResponse> response) {
+                        ContactsResponse body = response.body();
+
+                        if(body != null) {
+                            if(body.getStatusCode() == 200) {
+                                // save user info
+                                com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_CONTACTS, body);
+                                // show success message
+                                Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
+                                // go to setup page
+                                showContactsPage();
+                            } else Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ContactsResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -170,6 +196,11 @@ public class AddNewUserActivity extends AppCompatActivity {
 
     private void openHomePage() {
         Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
+
+    private void showContactsPage() {
+        Intent intent = new Intent(this, ContactsActivity.class);
         startActivity(intent);
     }
 }

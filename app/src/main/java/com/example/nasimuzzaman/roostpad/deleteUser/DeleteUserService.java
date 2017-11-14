@@ -14,5 +14,5 @@ import retrofit2.http.POST;
 public interface DeleteUserService {
 
     @POST("RoostpadLMS/controller/DeleteUser.php")
-    Call<DeleteUserResponse> updateUser(@Body DeleteUserCredential deleteUserCredential);
+    Call<DeleteUserResponse> deleteUser(@Body DeleteUserCredential deleteUserCredential);
 }
