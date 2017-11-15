@@ -37,6 +37,7 @@ import retrofit2.Response;
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHolder> {
 
     List<Contacts> contactsList;
+    int deleteCount = 0;
 
     public ContactAdapter(List<Contacts> contactsList) {
         this.contactsList = contactsList;
@@ -147,6 +148,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
                                 Toast.makeText(holder.context, body.getMessage(), Toast.LENGTH_SHORT);
                                 contactsList.remove(position);
                                 notifyItemRemoved(position);
+                                notifyItemRangeChanged(position, contactsList.size());
                             } else Toast.makeText(holder.context, body.getError(), Toast.LENGTH_SHORT).show();
                         }
                     }

@@ -169,9 +169,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
                     sender.sendMail("Reply from ROOSTPAD",
                             "Your request has been "+credential.getStatus(),
                             "roostpaddb@gmail.com",
-                            "" +
-                                    "maruf61807@yahoo.com");
-                    System.out.println("55555 "+credential.getEmail());
+                            credential.getEmail());
                     dialog.dismiss();
                 } catch (Exception e) {
                     Log.e("mylog", "Error: " + e.getMessage());

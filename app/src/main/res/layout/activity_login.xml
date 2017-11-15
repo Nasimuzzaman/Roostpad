@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:focusable="false"
     tools:context="com.example.nasimuzzaman.roostpad.authentication.LoginActivity">
 
 
@@ -28,4 +29,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Login" />
+
+    <Button
+        android:id="@+id/btn_forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgotten password?" />
+
+    <EditText
+        android:id="@+id/recover_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Email address of your account"
+        android:enabled="false"
+        android:clickable="false"
+        android:visibility="invisible"
+        />
+
+    <Button
+        android:id="@+id/btn_recover_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Recover Password"
+        android:visibility="invisible"/>
+
+
 </LinearLayout>

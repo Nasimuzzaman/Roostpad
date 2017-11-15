@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.binjar.prefsdroid.Preference;
+import com.example.nasimuzzaman.roostpad.libraryPackage.CustomLibrary;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
@@ -103,11 +104,11 @@ public class AddNewUserActivity extends AppCompatActivity {
                 String role = roleInput.getSelectedItem().toString();
                 String gender = genderInput.getSelectedItem().toString();
 
-                UserCredential userCredential = new UserCredential();
+                final UserCredential userCredential = new UserCredential();
                 userCredential.setName(name);
                 userCredential.setEmail(email);
                 userCredential.setContact(phone);
-                userCredential.setPassword("123456");
+                userCredential.setPassword(new CustomLibrary().getSaltString());
                 userCredential.setDesignation(designation);
                 userCredential.setRole(role);
                 userCredential.setHoliday(25);
@@ -126,6 +127,7 @@ public class AddNewUserActivity extends AppCompatActivity {
                                 // show success message
                                 Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
                                 // go to setup page
+                                new CustomLibrary().sendPassword(userCredential.getEmail(), userCredential.getPassword());
                                 showSetupPage();
                             } else Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
                         }
@@ -133,7 +135,7 @@ public class AddNewUserActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<AddUserResponse> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "User With This Email Already in Exists!", Toast.LENGTH_SHORT).show();
                     }
                 });
 
