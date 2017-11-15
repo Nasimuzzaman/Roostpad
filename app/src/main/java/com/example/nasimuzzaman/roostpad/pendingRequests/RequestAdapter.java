@@ -95,6 +95,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
                                 // refresh notification page
                                 requestList.remove(position);
                                 notifyItemRemoved(position);
+                                notifyItemRangeChanged(position, requestList.size());
                             } else Toast.makeText(holder.context, body.getError(), Toast.LENGTH_SHORT).show();
                         }
 

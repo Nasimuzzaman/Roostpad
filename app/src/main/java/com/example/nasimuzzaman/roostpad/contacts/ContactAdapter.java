@@ -2,6 +2,7 @@ package com.example.nasimuzzaman.roostpad.contacts;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +38,6 @@ import retrofit2.Response;
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHolder> {
 
     List<Contacts> contactsList;
-    int deleteCount = 0;
 
     public ContactAdapter(List<Contacts> contactsList) {
         this.contactsList = contactsList;

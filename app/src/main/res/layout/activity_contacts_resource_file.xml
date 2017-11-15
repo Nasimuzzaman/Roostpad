@@ -92,7 +92,7 @@
             android:focusable="false"/>
 
         <EditText
-            android:layout_width="120dp"
+            android:layout_width="150dp"
             android:layout_height="match_parent"
             android:entries="@array/role"
             android:text="Role"
@@ -102,7 +102,7 @@
             android:focusable="false"/>
 
         <EditText
-            android:layout_width="80dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:textColor="@color/black"
             android:text="Holidays"
@@ -124,13 +124,13 @@
 
         <Spinner
             android:id="@+id/roleSpinner"
-            android:layout_width="120dp"
+            android:layout_width="150dp"
             android:layout_height="match_parent"
             android:entries="@array/role" />
 
         <EditText
             android:id="@+id/holidayText"
-            android:layout_width="80dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:textColor="@color/black" />
     </LinearLayout>
