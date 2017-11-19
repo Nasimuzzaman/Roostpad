@@ -145,7 +145,7 @@ public class RequestHolidayActivity extends AppCompatActivity {
                                 // show success message
                                 Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
                                 // go to home page
-                                // openHomePage();
+                                openHomePage();
                             } else Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
                         }
                     }
