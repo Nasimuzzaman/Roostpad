@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
+import com.example.nasimuzzaman.roostpad.addHoliday.AddHolidayActivity;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
 import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
 import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
@@ -29,8 +30,7 @@ import retrofit2.Response;
 
 public class SetupActivity extends AppCompatActivity {
 
-    private Button users;
-    private Button contacts;
+    private Button users, contacts, btnAddHoliday;
     LoginResponse userInfo;
 
     @Override
@@ -40,6 +40,7 @@ public class SetupActivity extends AppCompatActivity {
 
         users = (Button) findViewById(R.id.users);
         contacts = (Button) findViewById(R.id.contacts);
+        btnAddHoliday = (Button) findViewById(R.id.btn_add_holiday);
         userInfo = Preference.getObject(PrefKeys.USER_INFO, LoginResponse.class);
 
         users.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +82,14 @@ public class SetupActivity extends AppCompatActivity {
                     }
                 });
 
+            }
+        });
+
+        btnAddHoliday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SetupActivity.this, AddHolidayActivity.class);
+                startActivity(intent);
             }
         });
 

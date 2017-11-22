@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
+import com.example.nasimuzzaman.roostpad.addHoliday.AddHolidayActivity;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
 import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
 import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
@@ -21,6 +22,7 @@ import com.example.nasimuzzaman.roostpad.contacts.ContactsClient;
 import com.example.nasimuzzaman.roostpad.contacts.ContactsResponse;
 import com.example.nasimuzzaman.roostpad.contacts.ContactsService;
 import com.example.nasimuzzaman.roostpad.employeeNotification.UserNotificationActivity;
+import com.example.nasimuzzaman.roostpad.libraryPackage.Helper;
 import com.example.nasimuzzaman.roostpad.pendingRequests.PendingRequestsActivity;
 import com.example.nasimuzzaman.roostpad.services.AddNewUserActivity;
 
@@ -30,9 +32,7 @@ import retrofit2.Response;
 
 public class UsersActivity extends AppCompatActivity {
 
-    private Button users;
-    private Button contacts;
-    private Button addNewUser;
+    private Button users, contacts, addNewUser, btnAddHoliday;
     LoginResponse userInfo;
 
 
@@ -43,6 +43,7 @@ public class UsersActivity extends AppCompatActivity {
 
         users = (Button) findViewById(R.id.users);
         contacts = (Button) findViewById(R.id.contacts);
+        btnAddHoliday = (Button) findViewById(R.id.btn_add_holiday);
         addNewUser = (Button) findViewById(R.id.add_new_user);
         userInfo = Preference.getObject(PrefKeys.USER_INFO, LoginResponse.class);
 
@@ -83,6 +84,13 @@ public class UsersActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+
+        btnAddHoliday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Helper.openPage(getApplicationContext(), AddHolidayActivity.class);
             }
         });
 

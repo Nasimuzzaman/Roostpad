@@ -102,7 +102,10 @@ public class ContactsActivity extends AppCompatActivity {
                                 // show success message
                                 Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
                                 // go to setup page
-                                showContactsPage();
+                                //showContactsPage();
+                                Intent intent = getIntent();
+                                finish();
+                                startActivity(intent);
                             } else Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
                         }
                     }

@@ -31,7 +31,9 @@
         <activity android:name=".contacts.ContactsActivity" />
         <activity android:name=".changePassword.ChangePasswordActivity" />
         <activity android:name=".pendingRequests.PendingRequestsActivity" />
-        <activity android:name=".employeeNotification.UserNotificationActivity"></activity>
+        <activity android:name=".employeeNotification.UserNotificationActivity" />
+        <activity android:name=".addHoliday.AddHolidayActivity" />
+        <activity android:name=".libraryPackage.Helper"></activity>
     </application>
 
 </manifest>
