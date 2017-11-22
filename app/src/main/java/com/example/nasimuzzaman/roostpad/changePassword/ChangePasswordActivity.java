@@ -1,9 +1,12 @@
 package com.example.nasimuzzaman.roostpad.changePassword;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -69,6 +72,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                     // com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_INFO, body);
                                     // show success message
                                     Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
+                                    Toast.makeText(getApplicationContext(), "Password changed successfully", Toast.LENGTH_SHORT).show();
                                     // go to setup page
                                     showHomePage();
                                 } else
@@ -81,6 +85,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
                         }
                     });
+                } else {
+                    Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+                    reNewPasswordInput.setError("Password don't match");
+                    reNewPasswordInput.startAnimation(shake);
                 }
 
 
