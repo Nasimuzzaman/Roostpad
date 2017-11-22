@@ -35,10 +35,17 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         userInfo = Preference.getObject(PrefKeys.USER_INFO, LoginResponse.class);
 
+
+
         requestAHoliday = (Button) findViewById(R.id.request_a_holiday);
         availableHolidayText = (TextView) findViewById(R.id.available_holiday_text);
 
-        availableHolidayText.setText("Your personal holiday left " + userInfo.getHoliday() + " days");
+        if(userInfo.getRole().toString().equals("CTO")) {
+            availableHolidayText.setVisibility(View.GONE);
+            requestAHoliday.setVisibility(View.GONE);
+        }
+
+        availableHolidayText.setText(userInfo.getHoliday() + " personal holidays left");
 
         requestAHoliday.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +87,16 @@ public class HomeActivity extends AppCompatActivity {
             openHomePage();
         } else if(res_id == R.id.action_setup) {
             showSetupPage();
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu (Menu menu) {
+
+        if(userInfo.getRole().toString().equals("Employee")) {
+            menu.getItem(1).setVisible(false);
         }
 
         return true;

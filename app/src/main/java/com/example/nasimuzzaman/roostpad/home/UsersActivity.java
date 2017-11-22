@@ -14,11 +14,13 @@ import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
+import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
 import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
 import com.example.nasimuzzaman.roostpad.contacts.ContactsActivity;
 import com.example.nasimuzzaman.roostpad.contacts.ContactsClient;
 import com.example.nasimuzzaman.roostpad.contacts.ContactsResponse;
 import com.example.nasimuzzaman.roostpad.contacts.ContactsService;
+import com.example.nasimuzzaman.roostpad.employeeNotification.UserNotificationActivity;
 import com.example.nasimuzzaman.roostpad.pendingRequests.PendingRequestsActivity;
 import com.example.nasimuzzaman.roostpad.services.AddNewUserActivity;
 
@@ -31,6 +33,8 @@ public class UsersActivity extends AppCompatActivity {
     private Button users;
     private Button contacts;
     private Button addNewUser;
+    LoginResponse userInfo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,8 @@ public class UsersActivity extends AppCompatActivity {
         users = (Button) findViewById(R.id.users);
         contacts = (Button) findViewById(R.id.contacts);
         addNewUser = (Button) findViewById(R.id.add_new_user);
+        userInfo = Preference.getObject(PrefKeys.USER_INFO, LoginResponse.class);
+
 
         users.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +109,11 @@ public class UsersActivity extends AppCompatActivity {
         int res_id = item.getItemId();
         if(res_id == R.id.action_show_pending_requests) {
             //Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
-            showPendingRequests();
+            if(userInfo.getRole().toString().equals("CTO")) {
+                showPendingRequests();
+            } else {
+                showUserNotification();
+            }
         } else if(res_id == R.id.action_change_password) {
             //Toast.makeText(getApplicationContext(), "You select Change Password option", Toast.LENGTH_SHORT).show();
             showChangePasswordDialogBox();
@@ -115,6 +125,16 @@ public class UsersActivity extends AppCompatActivity {
             openHomePage();
         } else if(res_id == R.id.action_setup) {
             showSetupPage();
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu (Menu menu) {
+
+        if(userInfo.getRole().toString().equals("Employee")) {
+            menu.getItem(1).setVisible(false);
         }
 
         return true;
@@ -148,6 +168,11 @@ public class UsersActivity extends AppCompatActivity {
 
     private void showContactsPage() {
         Intent intent = new Intent(this, ContactsActivity.class);
+        startActivity(intent);
+    }
+
+    private void showUserNotification() {
+        Intent intent = new Intent(this, UserNotificationActivity.class);
         startActivity(intent);
     }
 }

@@ -22,7 +22,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
 
     Button submitChangePassword, cancelChangePassword;
-    EditText currentPasswordInput, newPasswordInput;
+    EditText currentPasswordInput, newPasswordInput, reNewPasswordInput;
     LoginResponse userInfo;
 
     @Override
@@ -37,43 +37,53 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
         currentPasswordInput = (EditText) findViewById(R.id.current_passwrod);
         newPasswordInput = (EditText) findViewById(R.id.new_password);
+        reNewPasswordInput = (EditText) findViewById(R.id.re_type_new_password);
+
 
         submitChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String currentPassword = currentPasswordInput.getText().toString();
-                String newPassword = newPasswordInput.getText().toString();
 
-                ChangePasswordCredential credential = new ChangePasswordCredential();
-                credential.setEmail(userInfo.getEmail());
-                credential.setPassword(currentPassword);
-                credential.setNewPassword(newPassword);
+                System.out.println("00000 "+newPasswordInput.toString()+"\t00000" + reNewPasswordInput.toString());
 
-                ChangePasswordService changePasswordService = new ChangePasswordClient().createService();
-                Call<ChangePasswordResponse> call = changePasswordService.changePassword(credential);
+                if (newPasswordInput.getText().toString().equals(reNewPasswordInput.getText().toString())) {
+                    String currentPassword = currentPasswordInput.getText().toString();
+                    String newPassword = newPasswordInput.getText().toString();
 
-                call.enqueue(new Callback<ChangePasswordResponse>() {
-                    @Override
-                    public void onResponse(Call<ChangePasswordResponse> call, Response<ChangePasswordResponse> response) {
-                        ChangePasswordResponse body = response.body();
+                    ChangePasswordCredential credential = new ChangePasswordCredential();
+                    credential.setEmail(userInfo.getEmail());
+                    credential.setPassword(currentPassword);
+                    credential.setNewPassword(newPassword);
 
-                        if(body != null) {
-                            if(body.getStatusCode() == 200) {
-                                // save user info
-                                // com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_INFO, body);
-                                // show success message
-                                Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
-                                // go to setup page
-                                showHomePage();
-                            } else Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
+                    ChangePasswordService changePasswordService = new ChangePasswordClient().createService();
+                    Call<ChangePasswordResponse> call = changePasswordService.changePassword(credential);
+
+                    call.enqueue(new Callback<ChangePasswordResponse>() {
+                        @Override
+                        public void onResponse(Call<ChangePasswordResponse> call, Response<ChangePasswordResponse> response) {
+                            ChangePasswordResponse body = response.body();
+
+                            if (body != null) {
+                                if (body.getStatusCode() == 200) {
+                                    // save user info
+                                    // com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_INFO, body);
+                                    // show success message
+                                    Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
+                                    // go to setup page
+                                    showHomePage();
+                                } else
+                                    Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<ChangePasswordResponse> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<ChangePasswordResponse> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+
             }
         });
 

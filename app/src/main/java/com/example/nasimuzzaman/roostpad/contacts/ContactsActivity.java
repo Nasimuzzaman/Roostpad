@@ -17,7 +17,9 @@ import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
+import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
 import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
+import com.example.nasimuzzaman.roostpad.employeeNotification.UserNotificationActivity;
 import com.example.nasimuzzaman.roostpad.home.HomeActivity;
 import com.example.nasimuzzaman.roostpad.home.SetupActivity;
 import com.example.nasimuzzaman.roostpad.home.UsersActivity;
@@ -37,11 +39,14 @@ public class ContactsActivity extends AppCompatActivity {
     List<Contacts> contactsLists;
     RecyclerView view;
     RecyclerView.Adapter adapter;
+    LoginResponse userInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
+
+        userInfo = Preference.getObject(PrefKeys.USER_INFO, LoginResponse.class);
 
         contactsResponse = Preference.getObject(PrefKeys.USER_CONTACTS, ContactsResponse.class);
         contactsLists = contactsResponse.getContacts();
@@ -125,7 +130,11 @@ public class ContactsActivity extends AppCompatActivity {
         int res_id = item.getItemId();
         if(res_id == R.id.action_show_pending_requests) {
             //Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
-            showPendingRequests();
+            if(userInfo.getRole().toString().equals("CTO")) {
+                showPendingRequests();
+            } else {
+                showUserNotification();
+            }
         } else if(res_id == R.id.action_change_password) {
             //Toast.makeText(getApplicationContext(), "You select Change Password option", Toast.LENGTH_SHORT).show();
             showChangePasswordDialogBox();
@@ -140,6 +149,21 @@ public class ContactsActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu (Menu menu) {
+
+        if(userInfo.getRole().toString().equals("Employee")) {
+            menu.getItem(1).setVisible(false);
+        }
+
+        return true;
+    }
+
+    private void showUserNotification() {
+        Intent intent = new Intent(this, UserNotificationActivity.class);
+        startActivity(intent);
     }
 
     private void showPendingRequests() {
