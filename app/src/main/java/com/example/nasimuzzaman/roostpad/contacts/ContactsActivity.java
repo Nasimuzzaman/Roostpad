@@ -10,12 +10,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
+import com.example.nasimuzzaman.roostpad.holiday.HolidayActivity;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
 import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
 import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
@@ -23,6 +23,7 @@ import com.example.nasimuzzaman.roostpad.employeeNotification.UserNotificationAc
 import com.example.nasimuzzaman.roostpad.home.HomeActivity;
 import com.example.nasimuzzaman.roostpad.home.SetupActivity;
 import com.example.nasimuzzaman.roostpad.home.UsersActivity;
+import com.example.nasimuzzaman.roostpad.libraryPackage.Helper;
 import com.example.nasimuzzaman.roostpad.pendingRequests.PendingRequestsActivity;
 
 import java.util.List;
@@ -33,7 +34,7 @@ import retrofit2.Response;
 
 public class ContactsActivity extends AppCompatActivity {
 
-    private Button users, contacts;
+    private Button users, contacts, holiday;
     //private TextView contactView;
     ContactsResponse contactsResponse;
     List<Contacts> contactsLists;
@@ -53,6 +54,7 @@ public class ContactsActivity extends AppCompatActivity {
 
         users = (Button) findViewById(R.id.users);
         contacts = (Button) findViewById(R.id.contacts);
+        holiday = (Button) findViewById(R.id.btn_add_holiday);
         //contactView = (TextView) findViewById(R.id.contact_list);
         System.out.println("00000 "+contactsLists.size());
         view = (RecyclerView) findViewById(R.id.contactRecyclerView);
@@ -115,6 +117,13 @@ public class ContactsActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+
+        holiday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Helper.openPage(getApplicationContext(), HolidayActivity.class);
             }
         });
     }

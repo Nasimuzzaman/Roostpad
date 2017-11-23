@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.nasimuzzaman.roostpad.addHoliday.AddHolidayActivity">
+    tools:context="com.example.nasimuzzaman.roostpad.holiday.HolidayActivity">
 
     <Button
         android:id="@+id/users"
@@ -89,5 +89,54 @@
         android:textSize="20sp"
         android:textColor="@color/teal"
         android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/manage_contacts_text_view"
+        android:id="@+id/linearLayout">
+
+        <LinearLayout
+            android:id="@+id/add_holiday"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_select_holiday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                />
+
+            <EditText
+                android:id="@+id/add_holiday_description"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:hint="Description"
+                android:background="@drawable/holiday_description_border"/>
+
+            <Button
+                android:id="@+id/btn_add_new_holiday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rview_holidays"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

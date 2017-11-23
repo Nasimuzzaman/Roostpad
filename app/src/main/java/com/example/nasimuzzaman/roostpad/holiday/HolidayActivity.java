@@ -1,4 +1,4 @@
-package com.example.nasimuzzaman.roostpad.addHoliday;
+package com.example.nasimuzzaman.roostpad.holiday;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -22,9 +22,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddHolidayActivity extends AppCompatActivity {
+public class HolidayActivity extends AppCompatActivity {
 
-    private Button users, contacts, btnAddHoliday;
+    private Button users, contacts, btnAddHoliday, btnSelectHoliday, btnAddNewHoliday;
     LoginResponse userInfo;
 
     @Override
@@ -35,6 +35,8 @@ public class AddHolidayActivity extends AppCompatActivity {
         users = (Button) findViewById(R.id.users);
         contacts = (Button) findViewById(R.id.contacts);
         btnAddHoliday = (Button) findViewById(R.id.btn_add_holiday);
+        btnSelectHoliday = (Button) findViewById(R.id.btn_select_holiday);
+        btnAddNewHoliday = (Button) findViewById(R.id.btn_add_new_holiday);
         userInfo = Preference.getObject(PrefKeys.USER_INFO, LoginResponse.class);
 
         users.setOnClickListener(new View.OnClickListener() {
@@ -57,12 +59,11 @@ public class AddHolidayActivity extends AppCompatActivity {
 
                         if(body != null) {
                             if(body.getStatusCode() == 200) {
-                                // save user info
+                                // save contact info
                                 com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_CONTACTS, body);
                                 // show success message
                                 Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
-                                // go to setup page
-                                //new Helper().openPage(getApplicationContext(), ContactsActivity.class);
+                                // go to contact page
                                 Helper.openPage(getApplicationContext(), ContactsActivity.class);
                             } else Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
                         }

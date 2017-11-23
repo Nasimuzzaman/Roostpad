@@ -32,7 +32,7 @@
         <activity android:name=".changePassword.ChangePasswordActivity" />
         <activity android:name=".pendingRequests.PendingRequestsActivity" />
         <activity android:name=".employeeNotification.UserNotificationActivity" />
-        <activity android:name=".addHoliday.AddHolidayActivity" />
+        <activity android:name=".holiday.HolidayActivity" />
         <activity android:name=".libraryPackage.Helper"></activity>
     </application>
 

@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
-import com.example.nasimuzzaman.roostpad.addHoliday.AddHolidayActivity;
+import com.example.nasimuzzaman.roostpad.holiday.HolidayActivity;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
 import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
 import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
@@ -88,7 +88,7 @@ public class SetupActivity extends AppCompatActivity {
         btnAddHoliday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SetupActivity.this, AddHolidayActivity.class);
+                Intent intent = new Intent(SetupActivity.this, HolidayActivity.class);
                 startActivity(intent);
             }
         });
