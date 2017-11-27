@@ -23,7 +23,8 @@
         </activity>
         <activity android:name=".home.HomeActivity" />
         <activity android:name=".home.CalendarActivity" />
-        <activity android:name=".request.RequestHolidayActivity" />
+        <activity android:name=".request.RequestHolidayActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".home.DateCalendarActivity" />
         <activity android:name=".home.SetupActivity" />
         <activity android:name=".services.AddNewUserActivity" />

@@ -3,8 +3,10 @@ package com.example.nasimuzzaman.roostpad.request;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,12 +16,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.binjar.prefsdroid.Preference;
+import com.example.nasimuzzaman.roostpad.OnHolidayRequestCountChangeCallback;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
@@ -34,23 +36,29 @@ import com.example.nasimuzzaman.roostpad.pendingRequests.PendingRequestsActivity
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RequestHolidayActivity extends AppCompatActivity {
+public class RequestHolidayActivity extends AppCompatActivity implements OnHolidayRequestCountChangeCallback {
 
     private TextView fromDateInput, toDateInput, totalDayCount;
     private EditText messageInput;
     private Button btnFromDateGoCalender, btnToDateGoCalender, btnRequest, info;
-    private TableLayout dates;
+    //private TableLayout dates;
     private final int FROM_DATE_REQ = 1;
     private final int TO_DATE_REQ = 2;
     Date from, to;
     LoginResponse userInfo;
+    double days = 0;
+
+    RecyclerView rviewDays;
+    RecyclerView.Adapter adapter;
 
 
     @Override
@@ -64,12 +72,16 @@ public class RequestHolidayActivity extends AppCompatActivity {
         toDateInput = (TextView) findViewById(R.id.parseToDate);
         totalDayCount = (TextView) findViewById(R.id.total_day_count);
         messageInput = (EditText) findViewById(R.id.messageBox);
-        dates = (TableLayout) findViewById(R.id.dates);
+        //dates = (TableLayout) findViewById(R.id.dates);
 
         btnFromDateGoCalender = (Button) findViewById(R.id.btn_from_date_go_calendar);
         btnToDateGoCalender = (Button) findViewById(R.id.btn_to_date_go_calendar);
         btnRequest = (Button) findViewById(R.id.btn_request);
         info = (Button) findViewById(R.id.info);
+
+        rviewDays = (RecyclerView) findViewById(R.id.rview_days);
+        rviewDays.setHasFixedSize(true);
+        rviewDays.setLayoutManager(new LinearLayoutManager(this));
 
 
         //dates.append("Date" + "\t\t" + "Day" + "\t\t" + "Description" + "\n");
@@ -105,10 +117,13 @@ public class RequestHolidayActivity extends AppCompatActivity {
 
                 if (fromDateInput.getText().toString().trim().length() != 0 && toDateInput.getText().toString().trim().length() != 0) {
                     if (compareDate(btnFromDateGoCalender.getText().toString(), btnToDateGoCalender.getText().toString())) {
-                        dates.removeAllViews();
+                        //dates.removeAllViews();
                         btnToDateGoCalender.setError(null);
-                        showDatesInfo(btnFromDateGoCalender.getText().toString(), btnToDateGoCalender.getText().toString());
-                        totalDayCount.setText("Actual Holiday Requested: " + getTotalHolidayRequested(btnFromDateGoCalender.getText().toString(), btnToDateGoCalender.getText().toString()));
+                        btnFromDateGoCalender.setError(null);
+                        List<RequestDay> dayList = getDateList(btnFromDateGoCalender.getText().toString(), btnToDateGoCalender.getText().toString());
+                        adapter = new RequestDaysAdapter(dayList, RequestHolidayActivity.this);
+                        rviewDays.setAdapter(adapter);
+                        //showDatesInfo(btnFromDateGoCalender.getText().toString(), btnToDateGoCalender.getText().toString());
                     } else {
                         Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
                         btnToDateGoCalender.setError("Invalid Selection");
@@ -128,11 +143,11 @@ public class RequestHolidayActivity extends AppCompatActivity {
                     btnFromDateGoCalender.setError(null);
                     btnToDateGoCalender.setError(null);
 
-                    if(messageInput.getText().toString().equals("")) {
+                    if (messageInput.getText().toString().equals("")) {
                         Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
                         messageInput.setError("Please leave a message");
                         messageInput.startAnimation(shake);
-                    }else if (compareDate(btnFromDateGoCalender.getText().toString(), btnToDateGoCalender.getText().toString())) {
+                    } else if (compareDate(btnFromDateGoCalender.getText().toString(), btnToDateGoCalender.getText().toString())) {
 
                         String startDate = btnFromDateGoCalender.getText().toString();
                         String endDate = btnToDateGoCalender.getText().toString();
@@ -263,6 +278,39 @@ public class RequestHolidayActivity extends AppCompatActivity {
         startActivity(chooser);
     }
 
+    private List<RequestDay> getDateList(String start, String end) {
+
+        List<RequestDay> requestDays = new ArrayList<>();
+        days = 0.0;
+
+        Date startDate = getDateFromString(start);
+        Date endDate = getDateFromString(end);
+        for (Date date = startDate; date.before(getNextDate(endDate)); date = getNextDate(date)) {
+            RequestDay day = new RequestDay();
+            day.setDayName(getShortDayName(date));
+            day.setDayDate(formatDate(date));
+            if (isOfficialHoliday(date)) {
+                day.setHolidayType("Official");
+                day.setFirstHalfChecked(false);
+                day.setSecondHalfChecked(false);
+                day.setFirstHalfEnabled(false);
+                day.setSecondHalfEnabled(false);
+            } else {
+                days += 1.0;
+                day.setHolidayType("Personal");
+                day.setFirstHalfEnabled(true);
+                day.setSecondHalfEnabled(true);
+                day.setFirstHalfChecked(true);
+                day.setSecondHalfChecked(true);
+            }
+            requestDays.add(day);
+        }
+
+        totalDayCount.setText("Actual Holiday Requested: "+days);
+
+        return requestDays;
+    }
+
     private void showDatesInfo(String start, String end) {
 
         TableRow row = new TableRow(this);
@@ -278,7 +326,7 @@ public class RequestHolidayActivity extends AppCompatActivity {
         view3.setText("Holiday");
         row.addView(view3);
 
-        dates.addView(row);
+        //dates.addView(row);
 
         Date startDate = getDateFromString(start);
         Date endDate = getDateFromString(end);
@@ -298,7 +346,7 @@ public class RequestHolidayActivity extends AppCompatActivity {
             view3.setText(getDateInfo(date));
             row.addView(view3);
 
-            dates.addView(row);
+            //dates.addView(row);
         }
     }
 
@@ -384,6 +432,27 @@ public class RequestHolidayActivity extends AppCompatActivity {
         return dateFormat.format(date);
     }
 
+    private String getShortDayName(Date date) {
+        java.text.DateFormat dateFormat = new java.text.SimpleDateFormat("EEEE");
+        String dayName = dateFormat.format(date);
+        return dayName.substring(0, Math.min(dayName.length(), 3));
+    }
+
+    /*private String formatDate(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String format = formatter.format(date);
+
+        return format;
+    }*/
+
+    private boolean isOfficialHoliday(Date date) {
+        if (getShortDayName(date).equals("Sat") || getShortDayName(date).equals("Fri")) {
+            return true;
+        }
+
+        return false;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -462,4 +531,13 @@ public class RequestHolidayActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onHolidayRequestCountChange(boolean checked) {
+        if(checked) {
+            days += 0.5;
+        } else {
+            days -= 0.5;
+        }
+        totalDayCount.setText("Actual Holiday Requested: "+days);
+    }
 }
