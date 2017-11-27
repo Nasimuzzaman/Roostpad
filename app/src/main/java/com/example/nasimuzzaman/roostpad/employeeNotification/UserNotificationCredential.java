@@ -8,6 +8,15 @@ import com.google.gson.annotations.SerializedName;
 
 public class UserNotificationCredential {
     @SerializedName("email") private String email;
+    @SerializedName("token") private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public String getEmail() {
         return email;

@@ -13,7 +13,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.binjar.prefsdroid.Preference;
+import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
+import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
 import com.example.nasimuzzaman.roostpad.deleteUser.DeleteUserClient;
 import com.example.nasimuzzaman.roostpad.deleteUser.DeleteUserCredential;
 import com.example.nasimuzzaman.roostpad.deleteUser.DeleteUserResponse;
@@ -38,9 +41,11 @@ import retrofit2.Response;
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHolder> {
 
     List<Contacts> contactsList;
+    LoginResponse userInfo;
 
     public ContactAdapter(List<Contacts> contactsList) {
         this.contactsList = contactsList;
+        userInfo = Preference.getObject(PrefKeys.USER_INFO, LoginResponse.class);
     }
 
     @Override
@@ -135,6 +140,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
                 DeleteUserCredential credential = new DeleteUserCredential();
 
                 credential.setEmail(contacts.getEmail());
+                credential.setEmailOfAuthor(userInfo.getEmail());
+                credential.setTokenOfAuthor(userInfo.getToken());
 
                 DeleteUserService service = new DeleteUserClient().createService();
                 Call<DeleteUserResponse> call = service.deleteUser(credential);

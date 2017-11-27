@@ -47,6 +47,7 @@ public class UserNotificationActivity extends AppCompatActivity {
 
         UserNotificationCredential credential = new UserNotificationCredential();
         credential.setEmail(userInfo.getEmail());
+        credential.setToken(userInfo.getToken());
 
         UserNotificationService service = new UserNotificationClient().createService();
         Call<UserNotificationResponse> call = service.showUserNotifications(credential);
@@ -60,9 +61,7 @@ public class UserNotificationActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
                         // save notification list
                         notificationList = body.getNotificationList();
-                        if(body.getNotificationList() != null) {
-                            System.out.println("88888 : " + body.getNotificationList().size());
-                        }
+
                         adapter = new UserNotificationAdapter(notificationList);
                         recyclerView.setAdapter(adapter);
                     } else Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
