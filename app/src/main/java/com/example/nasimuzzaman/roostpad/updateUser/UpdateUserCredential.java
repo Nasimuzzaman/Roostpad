@@ -13,6 +13,24 @@ public class UpdateUserCredential {
     @SerializedName("designation") private String designation;
     @SerializedName("role") private String role;
     @SerializedName("holiday") private int holiday;
+    @SerializedName("emailOfAuthor") private String emailOfAuthor;
+    @SerializedName("tokenOfAuthor") private String tokenOfAuthor;
+
+    public String getEmailOfAuthor() {
+        return emailOfAuthor;
+    }
+
+    public void setEmailOfAuthor(String emailOfAuthor) {
+        this.emailOfAuthor = emailOfAuthor;
+    }
+
+    public String getTokenOfAuthor() {
+        return tokenOfAuthor;
+    }
+
+    public void setTokenOfAuthor(String tokenOfAuthor) {
+        this.tokenOfAuthor = tokenOfAuthor;
+    }
 
     public String getName() {
         return name;

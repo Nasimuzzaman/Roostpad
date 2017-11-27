@@ -11,6 +11,24 @@ public class ReplyToLeaveRequestCredential {
     @SerializedName("email") private String email;
     @SerializedName("days") private int days;
     @SerializedName("status") private String status;
+    @SerializedName("emailOfAuthor") private String emailOfAuthor;
+    @SerializedName("tokenOfAuthor") private String tokenOfAuthor;
+
+    public String getEmailOfAuthor() {
+        return emailOfAuthor;
+    }
+
+    public void setEmailOfAuthor(String emailOfAuthor) {
+        this.emailOfAuthor = emailOfAuthor;
+    }
+
+    public String getTokenOfAuthor() {
+        return tokenOfAuthor;
+    }
+
+    public void setTokenOfAuthor(String tokenOfAuthor) {
+        this.tokenOfAuthor = tokenOfAuthor;
+    }
 
     public int getId() {
         return id;

@@ -97,6 +97,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
                 credential.setDesignation(holder.designationText.getText().toString());
                 credential.setHoliday(Integer.parseInt(holder.holidayText.getText().toString()));
                 credential.setRole(holder.roleText.getSelectedItem().toString());
+                credential.setEmailOfAuthor(userInfo.getEmail());
+                credential.setTokenOfAuthor(userInfo.getToken());
 
                 UpdateUserService service = new UpdateUserClient().createService();
                 Call<UpdateUserResponse> call = service.updateUser(credential);

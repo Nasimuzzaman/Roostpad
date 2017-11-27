@@ -13,7 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import retrofit2.Call;
+
+import com.binjar.prefsdroid.Preference;
+import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
+import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
 import com.example.nasimuzzaman.roostpad.gmail.GMailSender;
 import com.example.nasimuzzaman.roostpad.replyToLeaveRequest.ReplyToLeaveRequestClient;
 import com.example.nasimuzzaman.roostpad.replyToLeaveRequest.ReplyToLeaveRequestCredential;
@@ -32,6 +36,7 @@ import retrofit2.Response;
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHolder> {
 
     List<Request> requestList;
+    LoginResponse userInfo;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -54,6 +59,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
 
     public RequestAdapter(List<Request> requestList) {
         this.requestList = requestList;
+        userInfo = Preference.getObject(PrefKeys.USER_INFO, LoginResponse.class);
     }
 
     @Override
@@ -77,6 +83,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
                 credential.setEmail(email);
                 credential.setDays(days);
                 credential.setStatus(status);
+                credential.setEmailOfAuthor(userInfo.getEmail());
+                credential.setTokenOfAuthor(userInfo.getToken());
 
                 ReplyToLeaveRequestService service = new ReplyToLeaveRequestClient().createService();
                 Call<ReplyToLeaveRequestResponse> call = service.replyToLeaveRequest(credential);
@@ -122,6 +130,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
                 credential.setEmail(email);
                 credential.setDays(days);
                 credential.setStatus(status);
+                credential.setEmailOfAuthor(userInfo.getEmail());
+                credential.setTokenOfAuthor(userInfo.getToken());
 
                 ReplyToLeaveRequestService service = new ReplyToLeaveRequestClient().createService();
                 Call<ReplyToLeaveRequestResponse> call = service.replyToLeaveRequest(credential);
@@ -140,7 +150,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
                                 // refresh notification page
                                 requestList.remove(position);
                                 notifyItemRemoved(position);
-
+                                notifyItemRangeChanged(position, requestList.size());
                             } else Toast.makeText(holder.context, body.getError(), Toast.LENGTH_SHORT).show();
                         }
 
