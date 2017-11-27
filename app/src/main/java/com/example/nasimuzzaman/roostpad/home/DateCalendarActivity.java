@@ -9,6 +9,9 @@ import android.widget.CalendarView;
 
 import com.example.nasimuzzaman.roostpad.R;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class DateCalendarActivity extends AppCompatActivity {
 
     private static final String TAG = "DateCalendarActivity";
@@ -20,6 +23,9 @@ public class DateCalendarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_date_calendar);
 
         dateCalendarView = (CalendarView) findViewById(R.id.dateCalendarView);
+
+        Calendar calendar = Calendar.getInstance();
+        dateCalendarView.setMinDate(calendar.getTimeInMillis());
 
         dateCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override

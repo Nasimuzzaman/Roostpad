@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -101,11 +103,17 @@ public class RequestHolidayActivity extends AppCompatActivity {
 //                System.out.println("000000 "+new LoginResponse().getName());
 
 
-
                 if (fromDateInput.getText().toString().trim().length() != 0 && toDateInput.getText().toString().trim().length() != 0) {
-                    dates.removeAllViews();
-                    showDatesInfo(btnFromDateGoCalender.getText().toString(), btnToDateGoCalender.getText().toString());
-                    totalDayCount.setText("Actual Holiday Requested: "+getTotalHolidayRequested(btnFromDateGoCalender.getText().toString(), btnToDateGoCalender.getText().toString()));
+                    if (compareDate(btnFromDateGoCalender.getText().toString(), btnToDateGoCalender.getText().toString())) {
+                        dates.removeAllViews();
+                        btnToDateGoCalender.setError(null);
+                        showDatesInfo(btnFromDateGoCalender.getText().toString(), btnToDateGoCalender.getText().toString());
+                        totalDayCount.setText("Actual Holiday Requested: " + getTotalHolidayRequested(btnFromDateGoCalender.getText().toString(), btnToDateGoCalender.getText().toString()));
+                    } else {
+                        Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+                        btnToDateGoCalender.setError("Invalid Selection");
+                        btnToDateGoCalender.startAnimation(shake);
+                    }
                 }
             }
         });
@@ -115,54 +123,98 @@ public class RequestHolidayActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String startDate = btnFromDateGoCalender.getText().toString();
-                String endDate = btnToDateGoCalender.getText().toString();
-                int numberOfDays = getTotalHolidayRequested(startDate, endDate);
-                String leaveMessage = messageInput.getText().toString();
+                if (fromDateInput.getText().toString().trim().length() != 0 && toDateInput.getText().toString().trim().length() != 0) {
+
+                    btnFromDateGoCalender.setError(null);
+                    btnToDateGoCalender.setError(null);
+
+                    if(messageInput.getText().toString().equals("")) {
+                        Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+                        messageInput.setError("Please leave a message");
+                        messageInput.startAnimation(shake);
+                    }else if (compareDate(btnFromDateGoCalender.getText().toString(), btnToDateGoCalender.getText().toString())) {
+
+                        String startDate = btnFromDateGoCalender.getText().toString();
+                        String endDate = btnToDateGoCalender.getText().toString();
+                        int numberOfDays = getTotalHolidayRequested(startDate, endDate);
+                        String leaveMessage = messageInput.getText().toString();
 
 
-                final RequestHolidayCredential credential = new RequestHolidayCredential();
-                credential.setEmail(userInfo.getEmail());
-                credential.setToken(userInfo.getToken());
-                //System.out.println("12345 "+userInfo.getCtoEmail().toString());
-                credential.setFromDate(startDate);
-                credential.setToDate(endDate);
-                credential.setDays(numberOfDays);
-                credential.setMessage(leaveMessage);
+                        final RequestHolidayCredential credential = new RequestHolidayCredential();
+                        credential.setEmail(userInfo.getEmail());
+                        credential.setToken(userInfo.getToken());
+                        //System.out.println("12345 "+userInfo.getCtoEmail().toString());
+                        credential.setFromDate(startDate);
+                        credential.setToDate(endDate);
+                        credential.setDays(numberOfDays);
+                        credential.setMessage(leaveMessage);
 
-                //sendEmail(credential);
-                sendMessage(credential);
+                        //sendEmail(credential);
+                        sendMessage(credential);
 
-                RequestHolidayService requestHolidayService = new RequestHolidayClient().createService();
-                Call<RequestHolidayResponse> call = requestHolidayService.requestHoliday(credential);
+                        RequestHolidayService requestHolidayService = new RequestHolidayClient().createService();
+                        Call<RequestHolidayResponse> call = requestHolidayService.requestHoliday(credential);
 
-                call.enqueue(new Callback<RequestHolidayResponse>() {
-                    @Override
-                    public void onResponse(Call<RequestHolidayResponse> call, Response<RequestHolidayResponse> response) {
-                        RequestHolidayResponse body = response.body();
-                        if(body != null) {
-                            if(body.getStatusCode() == 200) {
-                                // save user info
-                                // com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_INFO, body);
-                                // show success message
-                                Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
-                                // go to home page
-                                openHomePage();
-                            } else Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
-                        }
+                        call.enqueue(new Callback<RequestHolidayResponse>() {
+                            @Override
+                            public void onResponse(Call<RequestHolidayResponse> call, Response<RequestHolidayResponse> response) {
+                                RequestHolidayResponse body = response.body();
+                                if (body != null) {
+                                    if (body.getStatusCode() == 200) {
+                                        // save user info
+                                        // com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_INFO, body);
+                                        // show success message
+                                        Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
+                                        // go to home page
+                                        openHomePage();
+                                    } else
+                                        Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<RequestHolidayResponse> call, Throwable t) {
+                                Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+                        btnToDateGoCalender.setError("Invalid Selection");
+                        btnToDateGoCalender.startAnimation(shake);
+                    }
+                } else {
+                    Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+                    if (fromDateInput.getText().toString().trim().length() == 0) {
+                        btnFromDateGoCalender.setError("");
+                        btnFromDateGoCalender.startAnimation(shake);
+
+                    } else {
+                        btnFromDateGoCalender.setError(null);
                     }
 
-                    @Override
-                    public void onFailure(Call<RequestHolidayResponse> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+                    if (toDateInput.getText().toString().trim().length() == 0) {
+                        btnToDateGoCalender.setError("");
+                        btnToDateGoCalender.startAnimation(shake);
+                    } else {
+                        btnToDateGoCalender.setError(null);
                     }
-                });
-
+                }
             }
         });
 
     }
 
+    public boolean compareDate(String dateA, String dateB) {
+
+        Date date1 = getDateFromString(dateA);
+        Date date2 = getDateFromString(dateB);
+
+        if (date1.before(date2) || date1.compareTo(date2) == 0) {
+            return true;
+        }
+
+        return false;
+    }
 
     //using javax.mail
     private void sendMessage(final RequestHolidayCredential credential) {
@@ -256,7 +308,7 @@ public class RequestHolidayActivity extends AppCompatActivity {
         int count = 0;
 
         for (Date date = startDate; date.before(getNextDate(endDate)); date = getNextDate(date)) {
-            if(getDateInfo(date).equals("Personal")) {
+            if (getDateInfo(date).equals("Personal")) {
                 count++;
             }
         }
@@ -345,23 +397,23 @@ public class RequestHolidayActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int res_id = item.getItemId();
-        if(res_id == R.id.action_show_pending_requests) {
+        if (res_id == R.id.action_show_pending_requests) {
             //Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
-            if(userInfo.getRole().toString().equals("CTO")) {
+            if (userInfo.getRole().toString().equals("CTO")) {
                 showPendingRequests();
             } else {
                 showUserNotification();
             }
-        } else if(res_id == R.id.action_change_password) {
+        } else if (res_id == R.id.action_change_password) {
             //Toast.makeText(getApplicationContext(), "You select Change Password option", Toast.LENGTH_SHORT).show();
             showChangePasswordDialogBox();
-        } else if(res_id == R.id.action_logout) {
+        } else if (res_id == R.id.action_logout) {
             Toast.makeText(getApplicationContext(), "Logged out Successfully", Toast.LENGTH_SHORT).show();
             showLoginPage();
             Preference.remove(PrefKeys.USER_INFO);
-        } else if(res_id == R.id.action_home) {
+        } else if (res_id == R.id.action_home) {
             openHomePage();
-        } else if(res_id == R.id.action_setup) {
+        } else if (res_id == R.id.action_setup) {
             showSetupPage();
         }
 
@@ -369,9 +421,9 @@ public class RequestHolidayActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onPrepareOptionsMenu (Menu menu) {
+    public boolean onPrepareOptionsMenu(Menu menu) {
 
-        if(userInfo.getRole().toString().equals("Employee")) {
+        if (userInfo.getRole().toString().equals("Employee")) {
             menu.getItem(1).setVisible(false);
         }
 
