@@ -10,6 +10,7 @@ import com.google.gson.annotations.SerializedName;
 public class LoginResponse extends BaseResponse {
     @SerializedName("id") private long id;
     @SerializedName("email") private String email;
+    @SerializedName("password") private String password;
     @SerializedName("role") private String role;
     @SerializedName("designation") private String designation;
     @SerializedName("holiday") private int holiday;
@@ -56,5 +57,9 @@ public class LoginResponse extends BaseResponse {
 
     public String getName() {
         return name;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

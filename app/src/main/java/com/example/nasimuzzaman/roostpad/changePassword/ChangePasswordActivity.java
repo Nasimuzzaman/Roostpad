@@ -47,9 +47,19 @@ public class ChangePasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //System.out.println("00000 "+newPasswordInput.toString()+"\t00000" + reNewPasswordInput.toString());
-
-                if (newPasswordInput.getText().toString().equals(reNewPasswordInput.getText().toString())) {
+                if(currentPasswordInput.getText().toString().equals("")) {
+                    Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+                    currentPasswordInput.setError("Please enter current password");
+                    currentPasswordInput.startAnimation(shake);
+                } else if(!currentPasswordInput.getText().toString().equals(userInfo.getPassword())) {
+                    Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+                    currentPasswordInput.setError("Current password don't match");
+                    currentPasswordInput.startAnimation(shake);
+                } else if(newPasswordInput.getText().toString().length() < 6) {
+                    Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+                    newPasswordInput.setError("Password length must be at least 6");
+                    newPasswordInput.startAnimation(shake);
+                } else if (newPasswordInput.getText().toString().equals(reNewPasswordInput.getText().toString())) {
                     String currentPassword = currentPasswordInput.getText().toString();
                     String newPassword = newPasswordInput.getText().toString();
 
@@ -68,8 +78,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
                             if (body != null) {
                                 if (body.getStatusCode() == 200) {
-                                    // save user info
-                                    // com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_INFO, body);
                                     // show success message
                                     Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
                                     Toast.makeText(getApplicationContext(), "Password changed successfully", Toast.LENGTH_SHORT).show();
