@@ -87,8 +87,13 @@ public class ContactsActivity extends AppCompatActivity {
         contacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                ContactCredential credential = new ContactCredential();
+                credential.setEmail(userInfo.getEmail());
+                credential.setToken(userInfo.getToken());
+
                 ContactsService contactsService = new ContactsClient().createService();
-                Call<ContactsResponse> call = contactsService.showContacts();
+                Call<ContactsResponse> call = contactsService.showContacts(credential);
 
                 call.enqueue(new Callback<ContactsResponse>() {
                     @Override

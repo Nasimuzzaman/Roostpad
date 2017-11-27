@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
+import com.example.nasimuzzaman.roostpad.contacts.ContactCredential;
 import com.example.nasimuzzaman.roostpad.employeeNotification.UserNotificationActivity;
 import com.example.nasimuzzaman.roostpad.libraryPackage.CustomLibrary;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
@@ -75,8 +76,13 @@ public class AddNewUserActivity extends AppCompatActivity {
         contacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                ContactCredential credential = new ContactCredential();
+                credential.setEmail(userInfo.getEmail());
+                credential.setToken(userInfo.getToken());
+
                 ContactsService contactsService = new ContactsClient().createService();
-                Call<ContactsResponse> call = contactsService.showContacts();
+                Call<ContactsResponse> call = contactsService.showContacts(credential);
 
                 call.enqueue(new Callback<ContactsResponse>() {
                     @Override

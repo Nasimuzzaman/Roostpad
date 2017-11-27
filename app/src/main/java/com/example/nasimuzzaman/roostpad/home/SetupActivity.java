@@ -16,6 +16,7 @@ import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
 import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
 import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
+import com.example.nasimuzzaman.roostpad.contacts.ContactCredential;
 import com.example.nasimuzzaman.roostpad.contacts.ContactsActivity;
 import com.example.nasimuzzaman.roostpad.contacts.ContactsClient;
 import com.example.nasimuzzaman.roostpad.contacts.ContactsResponse;
@@ -55,8 +56,12 @@ public class SetupActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                Intent intent = new Intent(SetupActivity.this, ContactsActivity.class);
 //                startActivity(intent);
+                ContactCredential credential = new ContactCredential();
+                credential.setEmail(userInfo.getEmail());
+                credential.setToken(userInfo.getToken());
+
                 ContactsService contactsService = new ContactsClient().createService();
-                Call<ContactsResponse> call = contactsService.showContacts();
+                Call<ContactsResponse> call = contactsService.showContacts(credential);
 
                 call.enqueue(new Callback<ContactsResponse>() {
                     @Override
