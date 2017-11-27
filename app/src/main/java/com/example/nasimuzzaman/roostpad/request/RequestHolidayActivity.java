@@ -123,6 +123,7 @@ public class RequestHolidayActivity extends AppCompatActivity {
 
                 final RequestHolidayCredential credential = new RequestHolidayCredential();
                 credential.setEmail(userInfo.getEmail());
+                credential.setToken(userInfo.getToken());
                 //System.out.println("12345 "+userInfo.getCtoEmail().toString());
                 credential.setFromDate(startDate);
                 credential.setToDate(endDate);

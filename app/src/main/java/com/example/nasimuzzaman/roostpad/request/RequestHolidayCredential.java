@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class RequestHolidayCredential {
     @SerializedName("email") private String email;
+    @SerializedName("token") private String token;
     @SerializedName("fromDate") private String fromDate;
     @SerializedName("toDate") private String toDate;
     @SerializedName("days") private int days;
@@ -19,6 +20,14 @@ public class RequestHolidayCredential {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getFromDate() {

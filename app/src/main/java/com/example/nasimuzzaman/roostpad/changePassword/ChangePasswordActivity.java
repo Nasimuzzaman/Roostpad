@@ -47,7 +47,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println("00000 "+newPasswordInput.toString()+"\t00000" + reNewPasswordInput.toString());
+                //System.out.println("00000 "+newPasswordInput.toString()+"\t00000" + reNewPasswordInput.toString());
 
                 if (newPasswordInput.getText().toString().equals(reNewPasswordInput.getText().toString())) {
                     String currentPassword = currentPasswordInput.getText().toString();

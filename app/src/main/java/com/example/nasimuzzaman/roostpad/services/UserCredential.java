@@ -9,6 +9,25 @@ import com.google.gson.annotations.SerializedName;
 public class UserCredential {
     @SerializedName("name") private String name;
     @SerializedName("email") private String email;
+    @SerializedName("emailOfAdder") private String emailOfAdder;
+    @SerializedName("tokenOfAdder") private String tokenOfAdder;
+
+    public String getEmailOfAdder() {
+        return emailOfAdder;
+    }
+
+    public void setEmailOfAdder(String emailOfAdder) {
+        this.emailOfAdder = emailOfAdder;
+    }
+
+    public String getTokenOfAdder() {
+        return tokenOfAdder;
+    }
+
+    public void setTokenOfAdder(String tokenOfAdder) {
+        this.tokenOfAdder = tokenOfAdder;
+    }
+
     @SerializedName("contact") private String contact;
     @SerializedName("password") private String password;
     @SerializedName("designation") private String designation;
