@@ -49,8 +49,12 @@ public class PendingRequestsActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        PendingRequestsCredential credential = new PendingRequestsCredential();
+        credential.setEmail(userInfo.getEmail());
+        credential.setToken(userInfo.getToken());
+
         PendingRequestsService requestsService = new PendingRequestsClient().createService();
-        retrofit2.Call<PendingRequestsResponse> call = requestsService.showPendingRequests();
+        retrofit2.Call<PendingRequestsResponse> call = requestsService.showPendingRequests(credential);
         call.enqueue(new Callback<PendingRequestsResponse>() {
             @Override
             public void onResponse(retrofit2.Call<PendingRequestsResponse> call, Response<PendingRequestsResponse> response) {
