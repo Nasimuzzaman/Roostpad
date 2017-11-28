@@ -54,8 +54,7 @@ public class SetupActivity extends AppCompatActivity {
         contacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(SetupActivity.this, ContactsActivity.class);
-//                startActivity(intent);
+
                 ContactCredential credential = new ContactCredential();
                 credential.setEmail(userInfo.getEmail());
                 credential.setToken(userInfo.getToken());

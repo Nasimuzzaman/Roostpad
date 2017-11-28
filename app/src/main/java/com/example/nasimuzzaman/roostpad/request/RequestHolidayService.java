@@ -9,6 +9,6 @@ import retrofit2.http.POST;
  */
 
 public interface RequestHolidayService {
-    @POST("RoostpadLMS/controller/RequestForHoliday.php")
+    @POST("RoostpadLMS/controller/Request.php")
     Call<RequestHolidayResponse> requestHoliday(@Body RequestHolidayCredential requestHolidayCredential);
 }

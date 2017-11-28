@@ -8,16 +8,9 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-
 import com.example.nasimuzzaman.roostpad.OnHolidayRequestCountChangeCallback;
 import com.example.nasimuzzaman.roostpad.R;
-import com.example.nasimuzzaman.roostpad.contacts.ContactAdapter;
-import com.example.nasimuzzaman.roostpad.libraryPackage.CustomLibrary;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,27 +20,21 @@ import java.util.List;
 public class RequestDaysAdapter extends RecyclerView.Adapter<RequestDaysAdapter.MyViewHolder> {
 
     List<RequestDay> requestDays;
-    List<Boolean> flag;
     OnHolidayRequestCountChangeCallback callback;
 
     public RequestDaysAdapter(List<RequestDay> requestDays, OnHolidayRequestCountChangeCallback callback) {
         this.requestDays = requestDays;
-        flag = new ArrayList<>(requestDays.size());
-        //initializeFlag();
         this.callback = callback;
     }
 
-    private void initializeFlag() {
-        for (int i = 0; i < flag.size(); i++) {
-            flag.set(i, true);
-        }
+    public List<RequestDay> getRequestDays() {
+        return requestDays;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public TextView dayName, dayDate, holidayType;
         CheckBox firstHalf, secondHalf;
-        private Context context;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -58,8 +45,6 @@ public class RequestDaysAdapter extends RecyclerView.Adapter<RequestDaysAdapter.
 
             firstHalf = (CheckBox) itemView.findViewById(R.id.firstHalf);
             secondHalf = (CheckBox) itemView.findViewById(R.id.secondHalf);
-
-            context = itemView.getContext();
         }
 
     }
@@ -80,9 +65,6 @@ public class RequestDaysAdapter extends RecyclerView.Adapter<RequestDaysAdapter.
         holder.dayDate.setText(day.getDayDate());
         holder.holidayType.setText(day.getHolidayType());
 
-//        holder.firstHalf.setOnCheckedChangeListener(null);
-//        holder.secondHalf.setOnCheckedChangeListener(null);
-
         holder.firstHalf.setEnabled(day.isFirstHalfEnabled());
         holder.secondHalf.setEnabled(day.isSecondHalfEnabled());
         holder.firstHalf.setChecked(day.isFirstHalfChecked());
@@ -93,11 +75,11 @@ public class RequestDaysAdapter extends RecyclerView.Adapter<RequestDaysAdapter.
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (buttonView.isPressed() && callback != null) {
-                    //holder.firstHalf.setChecked(isChecked);
                     callback.onHolidayRequestCountChange(isChecked);
                     day.setFirstHalfChecked(isChecked);
                     requestDays.set(position, day);
                     notifyItemChanged(position);
+                    callback.setRequestDays(requestDays);
                 }
             }
         });
@@ -106,11 +88,11 @@ public class RequestDaysAdapter extends RecyclerView.Adapter<RequestDaysAdapter.
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (buttonView.isPressed() && callback != null) {
-                    //holder.secondHalf.setChecked(isChecked);
                     callback.onHolidayRequestCountChange(isChecked);
                     day.setSecondHalfChecked(isChecked);
                     requestDays.set(position, day);
                     notifyItemChanged(position);
+                    callback.setRequestDays(requestDays);
                 }
             }
         });
@@ -124,29 +106,5 @@ public class RequestDaysAdapter extends RecyclerView.Adapter<RequestDaysAdapter.
         }
         return 0;
     }
-/*
-
-    private String getDayNameFromDate(Date date) {
-        java.text.DateFormat dateFormat = new java.text.SimpleDateFormat("EEEE");
-        String dayName = dateFormat.format(date);
-        return dayName.substring(0, Math.min(dayName.length(), 3));
-    }
-
-    private String formatDate(Date date) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String format = formatter.format(date);
-
-        return format;
-    }
-
-    private boolean isOfficialHoliday(Date date) {
-        if (getDayNameFromDate(date).equals("Sat") || getDayNameFromDate(date).equals("Fri")) {
-            return true;
-        }
-
-        return false;
-    }
-*/
-
 
 }

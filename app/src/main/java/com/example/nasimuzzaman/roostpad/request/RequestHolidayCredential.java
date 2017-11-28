@@ -9,10 +9,10 @@ import com.google.gson.annotations.SerializedName;
 public class RequestHolidayCredential {
     @SerializedName("email") private String email;
     @SerializedName("token") private String token;
-    @SerializedName("fromDate") private String fromDate;
-    @SerializedName("toDate") private String toDate;
-    @SerializedName("days") private int days;
+    @SerializedName("info") private String info;
     @SerializedName("message") private String message;
+    @SerializedName("days") private double days;
+    @SerializedName("status") private String status;
 
     public String getEmail() {
         return email;
@@ -30,28 +30,12 @@ public class RequestHolidayCredential {
         this.token = token;
     }
 
-    public String getFromDate() {
-        return fromDate;
+    public String getInfo() {
+        return info;
     }
 
-    public void setFromDate(String fromDate) {
-        this.fromDate = fromDate;
-    }
-
-    public String getToDate() {
-        return toDate;
-    }
-
-    public void setToDate(String toDate) {
-        this.toDate = toDate;
-    }
-
-    public int getDays() {
-        return days;
-    }
-
-    public void setDays(int days) {
-        this.days = days;
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public String getMessage() {
@@ -62,14 +46,19 @@ public class RequestHolidayCredential {
         this.message = message;
     }
 
-    @Override
-    public String toString() {
-        return "RequestHolidayCredential{" +
-                "email='" + email + '\'' +
-                ", fromDate='" + fromDate + '\'' +
-                ", toDate='" + toDate + '\'' +
-                ", days=" + days +
-                ", message='" + message + '\'' +
-                '}';
+    public double getDays() {
+        return days;
+    }
+
+    public void setDays(double days) {
+        this.days = days;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

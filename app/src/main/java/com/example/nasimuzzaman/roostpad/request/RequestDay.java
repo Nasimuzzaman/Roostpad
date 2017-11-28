@@ -64,4 +64,17 @@ public class RequestDay {
     public void setSecondHalfChecked(boolean secondHalfChecked) {
         this.secondHalfChecked = secondHalfChecked;
     }
+
+    @Override
+    public String toString() {
+        return "RequestDay{" +
+                "dayName='" + dayName + '\'' +
+                ", dayDate='" + dayDate + '\'' +
+                ", holidayType='" + holidayType + '\'' +
+                ", firstHalfEnabled=" + firstHalfEnabled +
+                ", secondHalfEnabled=" + secondHalfEnabled +
+                ", firstHalfChecked=" + firstHalfChecked +
+                ", secondHalfChecked=" + secondHalfChecked +
+                '}';
+    }
 }

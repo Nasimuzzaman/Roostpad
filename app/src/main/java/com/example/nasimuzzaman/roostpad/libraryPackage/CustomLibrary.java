@@ -1,11 +1,10 @@
 package com.example.nasimuzzaman.roostpad.libraryPackage;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
-
 import com.example.nasimuzzaman.roostpad.gmail.GMailSender;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Random;
 
 /**
@@ -13,6 +12,11 @@ import java.util.Random;
  */
 
 public class CustomLibrary {
+
+    public void open(Context context, Class aClass) {
+        Intent intent = new Intent(context, aClass);
+        context.startActivity(intent);
+    }
 
     public String getSaltString() {
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmnopqrstuvwxyz";
