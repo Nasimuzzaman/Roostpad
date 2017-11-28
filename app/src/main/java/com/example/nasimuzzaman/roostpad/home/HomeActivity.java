@@ -84,8 +84,8 @@ public class HomeActivity extends AppCompatActivity {
             new CustomLibrary().open(this, ChangePasswordActivity.class);
         } else if(res_id == R.id.action_logout) {
             Toast.makeText(getApplicationContext(), "Logged out Successfully", Toast.LENGTH_SHORT).show();
-            showLoginPage();
             Preference.remove(PrefKeys.USER_INFO);
+            showLoginPage();
         } else if(res_id == R.id.action_home) {
             new CustomLibrary().open(this, HomeActivity.class);
         } else if(res_id == R.id.action_setup) {

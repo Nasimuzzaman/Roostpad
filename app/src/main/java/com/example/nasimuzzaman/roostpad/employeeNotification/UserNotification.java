@@ -10,47 +10,65 @@ public class UserNotification {
 
     @SerializedName("id") private int id;
     @SerializedName("email") private String email;
-    @SerializedName("from_date") private String fromDate;
-    @SerializedName("to_date") private String toDate;
-    @SerializedName("days") private int days;
+    @SerializedName("info") private String info;
     @SerializedName("message") private String message;
-    @SerializedName("seen") private boolean seen;
+    @SerializedName("days") private int days;
     @SerializedName("status") private String status;
-    @SerializedName("holiday") private int holiday;
-
-    public int getHoliday() {
-        return holiday;
-    }
+    @SerializedName("holiday") private double holiday;
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getFromDate() {
-        return fromDate;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getToDate() {
-        return toDate;
+    public String getInfo() {
+        return info;
     }
 
-    public int getDays() {
-        return days;
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public boolean isSeen() {
-        return seen;
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public int getDays() {
+        return days;
+    }
+
+    public void setDays(int days) {
+        this.days = days;
     }
 
     public String getStatus() {
         return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public double getHoliday() {
+        return holiday;
+    }
+
+    public void setHoliday(double holiday) {
+        this.holiday = holiday;
     }
 }

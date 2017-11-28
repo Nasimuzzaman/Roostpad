@@ -13,11 +13,15 @@ public class LoginResponse extends BaseResponse {
     @SerializedName("password") private String password;
     @SerializedName("role") private String role;
     @SerializedName("designation") private String designation;
-    @SerializedName("holiday") private int holiday;
+    @SerializedName("holiday") private double holiday;
     @SerializedName("gender") private String gender;
     @SerializedName("token") private String token;
     @SerializedName("name") private String name;
     @SerializedName("emailOfCTO") private String emailOfCTO;
+
+    public double getHoliday() {
+        return holiday;
+    }
 
     public String getGender() {
         return gender;
@@ -41,10 +45,6 @@ public class LoginResponse extends BaseResponse {
 
     public String getDesignation() {
         return designation;
-    }
-
-    public int getHoliday() {
-        return holiday;
     }
 
     public String isGender() {

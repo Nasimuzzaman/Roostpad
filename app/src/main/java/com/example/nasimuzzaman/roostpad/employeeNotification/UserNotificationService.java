@@ -13,6 +13,6 @@ import retrofit2.http.POST;
 
 public interface UserNotificationService {
 
-    @POST("RoostpadLMS/controller/GetEmployeeNotification.php")
+    @POST("RoostpadLMS/controller/employeeNotification.php")
     Call<UserNotificationResponse> showUserNotifications(@Body UserNotificationCredential credential);
 }
