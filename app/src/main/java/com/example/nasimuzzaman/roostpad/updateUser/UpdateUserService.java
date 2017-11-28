@@ -1,8 +1,5 @@
 package com.example.nasimuzzaman.roostpad.updateUser;
 
-import com.example.nasimuzzaman.roostpad.services.AddUserResponse;
-import com.example.nasimuzzaman.roostpad.services.UserCredential;
-
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;

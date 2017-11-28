@@ -12,7 +12,7 @@ public class UpdateUserCredential {
     @SerializedName("contact") private String contact;
     @SerializedName("designation") private String designation;
     @SerializedName("role") private String role;
-    @SerializedName("holiday") private int holiday;
+    @SerializedName("holiday") private double holiday;
     @SerializedName("emailOfAuthor") private String emailOfAuthor;
     @SerializedName("tokenOfAuthor") private String tokenOfAuthor;
 
@@ -72,11 +72,11 @@ public class UpdateUserCredential {
         this.role = role;
     }
 
-    public int getHoliday() {
+    public double getHoliday() {
         return holiday;
     }
 
-    public void setHoliday(int holiday) {
+    public void setHoliday(double holiday) {
         this.holiday = holiday;
     }
 }

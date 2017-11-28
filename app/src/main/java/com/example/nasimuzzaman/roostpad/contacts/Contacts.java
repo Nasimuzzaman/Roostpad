@@ -11,16 +11,16 @@ public class Contacts {
     @SerializedName("id") private int id;
     @SerializedName("email") private String email;
     @SerializedName("contact") private String contact;
-    @SerializedName("days") private int days;
+    @SerializedName("days") private double days;
     @SerializedName("designation") private String designation;
     @SerializedName("role") private String role;
-    @SerializedName("holiday") private int holiday;
+    @SerializedName("holiday") private double holiday;
 
     public int getId() {
         return id;
     }
 
-    public int getDays() {
+    public double getDays() {
         return days;
     }
 
@@ -28,7 +28,7 @@ public class Contacts {
         return designation;
     }
 
-    public int getHoliday() {
+    public double getHoliday() {
         return holiday;
     }
 

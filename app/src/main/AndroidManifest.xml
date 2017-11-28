@@ -28,7 +28,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".home.DateCalendarActivity" />
         <activity android:name=".home.SetupActivity" />
-        <activity android:name=".services.AddNewUserActivity" />
+        <activity android:name=".addUser.AddNewUserActivity" />
         <activity android:name=".home.UsersActivity" />
         <activity android:name=".contacts.ContactsActivity" />
         <activity android:name=".changePassword.ChangePasswordActivity" />

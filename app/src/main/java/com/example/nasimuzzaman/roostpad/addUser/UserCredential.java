@@ -1,4 +1,4 @@
-package com.example.nasimuzzaman.roostpad.services;
+package com.example.nasimuzzaman.roostpad.addUser;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -11,6 +11,12 @@ public class UserCredential {
     @SerializedName("email") private String email;
     @SerializedName("emailOfAdder") private String emailOfAdder;
     @SerializedName("tokenOfAdder") private String tokenOfAdder;
+    @SerializedName("contact") private String contact;
+    @SerializedName("password") private String password;
+    @SerializedName("designation") private String designation;
+    @SerializedName("role") private String role;
+    @SerializedName("holiday") private double holiday;
+    @SerializedName("gender") private String gender;
 
     public String getEmailOfAdder() {
         return emailOfAdder;
@@ -28,12 +34,6 @@ public class UserCredential {
         this.tokenOfAdder = tokenOfAdder;
     }
 
-    @SerializedName("contact") private String contact;
-    @SerializedName("password") private String password;
-    @SerializedName("designation") private String designation;
-    @SerializedName("role") private String role;
-    @SerializedName("holiday") private int holiday;
-    @SerializedName("gender") private String gender;
 
     public String getName() {
         return name;
@@ -83,11 +83,11 @@ public class UserCredential {
         this.role = role;
     }
 
-    public int getHoliday() {
+    public double getHoliday() {
         return holiday;
     }
 
-    public void setHoliday(int holiday) {
+    public void setHoliday(double holiday) {
         this.holiday = holiday;
     }
 

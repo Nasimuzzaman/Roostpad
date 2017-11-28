@@ -1,4 +1,4 @@
-package com.example.nasimuzzaman.roostpad.services;
+package com.example.nasimuzzaman.roostpad.addUser;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +32,6 @@ import com.example.nasimuzzaman.roostpad.home.SetupActivity;
 import com.example.nasimuzzaman.roostpad.home.UsersActivity;
 import com.example.nasimuzzaman.roostpad.pendingRequests.PendingRequestsActivity;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import retrofit2.Call;
@@ -50,6 +49,10 @@ public class AddNewUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_user);
+
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         userInfo = Preference.getObject(PrefKeys.USER_INFO, LoginResponse.class);
 
@@ -209,6 +212,8 @@ public class AddNewUserActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int res_id = item.getItemId();
+        if(res_id == android.R.id.home) onBackPressed();
+
         if (res_id == R.id.action_show_pending_requests) {
             //Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
             if (userInfo.getRole().toString().equals("CTO")) {

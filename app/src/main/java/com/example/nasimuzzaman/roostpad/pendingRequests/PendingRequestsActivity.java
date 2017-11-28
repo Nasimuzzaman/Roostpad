@@ -43,6 +43,10 @@ public class PendingRequestsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pending_requests);
 
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         userInfo = Preference.getObject(PrefKeys.USER_INFO, LoginResponse.class);
 
         recyclerView = (RecyclerView) findViewById(R.id.rviewPendingRequest);
@@ -95,6 +99,8 @@ public class PendingRequestsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int res_id = item.getItemId();
+        if(res_id == android.R.id.home) onBackPressed();
+
         if(res_id == R.id.action_show_pending_requests) {
             //Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
             if(userInfo.getRole().toString().equals("CTO")) {

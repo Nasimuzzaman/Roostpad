@@ -1,4 +1,4 @@
-package com.example.nasimuzzaman.roostpad.services;
+package com.example.nasimuzzaman.roostpad.addUser;
 
 import com.example.nasimuzzaman.roostpad.BaseResponse;
 import com.google.gson.annotations.SerializedName;
@@ -12,7 +12,7 @@ public class AddUserResponse extends BaseResponse {
     @SerializedName("email") private String email;
     @SerializedName("role") private String role;
     @SerializedName("designation") private String designation;
-    @SerializedName("holiday") private int holiday;
+    @SerializedName("holiday") private double holiday;
     @SerializedName("gender") private String gender;
     @SerializedName("token") private String token;
     @SerializedName("name") private String name;
@@ -33,7 +33,7 @@ public class AddUserResponse extends BaseResponse {
         return designation;
     }
 
-    public int getHoliday() {
+    public double getHoliday() {
         return holiday;
     }
 
