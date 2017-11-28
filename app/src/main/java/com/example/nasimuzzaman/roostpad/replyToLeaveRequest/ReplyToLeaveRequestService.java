@@ -12,6 +12,6 @@ import retrofit2.http.POST;
  */
 
 public interface ReplyToLeaveRequestService {
-    @POST("RoostpadLMS/controller/UpdateDBAfterReply.php")
+    @POST("RoostpadLMS/controller/replyToHolidayRequest.php")
     Call<ReplyToLeaveRequestResponse> replyToLeaveRequest(@Body ReplyToLeaveRequestCredential replyToLeaveRequestCredential);
 }

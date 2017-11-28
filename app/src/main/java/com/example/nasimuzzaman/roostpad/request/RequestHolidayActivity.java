@@ -32,7 +32,6 @@ import com.example.nasimuzzaman.roostpad.home.HomeActivity;
 import com.example.nasimuzzaman.roostpad.home.SetupActivity;
 import com.example.nasimuzzaman.roostpad.libraryPackage.CustomLibrary;
 import com.example.nasimuzzaman.roostpad.pendingRequests.PendingRequestsActivity;
-import com.example.nasimuzzaman.roostpad.pendingRequests.Request;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -13,6 +13,6 @@ import retrofit2.http.POST;
 
 public interface PendingRequestsService {
 
-    @POST("RoostpadLMS/controller/GetPendingLeaveRequests.php")
+    @POST("RoostpadLMS/controller/pendingLeaveRequests.php")
     Call<PendingRequestsResponse> showPendingRequests(@Body PendingRequestsCredential pendingRequestsCredential);
 }

@@ -45,7 +45,7 @@ public class PendingRequestsActivity extends AppCompatActivity {
 
         userInfo = Preference.getObject(PrefKeys.USER_INFO, LoginResponse.class);
 
-        recyclerView = (RecyclerView) findViewById(R.id.rview);
+        recyclerView = (RecyclerView) findViewById(R.id.rviewPendingRequest);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

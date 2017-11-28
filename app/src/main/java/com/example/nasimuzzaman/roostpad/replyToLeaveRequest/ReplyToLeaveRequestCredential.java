@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 public class ReplyToLeaveRequestCredential {
     @SerializedName("id") private int id;
     @SerializedName("email") private String email;
-    @SerializedName("days") private int days;
+    @SerializedName("days") private double days;
     @SerializedName("status") private String status;
     @SerializedName("emailOfAuthor") private String emailOfAuthor;
     @SerializedName("tokenOfAuthor") private String tokenOfAuthor;
@@ -46,11 +46,11 @@ public class ReplyToLeaveRequestCredential {
         this.email = email;
     }
 
-    public int getDays() {
+    public double getDays() {
         return days;
     }
 
-    public void setDays(int days) {
+    public void setDays(double days) {
         this.days = days;
     }
 

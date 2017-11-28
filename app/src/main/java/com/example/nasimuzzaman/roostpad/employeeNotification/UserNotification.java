@@ -12,9 +12,17 @@ public class UserNotification {
     @SerializedName("email") private String email;
     @SerializedName("info") private String info;
     @SerializedName("message") private String message;
-    @SerializedName("days") private int days;
+    @SerializedName("days") private double days;
     @SerializedName("status") private String status;
     @SerializedName("holiday") private double holiday;
+
+    public double getDays() {
+        return days;
+    }
+
+    public void setDays(double days) {
+        this.days = days;
+    }
 
     public int getId() {
         return id;
@@ -46,14 +54,6 @@ public class UserNotification {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public int getDays() {
-        return days;
-    }
-
-    public void setDays(int days) {
-        this.days = days;
     }
 
     public String getStatus() {

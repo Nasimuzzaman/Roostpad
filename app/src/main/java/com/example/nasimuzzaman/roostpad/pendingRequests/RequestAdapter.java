@@ -66,8 +66,9 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final Request request = requestList.get(position);
 
-        holder.applicationText.setText(request.getName() + " apply for leave from " + request.getFromDate() + " to " +
-                request.getToDate() + " for total "+request.getDays() + " days");
+        //holder.applicationText.setText(request.getName() + " apply for leave from " + request.getFromDate() + " to " +
+          //      request.getToDate() + " for total "+request.getDays() + " days");
+        holder.applicationText.setText("Application Text");
         holder.messageBoxText.setText(request.getMessage());
 
         holder.btnAcceptRequest.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +76,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
             public void onClick(View v) {
                 int id = request.getId();
                 String email = request.getEmail();
-                int days = request.getDays();
+                double days = request.getDays();
                 String status = "accepted";
 
                 final ReplyToLeaveRequestCredential credential = new ReplyToLeaveRequestCredential();
@@ -122,7 +123,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
             public void onClick(View v) {
                 int id = request.getId();
                 String email = request.getEmail();
-                int days = request.getDays();
+                double days = request.getDays();
                 String status = "rejected";
 
                 final ReplyToLeaveRequestCredential credential = new ReplyToLeaveRequestCredential();
@@ -146,7 +147,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
                                 // show success message
                                 Toast.makeText(holder.context, body.getMessage(), Toast.LENGTH_SHORT);
                                 // reply to corresponding employee through mail
-                                sendReply(credential , holder.context);
+                                //To Do
+                                // sendReply(credential , holder.context);
                                 // refresh notification page
                                 requestList.remove(position);
                                 notifyItemRemoved(position);
