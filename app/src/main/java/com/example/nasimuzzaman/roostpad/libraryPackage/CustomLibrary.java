@@ -3,6 +3,8 @@ package com.example.nasimuzzaman.roostpad.libraryPackage;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.EditText;
+
 import com.example.nasimuzzaman.roostpad.gmail.GMailSender;
 import com.example.nasimuzzaman.roostpad.request.RequestDay;
 
@@ -49,6 +51,20 @@ public final class CustomLibrary {
         }
 
         return monthName;
+    }
+
+    public static void disableEditText(List<EditText> editTextList) {
+        for(EditText editText : editTextList) {
+            editText.setEnabled(false);
+            editText.setClickable(false);
+        }
+    }
+
+    public static void enableEditText(List<EditText> editTextList) {
+        for(EditText editText : editTextList) {
+            editText.setEnabled(true);
+            editText.setClickable(true);
+        }
     }
 
     public static String getHolidayHalf(int flag) {
@@ -168,4 +184,28 @@ public final class CustomLibrary {
         return false;
     }
 
+    public static String prepareShortStatementForPendingRequestsNotification(String info) {
+
+        String statement = " request for personal holiday on ";
+        String[] lines = info.split(System.getProperty("line.separator"));
+
+        String line = lines[0];
+        String[] data = line.split("\\s+");
+        String dateString = data[0];
+        int flag = Integer.parseInt(data[1]);
+        statement = statement + CustomLibrary.getMonthNameWithDate(dateString, flag);
+
+
+        if (lines.length > 1) {
+            statement = statement.substring(0, statement.length() - 1);
+            line = lines[lines.length-1];
+            data = line.split("\\s+");
+            dateString = data[0];
+            flag = Integer.parseInt(data[1]);
+            statement = statement + " to " + CustomLibrary.getMonthNameWithDate(dateString, flag);
+
+        }
+
+        return statement.substring(0, statement.length() - 1);
+    }
 }

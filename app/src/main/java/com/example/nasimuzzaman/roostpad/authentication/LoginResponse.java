@@ -18,6 +18,11 @@ public class LoginResponse extends BaseResponse {
     @SerializedName("token") private String token;
     @SerializedName("name") private String name;
     @SerializedName("emailOfCTO") private String emailOfCTO;
+    @SerializedName("contact") private String contact;
+
+    public String getContact() {
+        return contact;
+    }
 
     public double getHoliday() {
         return holiday;

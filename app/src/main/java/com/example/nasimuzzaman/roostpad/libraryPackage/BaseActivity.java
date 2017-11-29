@@ -11,7 +11,10 @@ import android.widget.Toast;
 import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
+import com.example.nasimuzzaman.roostpad.authentication.AuthenticationClient;
+import com.example.nasimuzzaman.roostpad.authentication.AuthenticationService;
 import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
+import com.example.nasimuzzaman.roostpad.authentication.LoginCredential;
 import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
 import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
 import com.example.nasimuzzaman.roostpad.employeeNotification.UserNotificationActivity;
@@ -19,6 +22,10 @@ import com.example.nasimuzzaman.roostpad.home.HomeActivity;
 import com.example.nasimuzzaman.roostpad.home.SetupActivity;
 import com.example.nasimuzzaman.roostpad.pendingRequests.PendingRequestsActivity;
 import com.example.nasimuzzaman.roostpad.userNotificationDetails.UserDashboardActivity;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -69,7 +76,7 @@ public class BaseActivity extends AppCompatActivity {
             new CustomLibrary().open(this, SetupActivity.class);
         } else if(res_id == R.id.action_dashboard) {
             Toast.makeText(getApplicationContext(), "Dashboard Successfully", Toast.LENGTH_SHORT).show();
-            CustomLibrary.openPage(this, UserDashboardActivity.class);
+            CustomLibrary.openPage(getApplicationContext(), UserDashboardActivity.class);
         }
 
         return true;
@@ -90,4 +97,5 @@ public class BaseActivity extends AppCompatActivity {
         finishAffinity();
         startActivity(intent);
     }
+
 }

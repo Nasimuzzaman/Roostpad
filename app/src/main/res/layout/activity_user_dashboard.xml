@@ -173,7 +173,8 @@
             android:layout_height="wrap_content"
             android:text="Edit"
             android:textSize="@dimen/profileTextSize"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="invisible" />
 
         <Button
             android:id="@+id/btnUpdateProfile"
@@ -190,7 +191,7 @@
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="Update"
+            android:text="Cancel"
             android:textStyle="bold"
             android:textSize="@dimen/profileTextSize"
             android:visibility="invisible"/>

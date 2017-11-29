@@ -79,4 +79,18 @@ public class UpdateUserCredential {
     public void setHoliday(double holiday) {
         this.holiday = holiday;
     }
+
+    @Override
+    public String toString() {
+        return "UpdateUserCredential{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", contact='" + contact + '\'' +
+                ", designation='" + designation + '\'' +
+                ", role='" + role + '\'' +
+                ", holiday=" + holiday +
+                ", emailOfAuthor='" + emailOfAuthor + '\'' +
+                ", tokenOfAuthor='" + tokenOfAuthor + '\'' +
+                '}';
+    }
 }

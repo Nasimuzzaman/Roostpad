@@ -59,8 +59,6 @@ public class ContactsActivity extends BaseActivity {
 
         users = (Button) findViewById(R.id.users);
         contacts = (Button) findViewById(R.id.contacts);
-        //contactView = (TextView) findViewById(R.id.contact_list);
-        //System.out.println("00000 "+contactsLists.size());
         view = (RecyclerView) findViewById(R.id.contactRecyclerView);
         view.setHasFixedSize(true);
         view.setLayoutManager(new LinearLayoutManager(this));

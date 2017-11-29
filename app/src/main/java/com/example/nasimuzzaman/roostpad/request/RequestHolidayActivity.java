@@ -129,9 +129,6 @@ public class RequestHolidayActivity extends BaseActivity implements OnHolidayReq
                         credential.setDays(days);
                         credential.setStatus("pending");
 
-                        //To Do
-                        //sendMessage(credential);
-
                         RequestHolidayService requestHolidayService = new RequestHolidayClient().createService();
                         Call<RequestHolidayResponse> call = requestHolidayService.requestHoliday(credential);
                         call.enqueue(new Callback<RequestHolidayResponse>() {
@@ -140,10 +137,10 @@ public class RequestHolidayActivity extends BaseActivity implements OnHolidayReq
                                 RequestHolidayResponse body = response.body();
                                 if(body != null) {
                                     if(body.getStatusCode() == 200) {
-                                        // save user info
-                                        com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_CONTACTS, body);
                                         // show success message
                                         Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
+                                        //send email
+                                        sendMessage(credential);
                                         // go to next page
                                         new CustomLibrary().open(getApplicationContext(), HomeActivity.class);
                                     } else Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
@@ -329,8 +326,11 @@ public class RequestHolidayActivity extends BaseActivity implements OnHolidayReq
         dialog.setTitle("Sending Email");
         dialog.setMessage("Please wait");
         dialog.show();
-        final String subject = "";/*userInfo.getName() + " apply for holiday from " + credential.getFromDate() +
-                " to " + credential.getToDate() + " for total " + credential.getDays() + " days.";*/
+
+        String s = CustomLibrary.prepareShortStatementForPendingRequestsNotification(credential.getInfo());
+
+        final String subject = userInfo.getName() + s;
+
 
         Thread sender = new Thread(new Runnable() {
             @Override
