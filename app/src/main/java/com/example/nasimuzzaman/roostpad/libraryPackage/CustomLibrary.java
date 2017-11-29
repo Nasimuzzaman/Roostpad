@@ -6,6 +6,7 @@ import android.util.Log;
 import com.example.nasimuzzaman.roostpad.gmail.GMailSender;
 import com.example.nasimuzzaman.roostpad.request.RequestDay;
 
+import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,11 +17,47 @@ import java.util.Random;
  * Created by nasimuzzaman on 11/15/17.
  */
 
-public class CustomLibrary {
+public final class CustomLibrary {
 
     public void open(Context context, Class aClass) {
         Intent intent = new Intent(context, aClass);
         context.startActivity(intent);
+    }
+
+    public static void openPage(Context context, Class aClass) {
+        Intent intent = new Intent(context, aClass);
+        context.startActivity(intent);
+    }
+
+    /*
+    * Take a date string as dd/mm/yyyy format and return month-date i.e. Nov-5
+    * */
+    public static String getMonthNameWithDate(String dateString, int flag) {
+        String monthName = "";
+
+        String[] data = dateString.split("/");
+        if (data.length == 3) {
+            int day = Integer.parseInt(data[0]);
+            int monthNumber = Integer.parseInt(data[1]);
+            int year = Integer.parseInt(data[2]);
+
+            DateFormatSymbols dateFormatSymbols = new DateFormatSymbols();
+            String[] months = dateFormatSymbols.getShortMonths();
+            if (monthNumber > 0 && monthNumber < 13) {
+                monthName = monthName + months[monthNumber - 1] + " " + day + getHolidayHalf(flag) + ", " + year + ",";
+            }
+        }
+
+        return monthName;
+    }
+
+    public static String getHolidayHalf(int flag) {
+        if (flag == 1) {
+            return "(1sh half)";
+        } else if (flag == 2) {
+            return "(2nd half)";
+        } else
+            return "";
     }
 
     public String getSaltString() {

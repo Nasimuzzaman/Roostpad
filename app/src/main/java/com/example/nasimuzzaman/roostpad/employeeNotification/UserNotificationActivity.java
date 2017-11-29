@@ -22,11 +22,12 @@ import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
 import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
 import com.example.nasimuzzaman.roostpad.home.HomeActivity;
 import com.example.nasimuzzaman.roostpad.home.SetupActivity;
+import com.example.nasimuzzaman.roostpad.libraryPackage.BaseActivity;
 import com.example.nasimuzzaman.roostpad.pendingRequests.PendingRequestsActivity;
 
 import java.util.List;
 
-public class UserNotificationActivity extends AppCompatActivity {
+public class UserNotificationActivity extends BaseActivity {
 
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
@@ -79,74 +80,5 @@ public class UserNotificationActivity extends AppCompatActivity {
         });
 
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int res_id = item.getItemId();
-        if(res_id == android.R.id.home) onBackPressed();
-
-        if(res_id == R.id.action_show_pending_requests) {
-            //Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
-            if(userInfo.getRole().toString().equals("CTO")) {
-                showPendingRequests();
-            } else {
-                showUserNotification();
-            }
-        } else if(res_id == R.id.action_change_password) {
-            //Toast.makeText(getApplicationContext(), "You select Change Password option", Toast.LENGTH_SHORT).show();
-            showChangePasswordDialogBox();
-        } else if(res_id == R.id.action_logout) {
-            Toast.makeText(getApplicationContext(), "Logged out Successfully", Toast.LENGTH_SHORT).show();
-            showLoginPage();
-            Preference.remove(PrefKeys.USER_INFO);
-        } else if(res_id == R.id.action_home) {
-            openHomePage();
-        } else if(res_id == R.id.action_setup) {
-            showSetupPage();
-        }
-
-        return true;
-    }
-
-    private void showUserNotification() {
-        Intent intent = new Intent(this, UserNotificationActivity.class);
-        startActivity(intent);
-    }
-
-    private void showPendingRequests() {
-        Intent intent = new Intent(this, PendingRequestsActivity.class);
-        startActivity(intent);
-    }
-
-    private void showChangePasswordDialogBox() {
-        Intent intent = new Intent(this, ChangePasswordActivity.class);
-        startActivity(intent);
-    }
-
-    private void showSetupPage() {
-        Intent intent = new Intent(this, SetupActivity.class);
-        startActivity(intent);
-    }
-
-    private void showLoginPage() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        finishAffinity();
-        startActivity(intent);
-    }
-
-    private void openHomePage() {
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
     }
 }

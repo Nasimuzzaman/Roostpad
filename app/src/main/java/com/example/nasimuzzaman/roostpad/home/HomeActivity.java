@@ -18,11 +18,13 @@ import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
 import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
 import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
 import com.example.nasimuzzaman.roostpad.employeeNotification.UserNotificationActivity;
+import com.example.nasimuzzaman.roostpad.libraryPackage.BaseActivity;
 import com.example.nasimuzzaman.roostpad.libraryPackage.CustomLibrary;
 import com.example.nasimuzzaman.roostpad.pendingRequests.PendingRequestsActivity;
 import com.example.nasimuzzaman.roostpad.request.RequestHolidayActivity;
+import com.example.nasimuzzaman.roostpad.userNotificationDetails.UserDashboardActivity;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseActivity {
 
     private static final String TAG = "HomeActivity";
     LoginResponse userInfo;
@@ -35,10 +37,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         userInfo = Preference.getObject(PrefKeys.USER_INFO, LoginResponse.class);
-
-        if(getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
 
         requestAHoliday = (Button) findViewById(R.id.request_a_holiday);
         availableHolidayText = (TextView) findViewById(R.id.available_holiday_text);
@@ -59,55 +57,4 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int res_id = item.getItemId();
-        if(res_id == android.R.id.home) onBackPressed();
-
-        if(res_id == R.id.action_show_pending_requests) {
-            if(userInfo.getRole().toString().equals("CTO")) {
-                new CustomLibrary().open(this, PendingRequestsActivity.class);
-            } else {
-                new CustomLibrary().open(this, UserNotificationActivity.class);
-            }
-        } else if(res_id == R.id.action_change_password) {
-            new CustomLibrary().open(this, ChangePasswordActivity.class);
-        } else if(res_id == R.id.action_logout) {
-            Toast.makeText(getApplicationContext(), "Logged out Successfully", Toast.LENGTH_SHORT).show();
-            Preference.remove(PrefKeys.USER_INFO);
-            showLoginPage();
-        } else if(res_id == R.id.action_home) {
-            new CustomLibrary().open(this, HomeActivity.class);
-        } else if(res_id == R.id.action_setup) {
-            new CustomLibrary().open(this, SetupActivity.class);
-        }
-
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu (Menu menu) {
-
-        if(userInfo.getRole().toString().equals("Employee")) {
-            menu.getItem(1).setVisible(false);
-        }
-
-        return true;
-    }
-
-    private void showLoginPage() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        finishAffinity();
-        startActivity(intent);
-    }
 }

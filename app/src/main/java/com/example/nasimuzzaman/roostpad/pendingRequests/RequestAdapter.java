@@ -19,10 +19,12 @@ import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
 import com.example.nasimuzzaman.roostpad.gmail.GMailSender;
+import com.example.nasimuzzaman.roostpad.libraryPackage.CustomLibrary;
 import com.example.nasimuzzaman.roostpad.replyToLeaveRequest.ReplyToLeaveRequestClient;
 import com.example.nasimuzzaman.roostpad.replyToLeaveRequest.ReplyToLeaveRequestCredential;
 import com.example.nasimuzzaman.roostpad.replyToLeaveRequest.ReplyToLeaveRequestResponse;
 import com.example.nasimuzzaman.roostpad.replyToLeaveRequest.ReplyToLeaveRequestService;
+import com.example.nasimuzzaman.roostpad.userNotificationDetails.UserNotificationDetailsActivity;
 
 import java.util.List;
 
@@ -41,7 +43,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         public TextView messageBoxText;
-        public TextView applicationText;
+        public Button btnPendingRequests;
         public Button btnAcceptRequest;
         public Button btnRejectRequest;
         private Context context;
@@ -50,7 +52,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
         public MyViewHolder(View itemView) {
             super(itemView);
             messageBoxText = (TextView) itemView.findViewById(R.id.messageBox);
-            applicationText = (TextView) itemView.findViewById(R.id.applicationText);
+            btnPendingRequests = (Button) itemView.findViewById(R.id.btnPendingRequestNotification);
             btnAcceptRequest = (Button) itemView.findViewById(R.id.btn_Accept_Request);
             btnRejectRequest = (Button) itemView.findViewById(R.id.btn_Reject_Request);
             context = itemView.getContext();
@@ -66,10 +68,24 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final Request request = requestList.get(position);
 
-        //holder.applicationText.setText(request.getName() + " apply for leave from " + request.getFromDate() + " to " +
+        //holder.btnPendingRequests.setText(request.getName() + " apply for leave from " + request.getFromDate() + " to " +
           //      request.getToDate() + " for total "+request.getDays() + " days");
-        holder.applicationText.setText("Application Text");
+
+        String btnText = prepareShortStatementForPendingRequestsNotification(request.getInfo());
+        btnText = request.getName() + btnText;
+
+        holder.btnPendingRequests.setText(btnText);
+
         holder.messageBoxText.setText(request.getMessage());
+
+        holder.btnPendingRequests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(holder.context, UserNotificationDetailsActivity.class);
+                intent.putExtra("info", request.getInfo());
+                holder.context.startActivity(intent);
+            }
+        });
 
         holder.btnAcceptRequest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,6 +181,31 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
                 });
             }
         });
+    }
+
+    public String prepareShortStatementForPendingRequestsNotification(String info) {
+
+        String statement = " request for personal holiday on ";
+        String[] lines = info.split(System.getProperty("line.separator"));
+
+        String line = lines[0];
+        String[] data = line.split("\\s+");
+        String dateString = data[0];
+        int flag = Integer.parseInt(data[1]);
+        statement = statement + CustomLibrary.getMonthNameWithDate(dateString, flag);
+
+
+        if (lines.length > 1) {
+            statement = statement.substring(0, statement.length() - 1);
+            line = lines[lines.length-1];
+            data = line.split("\\s+");
+            dateString = data[0];
+            flag = Integer.parseInt(data[1]);
+            statement = statement + " to " + CustomLibrary.getMonthNameWithDate(dateString, flag);
+
+        }
+
+        return statement.substring(0, statement.length() - 1);
     }
 
     //using javax.mail

@@ -5,45 +5,17 @@
     android:orientation="vertical"
     android:background="@color/colorPrimaryDark"
     android:layout_marginTop="40dp"
-    android:layout_marginLeft="45dp">
+    android:layout_marginLeft="10dp">
 
-    <!--<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/nameText"
-            android:textStyle="bold"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/fromDateText"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/toDateText"
-            android:textStyle="bold"
-            />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/daysText"/>
-    </LinearLayout>-->
-
-    <TextView
-        android:id="@+id/applicationText"
+    <Button
+        android:id="@+id/btnPendingRequestNotification"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textStyle="bold"
         android:background="@color/colorPrimaryDark"
         android:textColor="@color/white"
         android:textSize="20dp"
+        android:textAllCaps="false"
         android:textAlignment="center"/>
 
     <TextView

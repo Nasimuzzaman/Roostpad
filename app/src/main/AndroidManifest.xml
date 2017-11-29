@@ -34,7 +34,9 @@
         <activity android:name=".changePassword.ChangePasswordActivity" />
         <activity android:name=".pendingRequests.PendingRequestsActivity" />
         <activity android:name=".employeeNotification.UserNotificationActivity" />
-        <activity android:name=".userNotificationDetails.UserNotificationDetailsActivity"></activity>
+        <activity android:name=".userNotificationDetails.UserNotificationDetailsActivity" />
+        <activity android:name=".userNotificationDetails.UserDashboardActivity" />
+        <activity android:name=".libraryPackage.BaseActivity"></activity>
     </application>
 
 </manifest>

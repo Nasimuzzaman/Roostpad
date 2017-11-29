@@ -44,12 +44,14 @@
             android:id="@+id/firstHalf"
             android:layout_width="80dp"
             android:layout_height="30dp"
+            android:buttonTint="@color/black"
             android:gravity="center"/>
 
         <android.support.v7.widget.AppCompatCheckBox
             android:id="@+id/secondHalf"
             android:layout_width="80dp"
             android:layout_height="30dp"
+            android:buttonTint="@color/black"
             android:gravity="center"/>
     </LinearLayout>
 

@@ -8,11 +8,12 @@ import android.util.Log;
 import android.widget.CalendarView;
 
 import com.example.nasimuzzaman.roostpad.R;
+import com.example.nasimuzzaman.roostpad.libraryPackage.BaseActivity;
 
 import java.util.Calendar;
 import java.util.Date;
 
-public class DateCalendarActivity extends AppCompatActivity {
+public class DateCalendarActivity extends BaseActivity {
 
     private static final String TAG = "DateCalendarActivity";
     private CalendarView dateCalendarView;

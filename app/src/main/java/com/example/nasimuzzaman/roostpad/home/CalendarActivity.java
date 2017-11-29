@@ -9,12 +9,13 @@ import android.util.Log;
 import android.widget.CalendarView;
 
 import com.example.nasimuzzaman.roostpad.R;
+import com.example.nasimuzzaman.roostpad.libraryPackage.BaseActivity;
 
 /**
  * Created by nasimuzzaman on 10/14/17.
  */
 
-public class CalendarActivity extends AppCompatActivity{
+public class CalendarActivity extends BaseActivity{
 
     private static final String TAG = "CalendarActivity";
     private CalendarView calendarView;

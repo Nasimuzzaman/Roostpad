@@ -2,14 +2,11 @@ package com.example.nasimuzzaman.roostpad.request;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -22,16 +19,12 @@ import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.OnHolidayRequestCountChangeCallback;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
-import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
 import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
-import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
-import com.example.nasimuzzaman.roostpad.employeeNotification.UserNotificationActivity;
 import com.example.nasimuzzaman.roostpad.gmail.GMailSender;
 import com.example.nasimuzzaman.roostpad.home.DateCalendarActivity;
 import com.example.nasimuzzaman.roostpad.home.HomeActivity;
-import com.example.nasimuzzaman.roostpad.home.SetupActivity;
+import com.example.nasimuzzaman.roostpad.libraryPackage.BaseActivity;
 import com.example.nasimuzzaman.roostpad.libraryPackage.CustomLibrary;
-import com.example.nasimuzzaman.roostpad.pendingRequests.PendingRequestsActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,7 +37,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RequestHolidayActivity extends AppCompatActivity implements OnHolidayRequestCountChangeCallback {
+public class RequestHolidayActivity extends BaseActivity implements OnHolidayRequestCountChangeCallback {
 
     private TextView fromDateInput, toDateInput, totalDayCount;
     private EditText messageInput;
@@ -54,6 +47,7 @@ public class RequestHolidayActivity extends AppCompatActivity implements OnHolid
     Date from, to;
     LoginResponse userInfo;
     double days = 0;
+    double existingDays = 0;
     List<RequestDay> requestDays;
 
     RecyclerView rviewDays;
@@ -105,7 +99,19 @@ public class RequestHolidayActivity extends AppCompatActivity implements OnHolid
             public void onClick(View view) {
                 Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
 
-                if (isOnlyFromDateSelected() || (isBothValidDateSelected() && isValidDateSelected())) {
+                if(userInfo.getHoliday() < days) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "You don't have sufficient holidays left", Toast.LENGTH_LONG);
+                    TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+                    v.setTextColor(Color.BLUE);
+                    v.setTextSize(18);
+                    toast.show();
+                } else if(days == 0) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Please select at least half a day", Toast.LENGTH_LONG);
+                    TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+                    v.setTextColor(Color.BLUE);
+                    v.setTextSize(18);
+                    toast.show();
+                } else if (isOnlyFromDateSelected() || (isBothValidDateSelected() && isValidDateSelected())) {
 
                     btnFromDateGoCalender.setError(null);
                     btnToDateGoCalender.setError(null);
@@ -197,8 +203,8 @@ public class RequestHolidayActivity extends AppCompatActivity implements OnHolid
     public String prepareInfo( List<RequestDay> requestDayList) {
         /*
         *
-        * Seperate date and holiday halves by %
-        * Seperate new line by &
+        * Seperate date and holiday halves by <space>
+        * Seperate new line by <new line>
         *
         * */
         String info = "";
@@ -287,6 +293,7 @@ public class RequestHolidayActivity extends AppCompatActivity implements OnHolid
             btnFromDateGoCalender.setError(null);
             List<RequestDay> dayList = getDateList(btnFromDateGoCalender.getText().toString(), btnFromDateGoCalender.getText().toString());
             requestDays = dayList;
+            setDetailInfo();
             adapter = new RequestDaysAdapter(dayList, RequestHolidayActivity.this);
             rviewDays.setAdapter(adapter);
         } else if (fromDateInput.getText().toString().trim().length() != 0 && toDateInput.getText().toString().trim().length() != 0) {
@@ -295,6 +302,7 @@ public class RequestHolidayActivity extends AppCompatActivity implements OnHolid
                 btnFromDateGoCalender.setError(null);
                 List<RequestDay> dayList = getDateList(btnFromDateGoCalender.getText().toString(), btnToDateGoCalender.getText().toString());
                 requestDays = dayList;
+                setDetailInfo();
                 adapter = new RequestDaysAdapter(dayList, RequestHolidayActivity.this);
                 rviewDays.setAdapter(adapter);
             } else {
@@ -303,6 +311,15 @@ public class RequestHolidayActivity extends AppCompatActivity implements OnHolid
                 btnToDateGoCalender.startAnimation(shake);
             }
         }
+    }
+
+    public void setDetailInfo() {
+        double remainingDays = userInfo.getHoliday() - days;
+        double selectedDays = days + existingDays;
+        totalDayCount.setText(selectedDays + " days\n");
+        totalDayCount.append(existingDays + " existing days\n");
+        totalDayCount.append(days + " days\n");
+        totalDayCount.append(remainingDays + " days");
     }
 
 
@@ -337,6 +354,7 @@ public class RequestHolidayActivity extends AppCompatActivity implements OnHolid
 
         List<RequestDay> requestDays = new ArrayList<>();
         days = 0.0;
+        existingDays = 0.0;
 
         Date startDate = getDateFromString(start);
         Date endDate = getDateFromString(end);
@@ -350,6 +368,7 @@ public class RequestHolidayActivity extends AppCompatActivity implements OnHolid
                 day.setSecondHalfChecked(false);
                 day.setFirstHalfEnabled(false);
                 day.setSecondHalfEnabled(false);
+                existingDays += 1.0;
             } else {
                 days += 1.0;
                 day.setHolidayType("Personal");
@@ -361,7 +380,7 @@ public class RequestHolidayActivity extends AppCompatActivity implements OnHolid
             requestDays.add(day);
         }
 
-        totalDayCount.setText("Actual Holiday Requested: " + days);
+        //totalDayCount.setText("Actual Holiday Requested: " + days);
 
         return requestDays;
     }
@@ -443,92 +462,21 @@ public class RequestHolidayActivity extends AppCompatActivity implements OnHolid
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int res_id = item.getItemId();
-        if (res_id == R.id.action_show_pending_requests) {
-            //Toast.makeText(getApplicationContext(), "You select Edit Profile option", Toast.LENGTH_SHORT).show();
-            if (userInfo.getRole().toString().equals("CTO")) {
-                showPendingRequests();
-            } else {
-                showUserNotification();
-            }
-        } else if (res_id == R.id.action_change_password) {
-            //Toast.makeText(getApplicationContext(), "You select Change Password option", Toast.LENGTH_SHORT).show();
-            showChangePasswordDialogBox();
-        } else if (res_id == R.id.action_logout) {
-            Toast.makeText(getApplicationContext(), "Logged out Successfully", Toast.LENGTH_SHORT).show();
-            showLoginPage();
-            Preference.remove(PrefKeys.USER_INFO);
-        } else if (res_id == R.id.action_home) {
-            openHomePage();
-        } else if (res_id == R.id.action_setup) {
-            showSetupPage();
-        }
-
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-
-        if (userInfo.getRole().toString().equals("Employee")) {
-            menu.getItem(1).setVisible(false);
-        }
-
-        return true;
-    }
-
-    private void showUserNotification() {
-        Intent intent = new Intent(this, UserNotificationActivity.class);
-        startActivity(intent);
-    }
-
-    private void showPendingRequests() {
-        Intent intent = new Intent(this, PendingRequestsActivity.class);
-        startActivity(intent);
-    }
-
-    private void showChangePasswordDialogBox() {
-        Intent intent = new Intent(this, ChangePasswordActivity.class);
-        startActivity(intent);
-    }
-
-    private void showSetupPage() {
-        Intent intent = new Intent(this, SetupActivity.class);
-        startActivity(intent);
-    }
-
-    private void showLoginPage() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        finishAffinity();
-        startActivity(intent);
-    }
-
-    private void openHomePage() {
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
-    }
-
-
-    @Override
     public void onHolidayRequestCountChange(boolean checked) {
         if (checked) {
             days += 0.5;
         } else {
             days -= 0.5;
         }
-        totalDayCount.setText("Actual Holiday Requested: " + days);
+        double remainingDays = userInfo.getHoliday() - days;
+        double selectedDays = days + existingDays;
+        totalDayCount.setText(selectedDays + " days\n");
+        totalDayCount.append(existingDays + " existing days\n");
+        totalDayCount.append(days + " days\n");
+        totalDayCount.append(remainingDays + " days");
     }
+
+
 
     @Override
     public void setRequestDays(List<RequestDay> requestDays) {

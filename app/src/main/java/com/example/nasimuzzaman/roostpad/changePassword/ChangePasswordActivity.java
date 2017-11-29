@@ -17,12 +17,14 @@ import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
 import com.example.nasimuzzaman.roostpad.home.HomeActivity;
+import com.example.nasimuzzaman.roostpad.libraryPackage.BaseActivity;
+import com.example.nasimuzzaman.roostpad.libraryPackage.CustomLibrary;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ChangePasswordActivity extends AppCompatActivity {
+public class ChangePasswordActivity extends BaseActivity {
 
 
     Button submitChangePassword, cancelChangePassword;
@@ -87,7 +89,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
                                     Toast.makeText(getApplicationContext(), "Password changed successfully", Toast.LENGTH_SHORT).show();
                                     // go to setup page
-                                    showHomePage();
+                                    CustomLibrary.openPage(getApplicationContext(), HomeActivity.class);
                                 } else
                                     Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
                             }
@@ -116,19 +118,5 @@ public class ChangePasswordActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int res_id = item.getItemId();
-        if(res_id == android.R.id.home) onBackPressed();
-
-        return true;
-    }
-
-    private void showHomePage() {
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
     }
 }

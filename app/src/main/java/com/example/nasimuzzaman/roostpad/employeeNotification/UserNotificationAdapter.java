@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.nasimuzzaman.roostpad.R;
 import com.example.nasimuzzaman.roostpad.libraryPackage.CustomLibrary;
@@ -50,8 +51,10 @@ public class UserNotificationAdapter extends RecyclerView.Adapter<UserNotificati
         requestDays = library.decodeInfo(notification.getInfo());
         //String btnText = prepareStatementForUserNotification(notification.getInfo());
         String btnText = prepareShortStatementForUserNotification(notification.getInfo());
+
         btnText = btnText + " is " + notification.getStatus();
         holder.btnReply.setText(btnText);
+        holder.messageText.setText(notification.getMessage());
 
         holder.btnReply.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,11 +166,13 @@ public class UserNotificationAdapter extends RecyclerView.Adapter<UserNotificati
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public Button btnReply;
+        public TextView messageText;
         public Context context;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             btnReply = (Button) itemView.findViewById(R.id.btnReply);
+            messageText = (TextView) itemView.findViewById(R.id.textMessage);
             context = itemView.getContext();
         }
     }

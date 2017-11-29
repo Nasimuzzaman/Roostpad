@@ -1,12 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="40dp"
-    android:layout_marginRight="5dp"
-    android:background="@color/AntiqueWhite"
-    android:focusable="false"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.example.nasimuzzaman.roostpad.userNotificationDetails.UserDashboardActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Profile"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/profileName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:hint="Name"
+            />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,40 +47,20 @@
         android:orientation="horizontal">
 
         <EditText
-            android:layout_width="60dp"
+            android:layout_width="@dimen/profileLeftColumnWidth"
             android:layout_height="match_parent"
             android:textColor="@color/black"
-            android:text="Name"
+            android:text="Email:"
+            android:textSize="@dimen/profileTextSize"
             android:textStyle="bold"
             android:enabled="false"
             android:focusable="false"/>
 
         <EditText
-            android:id="@+id/nameText"
+            android:id="@+id/profileEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/black"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <EditText
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:textColor="@color/black"
-            android:text="Email"
-            android:textStyle="bold"
-            android:enabled="false"
-            android:focusable="false"/>
-
-        <EditText
-            android:id="@+id/emailText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:textSize="@dimen/profileTextSize"
             android:textColor="@color/black" />
 
     </LinearLayout>
@@ -59,81 +72,94 @@
         android:orientation="horizontal">
 
         <EditText
-            android:layout_width="110dp"
+            android:layout_width="@dimen/profileLeftColumnWidth"
             android:layout_height="match_parent"
             android:textColor="@color/black"
-            android:text="Designation"
+            android:text="Designation:"
+            android:textSize="@dimen/profileTextSize"
             android:textStyle="bold"
             android:enabled="false"
             android:focusable="false"/>
 
         <EditText
-            android:id="@+id/designationText"
+            android:id="@+id/profileDesignation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:textSize="@dimen/profileTextSize"
             android:textColor="@color/black" />
 
     </LinearLayout>
 
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <EditText
-            android:layout_width="140dp"
+            android:layout_width="@dimen/profileLeftColumnWidth"
             android:layout_height="match_parent"
             android:textColor="@color/black"
-            android:text="Phone"
+            android:text="Phone:"
+            android:textSize="@dimen/profileTextSize"
             android:textStyle="bold"
             android:enabled="false"
             android:focusable="false"/>
 
         <EditText
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:entries="@array/role"
-            android:text="Role"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:enabled="false"
-            android:focusable="false"/>
-
-        <EditText
+            android:id="@+id/profilePhone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/black"
-            android:text="Holidays"
-            android:textStyle="bold"
-            android:enabled="false"
-            android:focusable="false"/>
+            android:textSize="@dimen/profileTextSize"
+            android:textColor="@color/black" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/contactText"
-            android:layout_width="140dp"
+            android:layout_width="@dimen/profileLeftColumnWidth"
             android:layout_height="match_parent"
-            android:textColor="@color/black" />
-
-        <Spinner
-            android:id="@+id/roleSpinner"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:entries="@array/role" />
+            android:textColor="@color/black"
+            android:text="Role:"
+            android:textSize="@dimen/profileTextSize"
+            android:textStyle="bold"
+            android:enabled="false"
+            android:focusable="false"/>
 
         <EditText
-            android:id="@+id/holidayText"
+            android:id="@+id/profileRole"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:textSize="@dimen/profileTextSize"
             android:textColor="@color/black" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <EditText
+            android:layout_width="@dimen/profileLeftColumnWidth"
+            android:layout_height="match_parent"
+            android:textColor="@color/black"
+            android:text="Holiday:"
+            android:textSize="@dimen/profileTextSize"
+            android:textStyle="bold"
+            android:enabled="false"
+            android:focusable="false"/>
+
+        <EditText
+            android:id="@+id/profileHolidayText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/profileTextSize"
+            android:textColor="@color/black" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -142,29 +168,35 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_edit_contact"
+            android:id="@+id/btnEditProfile"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:text="Edit"
+            android:textSize="@dimen/profileTextSize"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btn_delete_contact"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="Delete"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/btn_update_contact"
+            android:id="@+id/btnUpdateProfile"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="Update"
             android:textStyle="bold"
+            android:textSize="@dimen/profileTextSize"
+            android:visibility="invisible"/>
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Update"
+            android:textStyle="bold"
+            android:textSize="@dimen/profileTextSize"
             android:visibility="invisible"/>
 
     </LinearLayout>
+
+
 
 </LinearLayout>

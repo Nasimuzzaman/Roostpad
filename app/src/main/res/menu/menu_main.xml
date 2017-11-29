@@ -4,6 +4,13 @@
     >
 
     <item
+        android:id="@+id/action_dashboard"
+        android:title="Profile"
+        android:icon="@drawable/ic_profile"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
         android:id="@+id/action_home"
         android:title="Home"
         app:showAsAction="collapseActionView"
