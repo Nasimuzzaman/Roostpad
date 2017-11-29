@@ -158,13 +158,10 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
                         ReplyToLeaveRequestResponse body = response.body();
                         if(body != null) {
                             if(body.getStatusCode() == 200) {
-                                // save user info
-                                // com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_INFO, body);
                                 // show success message
                                 Toast.makeText(holder.context, body.getMessage(), Toast.LENGTH_SHORT);
                                 // reply to corresponding employee through mail
-                                //To Do
-                                // sendReply(credential , holder.context);
+                                sendReply(credential , holder.context);
                                 // refresh notification page
                                 requestList.remove(position);
                                 notifyItemRemoved(position);
@@ -210,10 +207,6 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
 
     //using javax.mail
     private void sendReply(final ReplyToLeaveRequestCredential credential, Context context) {
-        final ProgressDialog dialog = new ProgressDialog(context);
-        dialog.setTitle("Sending Email");
-        dialog.setMessage("Please wait");
-        dialog.show();
 
         Thread sender = new Thread(new Runnable() {
             @Override
@@ -221,10 +214,9 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
                 try {
                     GMailSender sender = new GMailSender("roostpaddb@gmail.com", "Kaz123Mig");
                     sender.sendMail("Reply from ROOSTPAD",
-                            "Your request has been "+credential.getStatus(),
+                            "Your request for leave has been "+credential.getStatus()+"\nPlease check notification from your app",
                             "roostpaddb@gmail.com",
                             credential.getEmail());
-                    dialog.dismiss();
                 } catch (Exception e) {
                     Log.e("mylog", "Error: " + e.getMessage());
                 }

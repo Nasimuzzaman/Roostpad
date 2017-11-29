@@ -322,15 +322,9 @@ public class RequestHolidayActivity extends BaseActivity implements OnHolidayReq
 
     //using javax.mail
     private void sendMessage(final RequestHolidayCredential credential) {
-        final ProgressDialog dialog = new ProgressDialog(RequestHolidayActivity.this);
-        dialog.setTitle("Sending Email");
-        dialog.setMessage("Please wait");
-        dialog.show();
-
         String s = CustomLibrary.prepareShortStatementForPendingRequestsNotification(credential.getInfo());
 
         final String subject = userInfo.getName() + s;
-
 
         Thread sender = new Thread(new Runnable() {
             @Override
@@ -341,7 +335,6 @@ public class RequestHolidayActivity extends BaseActivity implements OnHolidayReq
                             credential.getMessage(),
                             "roostpaddb@gmail.com",
                             userInfo.getCtoEmail());
-                    dialog.dismiss();
                 } catch (Exception e) {
                     Log.e("mylog", "Error: " + e.getMessage());
                 }
