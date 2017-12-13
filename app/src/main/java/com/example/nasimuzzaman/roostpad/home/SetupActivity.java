@@ -80,7 +80,7 @@ public class SetupActivity extends BaseActivity {
                                 // show success message
                                 Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
                                 // go to contact page
-                                CustomLibrary.openPage(getApplicationContext(), ContactsActivity.class);
+                                CustomLibrary.openPage(SetupActivity.this, ContactsActivity.class);
                             } else Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
                         }
                     }

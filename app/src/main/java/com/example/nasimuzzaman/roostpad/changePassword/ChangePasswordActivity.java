@@ -53,17 +53,15 @@ public class ChangePasswordActivity extends BaseActivity {
         submitChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Animation shake = AnimationUtils.loadAnimation(ChangePasswordActivity.this, R.anim.shake);
 
                 if(currentPasswordInput.getText().toString().equals("")) {
-                    Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
                     currentPasswordInput.setError("Please enter current password");
                     currentPasswordInput.startAnimation(shake);
                 } else if(!currentPasswordInput.getText().toString().equals(userInfo.getPassword())) {
-                    Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
                     currentPasswordInput.setError("Current password don't match");
                     currentPasswordInput.startAnimation(shake);
                 } else if(newPasswordInput.getText().toString().length() < 6) {
-                    Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
                     newPasswordInput.setError("Password length must be at least 6");
                     newPasswordInput.startAnimation(shake);
                 } else if (newPasswordInput.getText().toString().equals(reNewPasswordInput.getText().toString())) {
@@ -89,7 +87,7 @@ public class ChangePasswordActivity extends BaseActivity {
                                     Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
                                     Toast.makeText(getApplicationContext(), "Password changed successfully", Toast.LENGTH_SHORT).show();
                                     // go to setup page
-                                    CustomLibrary.openPage(getApplicationContext(), HomeActivity.class);
+                                    CustomLibrary.openPage(ChangePasswordActivity.this, HomeActivity.class);
                                 } else
                                     Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
                             }
@@ -101,7 +99,6 @@ public class ChangePasswordActivity extends BaseActivity {
                         }
                     });
                 } else {
-                    Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
                     reNewPasswordInput.setError("Password don't match");
                     reNewPasswordInput.startAnimation(shake);
                 }

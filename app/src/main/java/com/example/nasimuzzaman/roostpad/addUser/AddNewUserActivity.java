@@ -101,7 +101,7 @@ public class AddNewUserActivity extends BaseActivity {
                                 // show success message
                                 Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
                                 // go to setup page
-                                CustomLibrary.openPage(getApplicationContext(), ContactsActivity.class);
+                                CustomLibrary.openPage(AddNewUserActivity.this, ContactsActivity.class);
                             } else
                                 Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
                         }
@@ -172,7 +172,7 @@ public class AddNewUserActivity extends BaseActivity {
                                     Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
                                     // go to setup page
                                     new CustomLibrary().sendPassword(userCredential.getEmail(), userCredential.getPassword());
-                                    CustomLibrary.openPage(getApplicationContext(), SetupActivity.class);
+                                    CustomLibrary.openPage(AddNewUserActivity.this, SetupActivity.class);
                                 } else
                                     Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
                             }

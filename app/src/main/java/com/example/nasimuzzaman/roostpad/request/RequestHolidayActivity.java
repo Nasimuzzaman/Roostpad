@@ -97,7 +97,7 @@ public class RequestHolidayActivity extends BaseActivity implements OnHolidayReq
         btnRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+                Animation shake = AnimationUtils.loadAnimation(RequestHolidayActivity.this, R.anim.shake);
 
                 if(userInfo.getHoliday() < days) {
                     Toast toast = Toast.makeText(getApplicationContext(), "You don't have sufficient holidays left", Toast.LENGTH_LONG);
@@ -141,8 +141,8 @@ public class RequestHolidayActivity extends BaseActivity implements OnHolidayReq
                                         Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
                                         //send email
                                         sendMessage(credential);
-                                        // go to next page
-                                        new CustomLibrary().open(getApplicationContext(), HomeActivity.class);
+                                        // go to home page
+                                        CustomLibrary.openPage(RequestHolidayActivity.this, HomeActivity.class);
                                     } else Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -303,7 +303,7 @@ public class RequestHolidayActivity extends BaseActivity implements OnHolidayReq
                 adapter = new RequestDaysAdapter(dayList, RequestHolidayActivity.this);
                 rviewDays.setAdapter(adapter);
             } else {
-                Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+                Animation shake = AnimationUtils.loadAnimation(RequestHolidayActivity.this, R.anim.shake);
                 btnToDateGoCalender.setError("Invalid Selection");
                 btnToDateGoCalender.startAnimation(shake);
             }

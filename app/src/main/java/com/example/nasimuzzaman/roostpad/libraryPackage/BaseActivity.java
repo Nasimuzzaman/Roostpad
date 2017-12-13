@@ -76,7 +76,7 @@ public class BaseActivity extends AppCompatActivity {
             new CustomLibrary().open(this, SetupActivity.class);
         } else if(res_id == R.id.action_dashboard) {
             Toast.makeText(getApplicationContext(), "Dashboard Successfully", Toast.LENGTH_SHORT).show();
-            CustomLibrary.openPage(getApplicationContext(), UserDashboardActivity.class);
+            CustomLibrary.openPage(this, UserDashboardActivity.class);
         }
 
         return true;

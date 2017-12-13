@@ -95,16 +95,16 @@ public class ContactsActivity extends BaseActivity {
                                 // save user info
                                 com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_CONTACTS, body);
                                 // show success message
-                                Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
+                                Toast.makeText(ContactsActivity.this, body.getMessage(), Toast.LENGTH_SHORT);
                                 // go to contact page
-                                CustomLibrary.openPage(getApplicationContext(), ContactsActivity.class);
+                                CustomLibrary.openPage(ContactsActivity.this, ContactsActivity.class);
                             } else Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ContactsResponse> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ContactsActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
