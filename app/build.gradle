@@ -5,7 +5,7 @@ android {
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.example.nasimuzzaman.roostpad"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -26,6 +26,7 @@ dependencies {
     })
 
 
+    compile 'com.github.rey5137:material:1.2.4'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'

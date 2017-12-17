@@ -11,32 +11,48 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
+        android:screenOrientation="portrait"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".authentication.LoginActivity">
+        <activity android:name=".authentication.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".home.HomeActivity" />
-        <activity android:name=".home.CalendarActivity" />
+        <activity android:name=".home.HomeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".home.CalendarActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".request.RequestHolidayActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".home.DateCalendarActivity" />
-        <activity android:name=".home.SetupActivity" />
-        <activity android:name=".addUser.AddNewUserActivity" />
-        <activity android:name=".home.UsersActivity" />
-        <activity android:name=".contacts.ContactsActivity" />
-        <activity android:name=".changePassword.ChangePasswordActivity" />
-        <activity android:name=".pendingRequests.PendingRequestsActivity" />
-        <activity android:name=".employeeNotification.UserNotificationActivity" />
-        <activity android:name=".userNotificationDetails.UserNotificationDetailsActivity" />
-        <activity android:name=".userNotificationDetails.UserDashboardActivity" />
-        <activity android:name=".libraryPackage.BaseActivity"></activity>
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".home.DateCalendarActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".home.SetupActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".addUser.AddNewUserActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".home.UsersActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".contacts.ContactsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".changePassword.ChangePasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".pendingRequests.PendingRequestsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".employeeNotification.UserNotificationActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".userNotificationDetails.UserNotificationDetailsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".userNotificationDetails.UserDashboardActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".libraryPackage.BaseActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

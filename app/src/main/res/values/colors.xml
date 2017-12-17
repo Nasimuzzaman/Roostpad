@@ -7,7 +7,7 @@
     <color name="colorPrimary">#009688</color>
     <color name="colorPrimaryDark">#00695c</color>
     <color name="colorAccent">#b2dfdb</color>
-
+    <color name="colorWarn">#FF0000</color>
     <color name="White">#FFFFFF</color>
     <color name="Ivory">#FFFFF0</color>
     <color name="LightYellow">#FFFFE0</color>

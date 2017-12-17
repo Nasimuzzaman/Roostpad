@@ -23,13 +23,14 @@ import com.example.nasimuzzaman.roostpad.libraryPackage.CustomLibrary;
 import com.example.nasimuzzaman.roostpad.pendingRequests.PendingRequestsActivity;
 import com.example.nasimuzzaman.roostpad.request.RequestHolidayActivity;
 import com.example.nasimuzzaman.roostpad.userNotificationDetails.UserDashboardActivity;
+import com.rey.material.widget.FloatingActionButton;
 
 public class HomeActivity extends BaseActivity {
 
     private static final String TAG = "HomeActivity";
     LoginResponse userInfo;
 
-    private Button requestAHoliday;
+    private FloatingActionButton requestAHoliday;
     private TextView availableHolidayText;
 
     @Override
@@ -38,7 +39,7 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         userInfo = Preference.getObject(PrefKeys.USER_INFO, LoginResponse.class);
 
-        requestAHoliday = (Button) findViewById(R.id.request_a_holiday);
+        requestAHoliday = (FloatingActionButton) findViewById(R.id.request_a_holiday);
         availableHolidayText = (TextView) findViewById(R.id.available_holiday_text);
 
         if(userInfo.getRole().toString().equals("CTO")) {
@@ -46,7 +47,11 @@ public class HomeActivity extends BaseActivity {
             requestAHoliday.setVisibility(View.GONE);
         }
 
-        availableHolidayText.setText(userInfo.getHoliday() + " personal holidays left");
+        double decimal = userInfo.getHoliday();
+        String holidayText = decimal + "";
+        if ((int) decimal == decimal) holidayText = (int) decimal + "";
+
+        availableHolidayText.setText(holidayText);
 
         requestAHoliday.setOnClickListener(new View.OnClickListener() {
             @Override
