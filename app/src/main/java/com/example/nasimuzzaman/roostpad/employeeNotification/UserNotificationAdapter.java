@@ -1,7 +1,9 @@
 package com.example.nasimuzzaman.roostpad.employeeNotification;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +50,8 @@ public class UserNotificationAdapter extends RecyclerView.Adapter<UserNotificati
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final UserNotification notification = notificationList.get(position);
+
+
         requestDays = library.decodeInfo(notification.getInfo());
         //String btnText = prepareStatementForUserNotification(notification.getInfo());
         String btnText = prepareShortStatementForUserNotification(notification.getInfo());

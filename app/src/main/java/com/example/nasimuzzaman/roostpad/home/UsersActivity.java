@@ -1,11 +1,7 @@
 package com.example.nasimuzzaman.roostpad.home;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -13,20 +9,15 @@ import android.widget.Toast;
 import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
-import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
+import com.example.nasimuzzaman.roostpad.addUser.AddNewUserActivity;
 import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
-import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
 import com.example.nasimuzzaman.roostpad.contacts.ContactCredential;
 import com.example.nasimuzzaman.roostpad.contacts.Contacts;
-import com.example.nasimuzzaman.roostpad.contacts.ContactsActivity;
 import com.example.nasimuzzaman.roostpad.contacts.ContactsClient;
 import com.example.nasimuzzaman.roostpad.contacts.ContactsResponse;
 import com.example.nasimuzzaman.roostpad.contacts.ContactsService;
-import com.example.nasimuzzaman.roostpad.employeeNotification.UserNotificationActivity;
 import com.example.nasimuzzaman.roostpad.libraryPackage.BaseActivity;
 import com.example.nasimuzzaman.roostpad.libraryPackage.CustomLibrary;
-import com.example.nasimuzzaman.roostpad.pendingRequests.PendingRequestsActivity;
-import com.example.nasimuzzaman.roostpad.addUser.AddNewUserActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;

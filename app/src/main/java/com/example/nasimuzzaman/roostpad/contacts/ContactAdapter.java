@@ -16,6 +16,9 @@ import android.widget.Toast;
 import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
+import com.example.nasimuzzaman.roostpad.authentication.AuthenticationClient;
+import com.example.nasimuzzaman.roostpad.authentication.AuthenticationService;
+import com.example.nasimuzzaman.roostpad.authentication.LoginCredential;
 import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
 import com.example.nasimuzzaman.roostpad.deleteUser.DeleteUserClient;
 import com.example.nasimuzzaman.roostpad.deleteUser.DeleteUserCredential;
@@ -108,9 +111,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
                         UpdateUserResponse body = response.body();
                         if(body != null) {
                             if(body.getStatusCode() == 200) {
-                                // show success message
-                                Toast.makeText(holder.context, body.getMessage(), Toast.LENGTH_SHORT);
                                 //To do
+                                updateUserInfo();
                                 //Refresh page
                                 holder.nameText.setText(credential.getName());
                                 holder.emailText.setText(credential.getEmail());
@@ -228,5 +230,34 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
             context = itemView.getContext();
         }
 
+    }
+
+    public void updateUserInfo() {
+
+        String email = userInfo.getEmail().toString();
+        String password = userInfo.getPassword().toString();
+        LoginCredential credential = new LoginCredential();
+        credential.setEmail(email);
+        credential.setPassword(password);
+        AuthenticationService service = new AuthenticationClient().createService();
+        Call<LoginResponse> call = service.login(credential);
+        call.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                LoginResponse body = response.body();
+                if(body != null) {
+                    if (body.getStatusCode() == 200) {
+                        // save user info
+                        com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_INFO, body);
+
+                        userInfo = Preference.getObject(PrefKeys.USER_INFO, LoginResponse.class);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                userInfo = Preference.getObject(PrefKeys.USER_INFO, LoginResponse.class);            }
+        });
     }
 }

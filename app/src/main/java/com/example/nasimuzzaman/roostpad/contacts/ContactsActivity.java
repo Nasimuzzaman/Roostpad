@@ -1,31 +1,20 @@
 package com.example.nasimuzzaman.roostpad.contacts;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
-import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
 import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
-import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
-import com.example.nasimuzzaman.roostpad.employeeNotification.UserNotificationActivity;
-import com.example.nasimuzzaman.roostpad.home.HomeActivity;
-import com.example.nasimuzzaman.roostpad.home.SetupActivity;
 import com.example.nasimuzzaman.roostpad.home.UsersActivity;
 import com.example.nasimuzzaman.roostpad.libraryPackage.BaseActivity;
 import com.example.nasimuzzaman.roostpad.libraryPackage.CustomLibrary;
-import com.example.nasimuzzaman.roostpad.pendingRequests.PendingRequestsActivity;
 
 import java.util.List;
 
@@ -94,8 +83,6 @@ public class ContactsActivity extends BaseActivity {
                             if(body.getStatusCode() == 200) {
                                 // save user info
                                 com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_CONTACTS, body);
-                                // show success message
-                                Toast.makeText(ContactsActivity.this, body.getMessage(), Toast.LENGTH_SHORT);
                                 // go to contact page
                                 CustomLibrary.openPage(ContactsActivity.this, ContactsActivity.class);
                             } else Toast.makeText(getApplicationContext(), body.getError(), Toast.LENGTH_SHORT).show();
@@ -104,7 +91,12 @@ public class ContactsActivity extends BaseActivity {
 
                     @Override
                     public void onFailure(Call<ContactsResponse> call, Throwable t) {
-                        Toast.makeText(ContactsActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                        if(contactsLists != null) {
+                            // save user info
+                            com.binjar.prefsdroid.Preference.putObject(PrefKeys.USER_CONTACTS, contactsLists);
+                            // go to contact page
+                            CustomLibrary.openPage(ContactsActivity.this, ContactsActivity.class);
+                        }
                     }
                 });
             }

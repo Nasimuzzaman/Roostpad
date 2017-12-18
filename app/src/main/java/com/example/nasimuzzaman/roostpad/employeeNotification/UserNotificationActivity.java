@@ -1,6 +1,9 @@
 package com.example.nasimuzzaman.roostpad.employeeNotification;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -75,7 +78,11 @@ public class UserNotificationActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<UserNotificationResponse> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+                if(notificationList != null) {
+                    adapter = new UserNotificationAdapter(notificationList);
+                    recyclerView.setAdapter(adapter);
+                }
+                //Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT);
             }
         });
 

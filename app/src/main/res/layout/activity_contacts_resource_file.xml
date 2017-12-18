@@ -81,10 +81,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="3"
         android:orientation="horizontal">
 
         <EditText
-            android:layout_width="140dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"
             android:textColor="@color/black"
             android:text="Phone"
@@ -93,7 +95,8 @@
             android:focusable="false"/>
 
         <EditText
-            android:layout_width="150dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"
             android:entries="@array/role"
             android:text="Role"
@@ -103,7 +106,8 @@
             android:focusable="false"/>
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"
             android:textColor="@color/black"
             android:text="Holidays"
@@ -115,23 +119,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="3"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/contactText"
-            android:layout_width="140dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"
             android:textColor="@color/black" />
 
         <Spinner
             android:id="@+id/roleSpinner"
-            android:layout_width="150dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"
             android:entries="@array/role" />
 
         <EditText
             android:id="@+id/holidayText"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"
             android:textColor="@color/black" />
     </LinearLayout>
