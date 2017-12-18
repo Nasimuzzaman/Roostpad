@@ -2,177 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="40dp"
-    android:layout_marginRight="5dp"
-    android:background="@color/AntiqueWhite"
+    android:layout_marginRight="2dp"
+    android:background="@color/colorAccent"
     android:focusable="false"
-    android:orientation="vertical">
+    android:weightSum="10"
+    android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <EditText
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:textColor="@color/black"
-            android:text="Name"
-            android:textStyle="bold"
-            android:enabled="false"
-            android:focusable="false"/>
-
-        <EditText
-            android:id="@+id/nameText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/black"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <EditText
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:textColor="@color/black"
-            android:text="Email"
-            android:textStyle="bold"
-            android:enabled="false"
-            android:focusable="false"/>
-
-        <EditText
-            android:id="@+id/emailText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/black" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <EditText
-            android:layout_width="110dp"
-            android:layout_height="match_parent"
-            android:textColor="@color/black"
-            android:text="Designation"
-            android:textStyle="bold"
-            android:enabled="false"
-            android:focusable="false"/>
-
-        <EditText
-            android:id="@+id/designationText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/black" />
-
-    </LinearLayout>
-
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="5"
         android:layout_height="wrap_content"
-        android:weightSum="3"
-        android:orientation="horizontal">
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:weightSum="10">
 
-        <EditText
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:textColor="@color/black"
-            android:text="Phone"
-            android:textStyle="bold"
-            android:enabled="false"
-            android:focusable="false"/>
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:entries="@array/role"
-            android:text="Role"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:enabled="false"
-            android:focusable="false"/>
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:textColor="@color/black"
-            android:text="Holidays"
-            android:textStyle="bold"
-            android:enabled="false"
-            android:focusable="false"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="3"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/contactText"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:textColor="@color/black" />
-
-        <Spinner
-            android:id="@+id/roleSpinner"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:entries="@array/role" />
-
-        <EditText
-            android:id="@+id/holidayText"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:textColor="@color/black" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_edit_contact"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:text="Edit"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/btn_delete_contact"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="Delete"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/btn_update_contact"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="Update"
+            android:id="@+id/Contact_Name"
+            android:layout_width="match_parent"
+            android:layout_weight="4"
+            android:textColor="@color/white"
             android:textStyle="bold"
-            android:visibility="invisible"/>
+            android:drawableLeft="@drawable/ic_contacts_black_24dp"
+            android:background="@color/colorPrimary"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
+
 
 </LinearLayout>

@@ -52,7 +52,7 @@ public class ContactsActivity extends BaseActivity {
         view.setHasFixedSize(true);
         view.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new ContactAdapter(contactsLists);
+        adapter = new ContactAdapter(contactsLists, this);
         view.setAdapter(adapter);
 
         users.setOnClickListener(new View.OnClickListener() {

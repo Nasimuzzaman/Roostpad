@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ import com.example.nasimuzzaman.roostpad.updateUser.UpdateUserCredential;
 import com.example.nasimuzzaman.roostpad.updateUser.UpdateUserResponse;
 import com.example.nasimuzzaman.roostpad.updateUser.UpdateUserService;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,13 +43,15 @@ import retrofit2.Response;
  * Created by nasimuzzaman on 11/13/17.
  */
 
-public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHolder> {
+public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHolder> implements Serializable{
 
     List<Contacts> contactsList;
     LoginResponse userInfo;
+    private Context context;
 
-    public ContactAdapter(List<Contacts> contactsList) {
+    public ContactAdapter(List<Contacts> contactsList, Context context) {
         this.contactsList = contactsList;
+        this.context = context;
         userInfo = Preference.getObject(PrefKeys.USER_INFO, LoginResponse.class);
     }
 
@@ -61,118 +65,29 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final Contacts contacts = contactsList.get(position);
 
-        final List<String> spinnerArrayList = new ArrayList<>(
+
+        /*final List<String> spinnerArrayList = new ArrayList<>(
                 Arrays.asList("Admin", "CTO", "Employee")
-        );
+        );*/
 
-        holder.nameText.setText(contacts.getName());
-        holder.emailText.setText(contacts.getEmail());
-        holder.contactText.setText(contacts.getContact());
-        holder.designationText.setText(contacts.getDesignation());
-        holder.roleText.setSelection(spinnerArrayList.indexOf(contacts.getRole()));
-        holder.holidayText.setText(""+contacts.getHoliday());
+        holder.btnName.setText(contacts.getName());
 
-        final List<EditText> editTextList = new ArrayList<>(
+        /*final List<EditText> editTextList = new ArrayList<>(
                 Arrays.asList(holder.nameText, holder.emailText, holder.contactText, holder.designationText, holder.holidayText)
         );
 
         disableEditText(editTextList);
         holder.roleText.setEnabled(false);
-        editTextList.remove(holder.emailText);
+        editTextList.remove(holder.emailText);*/
 
-        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
+        holder.btnName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enableEditText(editTextList);
-                holder.roleText.setEnabled(true);
-                holder.btnUpdate.setVisibility(View.VISIBLE);
+                Intent intent = new Intent(context, ContactDetailActivity.class);
+                intent.putExtra("email", contacts.getEmail());
+                context.startActivity(intent);
             }
         });
-
-        holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final UpdateUserCredential credential = new UpdateUserCredential();
-
-                credential.setName(holder.nameText.getText().toString());
-                credential.setEmail(contacts.getEmail());
-                credential.setContact(holder.contactText.getText().toString());
-                credential.setDesignation(holder.designationText.getText().toString());
-                credential.setHoliday(Double.parseDouble(holder.holidayText.getText().toString()));
-                credential.setRole(holder.roleText.getSelectedItem().toString());
-                credential.setEmailOfAuthor(userInfo.getEmail());
-                credential.setTokenOfAuthor(userInfo.getToken());
-
-                UpdateUserService service = new UpdateUserClient().createService();
-                Call<UpdateUserResponse> call = service.updateUser(credential);
-                call.enqueue(new Callback<UpdateUserResponse>() {
-                    @Override
-                    public void onResponse(Call<UpdateUserResponse> call, Response<UpdateUserResponse> response) {
-                        UpdateUserResponse body = response.body();
-                        if(body != null) {
-                            if(body.getStatusCode() == 200) {
-                                //To do
-                                updateUserInfo();
-                                //Refresh page
-                                holder.nameText.setText(credential.getName());
-                                holder.emailText.setText(credential.getEmail());
-                                holder.contactText.setText(credential.getContact());
-                                holder.designationText.setText(credential.getDesignation());
-                                holder.roleText.setSelection(spinnerArrayList.indexOf(credential.getRole()));
-                                holder.holidayText.setText(""+credential.getHoliday());
-
-                            } else Toast.makeText(holder.context, body.getError(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<UpdateUserResponse> call, Throwable t) {
-                        Toast.makeText(holder.context, "Something went wrong!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
-                disableEditText(editTextList);
-                holder.roleText.setEnabled(false);
-                holder.btnUpdate.setVisibility(View.GONE);
-            }
-        });
-
-        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DeleteUserCredential credential = new DeleteUserCredential();
-
-                credential.setEmail(contacts.getEmail());
-                credential.setEmailOfAuthor(userInfo.getEmail());
-                credential.setTokenOfAuthor(userInfo.getToken());
-
-                DeleteUserService service = new DeleteUserClient().createService();
-                Call<DeleteUserResponse> call = service.deleteUser(credential);
-                call.enqueue(new Callback<DeleteUserResponse>() {
-                    @Override
-                    public void onResponse(Call<DeleteUserResponse> call, Response<DeleteUserResponse> response) {
-                        DeleteUserResponse body = response.body();
-                        if(body != null) {
-                            if(body.getStatusCode() == 200) {
-                                // show success message
-                                Toast.makeText(holder.context, body.getMessage(), Toast.LENGTH_SHORT);
-                                contactsList.remove(position);
-                                notifyItemRemoved(position);
-                                notifyItemRangeChanged(position, contactsList.size());
-                            } else Toast.makeText(holder.context, body.getError(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<DeleteUserResponse> call, Throwable t) {
-                        Toast.makeText(holder.context, "Something went wrong!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-
-
 
     }
 
@@ -200,34 +115,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        public EditText nameText;
-        public EditText emailText;
-        public EditText contactText;
-        public EditText designationText;
-        public Spinner roleText;
-        public EditText holidayText;
-        public Button btnEdit;
-        public Button btnDelete;
-        public Button btnUpdate;
-        private Context context;
+        public Button btnName;
 
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            nameText = (EditText) itemView.findViewById(R.id.nameText);
-            emailText = (EditText) itemView.findViewById(R.id.emailText);
-            contactText = (EditText) itemView.findViewById(R.id.contactText);
-            designationText = (EditText) itemView.findViewById(R.id.designationText);
-            roleText = (Spinner) itemView.findViewById(R.id.roleSpinner);
-            holidayText = (EditText) itemView.findViewById(R.id.holidayText);
-
-            btnEdit = (Button) itemView.findViewById(R.id.btn_edit_contact);
-            btnDelete = (Button) itemView.findViewById(R.id.btn_delete_contact);
-            btnUpdate = (Button) itemView.findViewById(R.id.btn_update_contact);
-
-
-
-            context = itemView.getContext();
+            btnName = (Button) itemView.findViewById(R.id.Contact_Name);
         }
 
     }
