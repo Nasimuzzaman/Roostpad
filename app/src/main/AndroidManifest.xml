@@ -17,6 +17,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".authentication.LoginActivity"
+            android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,46 +26,60 @@
             </intent-filter>
         </activity>
         <activity
+            android:exported="true"
             android:name=".home.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:exported="true"
             android:name=".home.CalendarActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:exported="true"
             android:name=".request.RequestHolidayActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
+            android:exported="true"
             android:name=".home.DateCalendarActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:exported="true"
             android:name=".home.SetupActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:exported="true"
             android:name=".addUser.AddNewUserActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:exported="true"
             android:name=".home.UsersActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:exported="true"
             android:name=".contacts.ContactsActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:exported="true"
             android:name=".changePassword.ChangePasswordActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:exported="true"
             android:name=".pendingRequests.PendingRequestsActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:exported="true"
             android:name=".employeeNotification.UserNotificationActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:exported="true"
             android:name=".userNotificationDetails.UserNotificationDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:exported="true"
             android:name=".userNotificationDetails.UserDashboardActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:exported="true"
             android:name=".libraryPackage.BaseActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".contacts.ContactDetailActivity"></activity>

@@ -17,6 +17,7 @@ import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
 import com.example.nasimuzzaman.roostpad.authentication.LoginCredential;
 import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
 import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
+import com.example.nasimuzzaman.roostpad.contacts.ContactDetailActivity;
 import com.example.nasimuzzaman.roostpad.employeeNotification.UserNotificationActivity;
 import com.example.nasimuzzaman.roostpad.home.HomeActivity;
 import com.example.nasimuzzaman.roostpad.home.SetupActivity;
@@ -75,8 +76,11 @@ public class BaseActivity extends AppCompatActivity {
         } else if(res_id == R.id.action_setup) {
             new CustomLibrary().open(this, SetupActivity.class);
         } else if(res_id == R.id.action_dashboard) {
-            Toast.makeText(getApplicationContext(), "Dashboard Successfully", Toast.LENGTH_SHORT).show();
-            CustomLibrary.openPage(this, UserDashboardActivity.class);
+            //Toast.makeText(getApplicationContext(), "Dashboard Successfully", Toast.LENGTH_SHORT).show();
+            //CustomLibrary.openPage(this, UserDashboardActivity.class);
+            Intent intent = new Intent(this, ContactDetailActivity.class);
+            intent.putExtra("email", userInfo.getEmail());
+            startActivity(intent);
         }
 
         return true;

@@ -4,16 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context="com.example.nasimuzzaman.roostpad.contacts.ContactDetailActivity">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
-        android:background="@color/colorPrimary"
+        android:layout_marginLeft="5dp"
+        android:background="@color/white"
         android:focusable="false"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contact Details"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:gravity="center"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,16 +35,18 @@
             android:orientation="horizontal">
 
             <EditText
-                android:layout_width="60dp"
+                android:layout_width="110dp"
                 android:layout_height="match_parent"
                 android:textColor="@color/black"
                 android:text="Name"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:enabled="false"
                 android:focusable="false"/>
 
             <EditText
                 android:id="@+id/nameText"
+                android:textSize="14sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/black"/>
@@ -43,10 +59,11 @@
             android:orientation="horizontal">
 
             <EditText
-                android:layout_width="60dp"
+                android:layout_width="110dp"
                 android:layout_height="match_parent"
                 android:textColor="@color/black"
                 android:text="Email"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:enabled="false"
                 android:focusable="false"/>
@@ -55,6 +72,7 @@
                 android:id="@+id/emailText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textSize="14sp"
                 android:textColor="@color/black" />
 
         </LinearLayout>
@@ -70,6 +88,7 @@
                 android:layout_height="match_parent"
                 android:textColor="@color/black"
                 android:text="Designation"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:enabled="false"
                 android:focusable="false"/>
@@ -78,13 +97,93 @@
                 android:id="@+id/designationText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textSize="14sp"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:text="Phone"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:enabled="false"
+                android:focusable="false"/>
+
+            <EditText
+                android:id="@+id/contactText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="14sp"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:entries="@array/role"
+                android:text="Role"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:enabled="false"
+                android:textSize="14sp"
+                android:focusable="false"/>
+
+
+            <Spinner
+                android:id="@+id/roleSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="14sp"
+                android:entries="@array/role" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+
+            <EditText
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:text="Holidays"
+                android:textStyle="bold"
+                android:enabled="false"
+                android:textSize="14sp"
+                android:focusable="false"/>
+
+
+            <EditText
+                android:id="@+id/holidayText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="14sp"
                 android:textColor="@color/black" />
 
         </LinearLayout>
 
 
 
-
+<!--
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -151,33 +250,40 @@
                 android:textColor="@color/black" />
         </LinearLayout>
 
+        -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn_edit_contact"
-                android:layout_width="110dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Edit"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:background="@color/colorPrimary"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/btn_delete_contact"
-                android:layout_width="110dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:layout_marginLeft="5dp"
-                android:text="Delete"
-                android:textStyle="bold" />
+                android:background="@color/colorPrimary"
+                android:textSize="14sp"
+                android:text="Delete" />
 
             <Button
                 android:id="@+id/btn_update_contact"
-                android:layout_width="110dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="Update"
-                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@color/colorPrimary"
                 android:visibility="invisible"/>
 
         </LinearLayout>

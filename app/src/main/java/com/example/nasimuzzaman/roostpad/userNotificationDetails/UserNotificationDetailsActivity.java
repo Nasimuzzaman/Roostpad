@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.nasimuzzaman.roostpad.OnHolidayRequestCountChangeCallback;
 import com.example.nasimuzzaman.roostpad.R;
+import com.example.nasimuzzaman.roostpad.libraryPackage.BaseActivity;
 import com.example.nasimuzzaman.roostpad.libraryPackage.CustomLibrary;
 import com.example.nasimuzzaman.roostpad.request.RequestDay;
 import com.example.nasimuzzaman.roostpad.request.RequestDaysAdapter;
@@ -14,7 +15,7 @@ import com.example.nasimuzzaman.roostpad.request.RequestDaysAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserNotificationDetailsActivity extends AppCompatActivity implements OnHolidayRequestCountChangeCallback{
+public class UserNotificationDetailsActivity extends BaseActivity implements OnHolidayRequestCountChangeCallback{
 
     RecyclerView rviewUserNotification;
     RecyclerView.Adapter adapter;

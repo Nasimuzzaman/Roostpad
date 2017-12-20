@@ -77,6 +77,7 @@ public class ContactDetailActivity extends BaseActivity implements Serializable{
         Intent intent = getIntent();
         final String email = intent.getStringExtra("email");
 
+
         final List<String> spinnerArrayList = new ArrayList<>(
                 Arrays.asList("Admin", "CTO", "Employee")
         );
@@ -99,6 +100,11 @@ public class ContactDetailActivity extends BaseActivity implements Serializable{
         editTextList.remove(emailText);
 
 
+        if(userInfo.getEmail().equals(email)) {
+            btnDelete.setVisibility(View.GONE);
+        }
+
+
         nameText.setText(contact.getName());
         emailText.setText(contact.getEmail());
         contactText.setText(contact.getContact());
@@ -113,6 +119,12 @@ public class ContactDetailActivity extends BaseActivity implements Serializable{
                 enableEditText(editTextList);
                 roleText.setEnabled(true);
                 btnUpdate.setVisibility(View.VISIBLE);
+                if(userInfo.getEmail().equals(email)) {
+                    btnDelete.setVisibility(View.GONE);
+                    roleText.setEnabled(false);
+                    holidayText.setEnabled(false);
+                    designationText.setEnabled(false);
+                }
             }
         });
 

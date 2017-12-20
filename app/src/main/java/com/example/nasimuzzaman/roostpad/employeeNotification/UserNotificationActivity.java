@@ -1,34 +1,21 @@
 package com.example.nasimuzzaman.roostpad.employeeNotification;
 
-import android.app.NotificationManager;
-import android.content.Context;
-import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.Toast;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import com.binjar.prefsdroid.Preference;
 import com.example.nasimuzzaman.roostpad.PrefKeys;
 import com.example.nasimuzzaman.roostpad.R;
-import com.example.nasimuzzaman.roostpad.authentication.LoginActivity;
 import com.example.nasimuzzaman.roostpad.authentication.LoginResponse;
-import com.example.nasimuzzaman.roostpad.changePassword.ChangePasswordActivity;
-import com.example.nasimuzzaman.roostpad.home.HomeActivity;
-import com.example.nasimuzzaman.roostpad.home.SetupActivity;
 import com.example.nasimuzzaman.roostpad.libraryPackage.BaseActivity;
-import com.example.nasimuzzaman.roostpad.pendingRequests.PendingRequestsActivity;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class UserNotificationActivity extends BaseActivity {
 
@@ -67,6 +54,8 @@ public class UserNotificationActivity extends BaseActivity {
                     if(body.getStatusCode() == 200) {
                         // show success message
                         Toast.makeText(getApplicationContext(), body.getMessage(), Toast.LENGTH_SHORT);
+
+                        Toast.makeText(getApplicationContext(), "Called", Toast.LENGTH_SHORT);
                         // save notification list
                         notificationList = body.getNotificationList();
 
@@ -78,11 +67,9 @@ public class UserNotificationActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<UserNotificationResponse> call, Throwable t) {
-                if(notificationList != null) {
-                    adapter = new UserNotificationAdapter(notificationList);
-                    recyclerView.setAdapter(adapter);
-                }
-                //Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), "Not Called", Toast.LENGTH_SHORT);
+
+                Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT);
             }
         });
 

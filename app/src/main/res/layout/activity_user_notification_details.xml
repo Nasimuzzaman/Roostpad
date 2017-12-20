@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context="com.example.nasimuzzaman.roostpad.userNotificationDetails.UserNotificationDetailsActivity">
 
-    <LinearLayout
+   <!-- <LinearLayout
         android:id="@+id/rviewHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
             android:gravity="center"
             android:text="Day"
             android:textColor="@color/black"
-            android:textSize="18dp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
@@ -28,7 +28,7 @@
             android:gravity="center"
             android:text="Date"
             android:textColor="@color/black"
-            android:textSize="18dp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
@@ -37,7 +37,7 @@
             android:gravity="center"
             android:text="Holiday"
             android:textColor="@color/black"
-            android:textSize="18dp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
@@ -46,7 +46,7 @@
             android:gravity="center"
             android:text="1st Half"
             android:textColor="@color/black"
-            android:textSize="18dp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
@@ -55,7 +55,66 @@
             android:gravity="center"
             android:text="2nd Half"
             android:textColor="@color/black"
-            android:textSize="18dp"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>-->
+
+    <LinearLayout
+        android:id="@+id/rviewHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dayNameText"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Day"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Date"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Holiday"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="72dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="1st Half"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="72dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="2nd Half"
+            android:textColor="@color/black"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
     </LinearLayout>

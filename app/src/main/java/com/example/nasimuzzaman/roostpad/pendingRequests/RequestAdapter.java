@@ -71,10 +71,16 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
         //holder.btnPendingRequests.setText(request.getName() + " apply for leave from " + request.getFromDate() + " to " +
           //      request.getToDate() + " for total "+request.getDays() + " days");
 
+        String notificationText = "";
+        notificationText = prepareNotification(request.getInfo());
+        notificationText = "Applicant: " + request.getName() + "\n"
+                + "Total request day " + request.getDays() + "\n" + notificationText;
+
+
         String btnText = prepareShortStatementForPendingRequestsNotification(request.getInfo());
         btnText = request.getName() + btnText;
 
-        holder.btnPendingRequests.setText(btnText);
+        holder.btnPendingRequests.setText(notificationText);
 
         holder.messageBoxText.setText(request.getMessage());
 
@@ -183,6 +189,31 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
     public String prepareShortStatementForPendingRequestsNotification(String info) {
 
         String statement = " request for personal holiday on ";
+        String[] lines = info.split(System.getProperty("line.separator"));
+
+        String line = lines[0];
+        String[] data = line.split("\\s+");
+        String dateString = data[0];
+        int flag = Integer.parseInt(data[1]);
+        statement = statement + CustomLibrary.getMonthNameWithDate(dateString, flag);
+
+
+        if (lines.length > 1) {
+            statement = statement.substring(0, statement.length() - 1);
+            line = lines[lines.length-1];
+            data = line.split("\\s+");
+            dateString = data[0];
+            flag = Integer.parseInt(data[1]);
+            statement = statement + " to " + CustomLibrary.getMonthNameWithDate(dateString, flag);
+
+        }
+
+        return statement.substring(0, statement.length() - 1);
+    }
+
+    public String prepareNotification(String info) {
+
+        String statement = "Date: ";
         String[] lines = info.split(System.getProperty("line.separator"));
 
         String line = lines[0];

@@ -56,7 +56,7 @@ public class UserNotificationAdapter extends RecyclerView.Adapter<UserNotificati
         //String btnText = prepareStatementForUserNotification(notification.getInfo());
         String btnText = prepareShortStatementForUserNotification(notification.getInfo());
 
-        btnText = btnText + " is " + notification.getStatus();
+        btnText = btnText + "\n\nRequest status: " + notification.getStatus();
         holder.btnReply.setText(btnText);
         holder.messageText.setText(notification.getMessage());
 
@@ -74,7 +74,7 @@ public class UserNotificationAdapter extends RecyclerView.Adapter<UserNotificati
 
     public String prepareStatementForUserNotification(String info) {
 
-        String statement = "Your request for personal holiday on ";
+        String statement = "You request for personal holiday on ";
         String[] lines = info.split(System.getProperty("line.separator"));
 
         for (String line : lines) {
@@ -90,7 +90,7 @@ public class UserNotificationAdapter extends RecyclerView.Adapter<UserNotificati
 
     public String prepareShortStatementForUserNotification(String info) {
 
-        String statement = "Your request for personal holiday on ";
+        String statement = "Your have requested for personal holiday on ";
         String[] lines = info.split(System.getProperty("line.separator"));
 
         String line = lines[0];
